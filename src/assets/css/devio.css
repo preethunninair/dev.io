@@ -1,0 +1,65 @@
+.editor{
+    display:grid;
+    height: 100%;
+    grid-template-areas:
+      "brand header header header header header"
+      "main main main main main main"
+      "main main main main main main";
+      grid-template-rows: 60px auto;
+    grid-template-columns:260px auto;
+}
+
+.app-header {
+    grid-area: header;
+  }
+ 
+  .app-main {
+    grid-area: main;
+  }
+  .app-brand {
+    grid-area: brand;
+  }
+
+  .page-grid{
+    display: grid;
+    height: calc(100% - 50px);
+    justify-items: stretch;
+  }
+  .layout-editor{
+    grid-template-areas: "leftpanel workbench";
+    grid-template-columns: 300px auto;
+  }
+  .route-editor{
+    grid-template-areas: "leftpanel workbench";
+
+    grid-template-columns: 300px auto;
+
+  }
+  .generate-layout{
+    grid-template-areas: "workbench";
+  }
+  .leftpanel{
+grid-area: leftpanel;
+height: calc(100vh - 110px);
+  }
+  .workbench{
+    grid-area: workbench;
+    background: #0000003d;
+  }
+  .rightpanel{
+    grid-area: rightpanel;
+  }
+  .circle{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .layout-control li{
+    margin-bottom: 15px;
+  }
