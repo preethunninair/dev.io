@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createHashHistory } from "history";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { Provider } from "react-redux";
+import CreateProject from "./views/CreateProject";
+import EditProject from "./views/EditProject";
+import AppContainer from "./AppContainer";
+import store from "./store";
+
+import "./assets/css/styles.css";
+
+import * as serviceWorker from "./serviceWorker";
+
+const hist = createHashHistory();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <Router history={hist}>
+      <Route path="/" render={(props) => <AppContainer {...props} />} />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
