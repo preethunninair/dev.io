@@ -27,6 +27,10 @@ exports.buildProject = function (pages) {
 exports.applyProjectConfig = function (path, data) {
   return fs.writeFile(path, JSON.stringify(data), "utf-8");
 };
+
+exports.emptyDir = function (path) {
+  return fs.emptyDir(path);
+};
 exports.copyFolder = function (fromDir, toDir) {
   return fs
     .copy(fromDir, toDir)

@@ -1120,7 +1120,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .wrapper[data-appmode="dark"] {
-  background: linear-gradient(#1e1e2f, #1e1e24);
+  background: #1e1e2f;
   color: #fff;
   font-weight: lighter;
   /* background: linear-gradient(#1a1e34, #1a1e3f); */

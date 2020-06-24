@@ -49,7 +49,7 @@ class Routes extends React.PureComponent {
   componentDidUpdate(prevProps) {
     if (
       prevProps.wizardIndex != this.props.wizardIndex &&
-      this.props.wizardIndex == 2
+      this.props.wizardIndex == 3
     ) {
       this.props.dispatch(createRoute(this.state.routeData));
     }
@@ -174,7 +174,7 @@ class Routes extends React.PureComponent {
     return (
       <div
         className={`${
-          this.props.wizardIndex == 1 ? "" : "d-none "
+          this.props.wizardIndex == 2 ? "" : "d-none "
         }page-grid route-editor px-3`}
       >
         <div className="leftpanel p-2">

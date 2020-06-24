@@ -227,3 +227,30 @@ height: 60px !important;
 /* .app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-menu {
   padding-top: 20px;
 } */
+
+
+/*..........Floating Menu.........*/
+.app-container[data-floatingmenu="SIDENAV"] .sidebar .sidebar-wrapper{
+  min-height: unset;
+  max-height: unset;
+}
+.app-container[data-floatingmenu="SIDENAV"] .sidebar{
+  height:auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  margin-bottom: 55px;
+}
+.app-container[data-floatingmenu="SIDENAV"] .app-menu{
+  align-items:center;
+  display: flex;
+}
+
+.app-container:not([data-rounded="FALSE"]):not([data-padded="FALSE"])[data-floatingmenu="SIDENAV"] .sidebar{
+  border-radius:5px !important;
+}
+.app-container:not([data-rounded="FALSE"])[data-padded="FALSE"][data-floatingmenu="SIDENAV"] .sidebar{
+  border-top-right-radius:5px !important;
+  border-bottom-right-radius:5px !important;
+
+}

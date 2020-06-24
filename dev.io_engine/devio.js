@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require("body-parser");
 
 var mochitoBuild = require("./mochito_modules/fs_operations.js");
-var templateEngine = require("./mochito_modules/templateEngine.js");
+//var templateEngine = require("./mochito_modules/templateEngine.js");
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(function (req, res, next) {
@@ -17,29 +17,30 @@ app.use(function (req, res, next) {
 });
 
 app.post("/generateProject", (req, res) => {
-  mochitoBuild
-    .copyFolder(
-      `${process.cwd()}/dev.io_engine/src`,
-      process.cwd() + "/publics/"
-    )
-    .then(function (response) {
-      res.send("200");
-    });
-});
-
-app.post("/applyConfig", (req, res) => {
-  mochitoBuild
-    .applyProjectConfig(`${process.cwd()}/publics/dev.io/config.json`, req.body)
-    .then(function (response) {
-      res.send("200");
-    });
-});
-app.post("/createRoute", (req, res) => {
-  mochitoBuild
-    .applyProjectConfig(`${process.cwd()}/publics/dev.io/route.json`, req.body)
-    .then(function (response) {
-      res.send("200");
-    });
+  mochitoBuild.emptyDir(process.cwd() + "/publics/").then(function (response) {
+    mochitoBuild
+      .copyFolder(
+        `${process.cwd()}/dev.io_engine/src`,
+        process.cwd() + "/publics/"
+      )
+      .then(function (response) {
+        mochitoBuild
+          .applyProjectConfig(
+            `${process.cwd()}/publics/dev.io/config.json`,
+            req.body.config
+          )
+          .then(function (response) {
+            mochitoBuild
+              .applyProjectConfig(
+                `${process.cwd()}/publics/dev.io/route.json`,
+                req.body.route
+              )
+              .then(function (response) {
+                res.send("200");
+              });
+          });
+      });
+  });
 });
 
 app.post("/build", (req, res) => {
@@ -52,24 +53,24 @@ app.post("/build", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/create", (req, res) => {
-  let appName = req.body.appName;
-  let appDir = req.body.appDir;
-  mochitoBuild
-    .createProjectDirectory(appName, appDir)
-    .then(function (response) {
-      mochitoBuild
-        .createProject(appName, appDir)
-        .then(function (response) {
-          templateEngine.generateIndexHTML(appDir, appName);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+// app.post("/create", (req, res) => {
+//   let appName = req.body.appName;
+//   let appDir = req.body.appDir;
+//   mochitoBuild
+//     .createProjectDirectory(appName, appDir)
+//     .then(function (response) {
+//       mochitoBuild
+//         .createProject(appName, appDir)
+//         .then(function (response) {
+//           templateEngine.generateIndexHTML(appDir, appName);
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
+//     });
 
-  res.send("Hello World!");
-});
+//   res.send("Hello World!");
+// });
 
 app.listen(port, () =>
   console.log("Example app listening on port" + port + "!")

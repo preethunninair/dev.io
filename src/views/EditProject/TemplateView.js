@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import tinycolor from "tinycolor2";
 import logo_white from "../../assets/img/logo_white.png";
 import logo_black from "../../assets/img/logo_black.png";
-
+import { Card } from "reactstrap";
 function TemplateView(props) {
   if (props.config == undefined) {
     return null;
@@ -37,17 +37,20 @@ function TemplateView(props) {
     sidebarBgColor,
     sidehighlightBgColor,
     navhighlightBgColor,
+    appBgColor,
+    floatingMenu,
   } = props.config;
   const { MENUDATA } = props;
   return (
     <div
       className="wrapper h-100"
-      style={{ transform: "scale(1)" }}
-      data-appmode={"light"}
+      style={{ background: appBgColor }}
+      data-appmode={tinycolor(appBgColor).isDark() ? "dark" : "light"}
     >
       <div
         className="app-container"
         data-navbarsize={navbarsize}
+        data-floatingMenu={floatingMenu}
         data-sidebarsize={sidebarsize}
         data-padded={padded}
         data-boxed={boxed}

@@ -7,6 +7,7 @@ import GenerateProject from "./EditProject/GenerateProject";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../library/axiosInstance";
+import ColorPalette from "./EditProject/ColorPalette";
 const mapState = (state) => ({
   config: state.templateConfig.templateConfig,
   route: state.templateConfig.route,
@@ -71,18 +72,17 @@ class EditProject extends React.PureComponent {
   }
   generateProject() {
     this.statusCode(0);
-    axios.post("/generateProject").then((res) => {
-      setTimeout(() => this.statusCode(1), 5000);
-    });
-    setTimeout(() => this.statusCode(2), 5000);
     axios
-      .post("/applyConfig", { config: this.props.config })
-      .then((response) => {
-        setTimeout(() => this.statusCode(3), 5000);
+      .post("/generateProject", {
+        config: this.props.config,
+        route: this.props.route,
+      })
+      .then((res) => {
+        setTimeout(() => this.statusCode(1), 1000);
+        setTimeout(() => this.statusCode(2), 2000);
+        setTimeout(() => this.statusCode(3), 3000);
+        setTimeout(() => this.statusCode(4), 4000);
       });
-    axios.post("/createRoute", { route: this.props.route }).then((response) => {
-      setTimeout(() => this.statusCode(4), 5000);
-    });
   }
   setAppMode(mode) {
     document
@@ -206,6 +206,8 @@ class EditProject extends React.PureComponent {
         </div>
         <div className="app-main">
           <AppLayout wizardIndex={wizardIndex} />
+          <ColorPalette wizardIndex={wizardIndex} />
+
           <Routes wizardIndex={wizardIndex} />
           <GenerateProject
             msg={this.state.generateStatus}

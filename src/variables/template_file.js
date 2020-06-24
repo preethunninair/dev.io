@@ -26,6 +26,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Reduced",
@@ -54,6 +55,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Compact",
@@ -82,6 +84,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav (S-LN)",
@@ -110,6 +113,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
 
   {
@@ -139,6 +143,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav (P)(S-L-N)",
@@ -167,6 +172,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav (P)(SL-N)",
@@ -195,6 +201,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
 
   {
@@ -224,6 +231,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Reduced (P)(S-LN)",
@@ -252,6 +260,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Reduced (P)(S-L-N)",
@@ -280,6 +289,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
 
   {
@@ -309,6 +319,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
 
   {
@@ -338,6 +349,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Compact (P)(S-LN)",
@@ -366,6 +378,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Compact (P)(SLN)",
@@ -394,6 +407,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     templateName: "Sidenav Compact (P)(SL_N)",
@@ -422,7 +436,190 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
+  {
+    templateName: "Sidenav Compact Floating",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S2",
+    rounded: "FALSE",
+    boxed: "FALSE",
+    padded: "FALSE",
+    template: "S2",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+  {
+    templateName: "Sidenav Compact Floating (P)(S-LN)",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S2",
+    rounded: "FALSE",
+    boxed: "S_LN",
+    padded: "S_LN",
+    template: "S2",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+  {
+    templateName: "Sidenav Compact Floating (P)(S-L-N)",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S2",
+    rounded: "FALSE",
+    boxed: "S_LN",
+    padded: "SLN",
+    template: "S2",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+
+  {
+    templateName: "Sidenav Reduced Floating",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S1",
+    rounded: "FALSE",
+    boxed: "FALSE",
+    padded: "FALSE",
+    template: "S1",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+  {
+    templateName: "Sidenav Reduced Floating (P)(S-LN)",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S1",
+    rounded: "FALSE",
+    boxed: "S_LN",
+    padded: "S_LN",
+    template: "S1",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+  {
+    templateName: "Sidenav Reduced Floating (P)(S-L-N)",
+    templateID: "S0B",
+    selectedPage: "/admin",
+
+    logoTheme: "light",
+    layout: "SIDE_NAVIGATION",
+    floatingMenu: "SIDENAV",
+    submenuConfig: "SNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "S1",
+    rounded: "FALSE",
+    boxed: "S_LN",
+    padded: "SLN",
+    template: "S1",
+
+    logoBgColor: "transparent",
+    navbarBgColor: "transparent",
+    sidebarBgColor: "#007bff",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "M",
+    sidebarsize: "S",
+    appBgColor: "#171725",
+  },
+
   //topnavigation
   {
     selectedPage: "/admin",
@@ -449,6 +646,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     selectedPage: "/admin",
@@ -475,6 +673,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     selectedPage: "/admin",
@@ -501,6 +700,7 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
   {
     selectedPage: "/admin",
@@ -527,5 +727,6 @@ export const TEMPLATES = [
     navbarlinktemplate: "LT0_NOICON",
     navbarsize: "M",
     sidebarsize: "S",
+    appBgColor: "#f2f2f2",
   },
 ];

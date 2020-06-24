@@ -104,9 +104,14 @@ class AppLayout extends React.PureComponent {
   }
   handleColorChange = (color, attr) => {
     const temp = [...this.state.templateCopy];
+    let colorStr = color.hex;
+    if (color.rgb.a !== 1) {
+      colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+    }
+
     temp.forEach((template) => {
-      template[`${attr}BgColor`] = color.hex;
-      template[`${attr}Theme`] = tinycolor(color.hex).isDark()
+      template[`${attr}BgColor`] = colorStr;
+      template[`${attr}Theme`] = tinycolor(colorStr).isDark()
         ? "dark"
         : "light";
     });
@@ -180,6 +185,17 @@ class AppLayout extends React.PureComponent {
 
     this.initializeDropdownEventHandler();
   }
+  setAppMode = () => {
+    const temp = [...this.state.templateCopy];
+
+    if (temp[this.state.templateIndex]["appMode"] != "dark") {
+      temp[this.state.templateIndex]["appMode"] = "dark";
+    } else {
+      temp[this.state.templateIndex]["appMode"] = "light";
+    }
+
+    this.setState({ templateCopy: temp });
+  };
   roundedToggle = () => {
     const temp = [...this.state.templateCopy];
 
@@ -230,6 +246,23 @@ class AppLayout extends React.PureComponent {
                 }}
               >
                 <li>
+                  <p>App Background</p>
+                  <div className="d-flex">
+                    <CirclePicker
+                      width="unset"
+                      circleSize={15}
+                      onChange={(color, event) =>
+                        this.handleColorChange(color, "app")
+                      }
+                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
+                    />
+                    <ColorPicker
+                      src={"app"}
+                      handleColorChange={this.handleColorChange}
+                    />
+                  </div>
+                </li>
+                <li>
                   <p>Logo Background</p>
                   <div className="d-flex">
                     <CirclePicker
@@ -238,7 +271,7 @@ class AppLayout extends React.PureComponent {
                       onChange={(color, event) =>
                         this.handleColorChange(color, "logo")
                       }
-                      colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
                     />
                     <ColorPicker
                       src={"logo"}
@@ -255,7 +288,7 @@ class AppLayout extends React.PureComponent {
                       onChange={(color, event) =>
                         this.handleColorChange(color, "navbar")
                       }
-                      colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
                     />
                     <ColorPicker
                       src={"navbar"}
@@ -272,7 +305,7 @@ class AppLayout extends React.PureComponent {
                       onChange={(color, event) =>
                         this.handleColorChange(color, "sidebar")
                       }
-                      colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
                     />
                     <ColorPicker
                       src={"sidebar"}
@@ -296,7 +329,9 @@ class AppLayout extends React.PureComponent {
                     options={SBS}
                   />
                 </li>
-                {templateCopy[templateIndex].padded != "FALSE" ? (
+                {templateCopy[templateIndex].padded != "FALSE" ||
+                templateCopy[templateIndex].templateName.indexOf("Floating") >
+                  -1 ? (
                   <li>
                     <div className="custom-control d-flex align-items-center custom-checkbox">
                       <input
