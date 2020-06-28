@@ -623,7 +623,7 @@ export const TEMPLATES = [
   //topnavigation
   {
     selectedPage: "/admin",
-
+    templateName: "Topnav Standard",
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
     submenuConfig: "SNS",
@@ -650,6 +650,7 @@ export const TEMPLATES = [
   },
   {
     selectedPage: "/admin",
+    templateName: "Topnav Stacked",
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
@@ -677,6 +678,7 @@ export const TEMPLATES = [
   },
   {
     selectedPage: "/admin",
+    templateName: "Topnav Stacked LN",
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
@@ -687,11 +689,11 @@ export const TEMPLATES = [
       floating: true,
       hash: "FR",
     },
-    gridConfig: "N2",
+    gridConfig: "N1",
     rounded: "FALSE",
     boxed: "FALSE",
     padded: "FALSE",
-    template: "N2",
+    template: "N1",
 
     logoBgColor: "#1e1e2f",
     navbarBgColor: "white",
@@ -701,32 +703,6 @@ export const TEMPLATES = [
     navbarsize: "M",
     sidebarsize: "S",
     appBgColor: "#f2f2f2",
-  },
-  {
-    selectedPage: "/admin",
-
-    logoTheme: "dark",
-    layout: "TOP_NAVIGATION",
-    submenuConfig: "SNS",
-    searchbarConfig: {
-      placement: "RIGHT",
-      width: "15vw",
-      floating: true,
-      hash: "FR",
-    },
-    gridConfig: "N3",
-    rounded: "FALSE",
-    boxed: "FALSE",
-    padded: "FALSE",
-    template: "N3",
-
-    logoBgColor: "#1e1e2f",
-    navbarBgColor: "white",
-    sidebarBgColor: "#1e1e2f",
-    sidebarlinktemplate: "SLT0",
-    navbarlinktemplate: "LT0_NOICON",
-    navbarsize: "M",
-    sidebarsize: "S",
-    appBgColor: "#f2f2f2",
+    logoOnNav: "TRUE",
   },
 ];

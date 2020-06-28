@@ -182,12 +182,11 @@ class AdminNavbar extends React.PureComponent {
                 <span className="navbar-toggler-bar bar3" />
               </button>
             </div>
-            <a className="navbar-brand" onClick={(e) => e.preventDefault()}>
+            {/* <a className="navbar-brand" onClick={(e) => e.preventDefault()}>
               <div className="brand-img d-flex align-items-center h-100">
                 <img src={this.props.logo} alt="react-logo" />
-                {/* {this.props.brandText} */}
               </div>
-            </a>
+            </a> */}
           </div>
           <button
             aria-expanded={false}

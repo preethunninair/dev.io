@@ -786,9 +786,7 @@
   .navbar .navbar-nav.page-nav{
     padding-left: 1rem;
   }
-  .navbar[data-theme="light"][data-template="N3"] .navbar-nav.page-nav{
-    background: #e2e2e2;
-  }
+  
   .navbar[data-theme="transparent"] {
     background: transparent;
   }
@@ -807,43 +805,45 @@
     padding: 0 5px;
   }
   /*.............Top Navigation Template.................*/
-  .navbar[data-template="N3"],
-  .navbar[data-template="N3"] .container-fluid {
+  .navbar[data-template="N1"],
+  .navbar[data-template="N1"] .container-fluid {
     padding: 0px;
   }
-  .navbar[data-template="N3"] .container-fluid,
-  .navbar[data-template="N3"] .navbar-collapse {
+  .navbar[data-template="N1"] .container-fluid,
+  .navbar[data-template="N1"] .navbar-collapse {
     height: 100%;
   }
 
-  .navbar[data-template="N3"] .navbar-collapse {
+  .navbar[data-template="N1"] .navbar-collapse {
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .navbar[data-template="N3"] .navbar-nav.page-nav {
+  .navbar[data-template="N1"] .navbar-nav.page-nav {
     order: 2;
     padding-left: 5px !important;
-    background: #171b2f;
+    background: #02020229;
     width: 100%;
     z-index: 1;
+    height: 40px;
+    align-items: center;
     padding: 5px 0px 5px 0px;
   }
 
-  .navbar[data-template="N3"] .navbar-nav:not(.page-nav) {
+  .navbar[data-template="N1"] .navbar-nav:not(.page-nav) {
     height: 100%;
     align-items: center;
     padding-right: 10px;
   }
 
-  .navbar[data-template="N3"] .navbar-brand {
+  .navbar[data-template="N1"] .navbar-brand {
     top: 0;
 
     height: 100%;
     position: absolute !important;
     align-items: center;
   }
-  .navbar[data-template="N3"] .navbar-brand .brand-img {
+  .navbar[data-template="N1"] .navbar-brand .brand-img {
     margin-bottom: 50px;
     height: 50% !important;
   }
@@ -915,22 +915,73 @@
 
   /*............. .................*/
 
-  /*.............Link Template 2 .................*/
+  /*.............Link Template 3 .................*/
 
-  .navbar[data-linktemplate^="LT3"]
+   
+  
+  .app-container[data-navbarsize="XS"] .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 50px;
+  }
+
+  .app-container[data-navbarsize="S"] .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 60px;
+  }
+
+  .app-container[data-navbarsize="M"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 70px;
+  }
 
+
+  
+
+
+  .app-container:not([data-grid="N0"]) .navbar
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    padding: 0.4rem 1rem;
+  }
+
+  .app-container[data-grid="N1"] .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+      height: 40px;
+    }
+    
+
+  .app-container[data-navbarsize="M"][data-grid="N0"]
+    .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 70px;
     min-width: 100px;
   }
-  .app-container[data-grid="N1"]
-    .navbar[data-linktemplate^="LT3"][data-template="N1"]
+  .app-container[data-navbarsize="L"][data-grid="N0"]
+    .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 100px;
+    min-width: 100px;
+  }
+  .app-container[data-navbarsize="XL"][data-grid="N0"]
+    .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 120px;
+    min-width: 110px;
   }
 
   /*............. .................*/

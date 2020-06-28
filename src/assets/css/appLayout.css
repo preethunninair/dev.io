@@ -78,22 +78,18 @@ body,
   /*..............TOP_NAVIGATION Layout...........*/
   .app-container[data-layout="TOP_NAVIGATION"] {
     grid-template-areas:
-      "header header header header header header"
+      "brand header header header header header"
       "main main main main main main"
       "main main main main main main";
     grid-template-columns: 140px auto;
   }
 
-  .app-container[data-grid="N0"] {
-    grid-template-rows: 70px auto;
+  .app-container[data-logoonnav="TRUE"] .app-brand{
+    z-index: 1092;
+    height:calc(100% - 40px);
   }
-  .app-container[data-grid="N1"] {
-    grid-template-rows: 100px auto;
-  }
-
-  .app-container[data-grid="N2"],
-  .app-container[data-grid="N3"] {
-    grid-template-rows: 130px auto;
+  .app-container[data-logoonnav="TRUE"] .app-header{
+    grid-column-start: 1;
   }
 
   /*..............Rounded...........*/
@@ -153,7 +149,7 @@ body,
   }
 }
 
-/*........Slim Mode..............*/
+/*........Nav Height..............*/
 
 .app-container[data-navbarsize="S"] {
   grid-template-rows: 60px auto;
@@ -161,6 +157,21 @@ body,
 .app-container[data-navbarsize="XS"] {
   grid-template-rows: 50px auto;
 }
+.app-container[data-navbarsize="M"] {
+  grid-template-rows: 70px auto;
+}
+.app-container[data-grid="N1"][data-navbarsize="M"] {
+  grid-template-rows: 90px auto;
+}
+.app-container[data-navbarsize="L"] {
+  grid-template-rows: 100px auto;
+}
+.app-container[data-navbarsize="XL"] {
+  grid-template-rows: 120px auto;
+}
+/*.................................*/
+
+/*........Sidebar width..............*/
 
 .app-container[data-sidebarsize="M"][data-grid="S2"] {
   grid-template-columns: 100px auto;
@@ -181,20 +192,8 @@ body,
 .app-container[data-sidebarsize="XS"][data-grid="S1"] {
   grid-template-columns: 100px auto;
 }
+/*...................................................*/
 
-/* .app-container[data-navbarsize$="S"][data-boxed="SL_N"] .app-brand,
-.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-brand {
-  height: 80px;
-  z-index: 2;
-}
-.app-container[data-navbarsize$="S"][data-boxed="SL_N"]
-  .app-menu
-  .sidebar-wrapper {
-  padding-top: 30px;
-}
-.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-menu {
-  padding-top: 30px;
-} */
 .app-container[data-navbarsize="S"] .brand-img {
  padding:10px;
 }
@@ -202,11 +201,7 @@ body,
 .app-container[data-navbarsize="XS"] .brand-img > img{
   padding:5px;
  }
-.app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-brand,
-.app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-brand {
-  height: 70px;
-  z-index: 2;
-}
+
 .app-container[data-navbarsize="S"][data-padded="FALSE"]
   .app-menu
   .sidebar-wrapper {
@@ -217,17 +212,6 @@ body,
   .sidebar-wrapper {
   padding-top: 20px;
 }
-
-.app-container[data-navbarsize="S"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link{
-height: 60px !important;
-}
-.app-container[data-navbarsize="XS"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link{
-  height: 50px !important;
-  }
-/* .app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-menu {
-  padding-top: 20px;
-} */
-
 
 /*..........Floating Menu.........*/
 .app-container[data-floatingmenu="SIDENAV"] .sidebar .sidebar-wrapper{

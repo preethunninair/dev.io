@@ -79,7 +79,11 @@ const SBS = [
     },
   },
 ];
-class AppLayout extends React.PureComponent {
+
+const mapState = (state) => ({
+  selectedConfig: state.templateConfig.templateConfig,
+});
+class ColorPalette extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -243,41 +247,44 @@ class AppLayout extends React.PureComponent {
                   overflowY: "auto",
                 }}
               >
-                <li>
-                  <p>Navbar Link Highlight Color</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "navbarLink")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff"]}
-                    />
-                    <ColorPicker
-                      src={"navbar"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
-                </li>
-
-                <li>
-                  <p>Sidebar Link Highlight Color</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "sidebarLink")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff"]}
-                    />
-                    <ColorPicker
-                      src={"sidebar"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
-                </li>
+                {this.props.selectedConfig.submenuConfig == "TNS" ? (
+                  <li>
+                    <p>Navbar Link Highlight Color</p>
+                    <div className="d-flex">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleColorChange(color, "navbarLink")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"navbar"}
+                        handleColorChange={this.handleColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
+                {this.props.selectedConfig.submenuConfig == "SNS" ? (
+                  <li>
+                    <p>Sidebar Link Highlight Color</p>
+                    <div className="d-flex">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleColorChange(color, "sidebarLink")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"sidebar"}
+                        handleColorChange={this.handleColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
                 <li>
                   <p>Card Default Background</p>
                   <div className="d-flex">
@@ -302,11 +309,11 @@ class AppLayout extends React.PureComponent {
         <div className="workbench rounded p-3">
           <TemplateView
             MENUDATA={MENUDATA}
-            config={templateCopy[templateIndex]}
+            config={this.props.selectedConfig}
           />
         </div>
       </div>
     );
   }
 }
-export default connect()(AppLayout);
+export default connect(mapState)(ColorPalette);

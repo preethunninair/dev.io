@@ -39,6 +39,7 @@ function TemplateView(props) {
     navhighlightBgColor,
     appBgColor,
     floatingMenu,
+    logoOnNav,
   } = props.config;
   const { MENUDATA } = props;
   return (
@@ -53,27 +54,28 @@ function TemplateView(props) {
         data-floatingMenu={floatingMenu}
         data-sidebarsize={sidebarsize}
         data-padded={padded}
+        data-logoonnav={logoOnNav}
         data-boxed={boxed}
         data-layout={layout}
         data-rounded={rounded}
         data-grid={gridConfig}
       >
-        {layout == "SIDE_NAVIGATION" || layout == "SIDEONLYNAVIGATION" ? (
-          <div className="app-brand d-none d-md-block" data-grid={gridConfig}>
-            <div
-              className="brand-img h-100"
-              style={{ background: logoBgColor }}
-              data-theme={logoTheme}
-            >
-              <img
-                src={!tinycolor(logoBgColor).isDark() ? logo_black : logo_white}
-                alt="react-logo"
-                style={{ width: "100px" }}
-              />
-              {/* {this.props.brandText} */}
-            </div>
+        {/* {layout == "SIDE_NAVIGATION" || layout == "SIDEONLYNAVIGATION" ? ( */}
+        <div className="app-brand d-none d-md-block" data-grid={gridConfig}>
+          <div
+            className="brand-img h-100"
+            style={{ background: logoBgColor }}
+            data-theme={logoTheme}
+          >
+            <img
+              src={!tinycolor(logoBgColor).isDark() ? logo_black : logo_white}
+              alt="react-logo"
+              style={{ width: "100px" }}
+            />
+            {/* {this.props.brandText} */}
           </div>
-        ) : null}
+        </div>
+        {/* ) : null} */}
         {layout != "SIDEONLYNAVIGATION" ? (
           <div className="app-header">
             <AdminNavbar
@@ -85,7 +87,9 @@ function TemplateView(props) {
               selectedPage={selectedPage}
               theme={navbarTheme}
               navbarBgColor={navbarBgColor}
-              logo="./current/logo.png"
+              logo={
+                !tinycolor(navbarBgColor).isDark() ? logo_black : logo_white
+              }
               template={template}
             />
           </div>
@@ -136,16 +140,36 @@ function TemplateView(props) {
           <div className="scroller"></div>
         </div>
       </div>
-      {/* <style
+      <style
         dangerouslySetInnerHTML={{
           __html: `
+          ${
+            sidebarlinktemplate.indexOf("LT0") > -1
+              ? `.sidebar .nav li > a.active{
+            color:${sidehighlightBgColor} !important;
+          }`
+              : `
           .sidebar .nav li > a.active{
-            background:${navhighlightBgColor} !important;
+            background:${sidehighlightBgColor} !important;
+          }`
           }
+          
+          ${
+            navbarlinktemplate.indexOf("LT0") > -1
+              ? `.navbar .navbar-collapse .navbar-nav.page-nav .nav-link.active{
+                color:${navhighlightBgColor} !important;
+              } `
+              : `
+              .navbar .navbar-collapse .navbar-nav.page-nav .nav-link.active{
+                background:${navhighlightBgColor} !important;
+              }`
+          }
+          
+          
+          `,
           //sidehighlightBgColor
-    `,
         }}
-      /> */}
+      />
     </div>
   );
 }

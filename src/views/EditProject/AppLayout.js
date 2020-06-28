@@ -9,6 +9,10 @@ import {
   Row,
   Col,
   CardSubtitle,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import { MENUDATA } from "../../variables/mockdata";
 
@@ -21,8 +25,8 @@ import { TEMPLATES } from "../../variables/template_file";
 import ColorPicker from "../../components/ColorPicker";
 import { connect } from "react-redux";
 import { updateSelectedTemplate } from "../../redux/actions/editProjectActions";
-const SIZEMAP = { "0": "XS", "1": "S", "2": "M" };
-const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2 };
+const SIZEMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
+const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
 
 const SHT = [
   { value: "SLT0", label: "Text Highlight" },
@@ -85,8 +89,12 @@ class AppLayout extends React.PureComponent {
     this.state = {
       templateIndex: 0,
       templateCopy: TEMPLATES,
+      dropdownOpen: false,
     };
   }
+  toggleTemplateDropDown = () => {
+    this.setState((prevState) => ({ dropdownOpen: !prevState.dropdownOpen }));
+  };
   getTemplateConfig() {
     return this.state.templateCopy[this.state.templateIndex];
   }
@@ -229,12 +237,35 @@ class AppLayout extends React.PureComponent {
         <div className="leftpanel p-2">
           <Card className="h-100">
             <CardHeader className="text-left">
-              <CardSubtitle style={{ fontSize: "10px" }}>
-                Template Name
-              </CardSubtitle>
-              <CardTitle tag="h3" className="text-highlight">
-                {TEMPLATES[templateIndex].templateName}
-              </CardTitle>
+              <Dropdown
+                isOpen={this.state.dropdownOpen}
+                toggle={this.toggleTemplateDropDown}
+              >
+                <DropdownToggle tag="div" className="pointer" caret>
+                  <CardSubtitle style={{ fontSize: "10px" }}>
+                    Template Name
+                  </CardSubtitle>
+                  <CardTitle tag="h3" className="text-highlight">
+                    {TEMPLATES[templateIndex].templateName}
+                  </CardTitle>
+                </DropdownToggle>
+                <DropdownMenu
+                  style={{
+                    height: "500px",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                  }}
+                >
+                  {this.state.templateCopy.map((tempName, i) => (
+                    <DropdownItem
+                      onClick={() => this.setState({ templateIndex: i })}
+                      key={i}
+                    >
+                      {tempName.templateName}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
             </CardHeader>
             <CardBody className="px-1">
               <ul
@@ -353,13 +384,25 @@ class AppLayout extends React.PureComponent {
                 ) : null}
                 <li>
                   <label className="text-white" htmlFor="navWidth">
-                    Navbar Width
+                    Navbar Height
                   </label>
                   <input
                     type="range"
                     className="custom-range"
-                    min="0"
-                    max="2"
+                    min={
+                      templateCopy[templateIndex].templateName.indexOf(
+                        "Topnav"
+                      ) == -1
+                        ? "0"
+                        : "2"
+                    }
+                    max={
+                      templateCopy[templateIndex].templateName.indexOf(
+                        "Topnav"
+                      ) == -1
+                        ? "2"
+                        : "4"
+                    }
                     step="1"
                     value={
                       SIZEMAPINVERSE[templateCopy[templateIndex].navbarsize]
@@ -368,7 +411,9 @@ class AppLayout extends React.PureComponent {
                     id="navWidth"
                   />
                 </li>
-                {templateCopy[templateIndex].template.indexOf("S0") == -1 ? (
+                {templateCopy[templateIndex].template.indexOf("S0") == -1 &&
+                templateCopy[templateIndex].templateName.indexOf("Sidenav") >
+                  -1 ? (
                   <li>
                     <label className="text-white" htmlFor="sidWidth">
                       Sidebar Width

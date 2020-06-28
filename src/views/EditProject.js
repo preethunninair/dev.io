@@ -155,7 +155,7 @@ class EditProject extends React.PureComponent {
                         className={wizardIndex == 1 ? "text-highlight" : ""}
                         iconObj={{
                           family: "material-icon",
-                          name: "account_tree",
+                          name: "palette",
                         }}
                       />
                     </a>
@@ -164,6 +164,17 @@ class EditProject extends React.PureComponent {
                     <a className="nav-link">
                       <Icon
                         className={wizardIndex == 2 ? "text-highlight" : ""}
+                        iconObj={{
+                          family: "material-icon",
+                          name: "account_tree",
+                        }}
+                      />
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link">
+                      <Icon
+                        className={wizardIndex == 3 ? "text-highlight" : ""}
                         iconObj={{
                           family: "material-icon",
                           name: "assignment_turned_in",
