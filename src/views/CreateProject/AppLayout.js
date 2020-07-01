@@ -24,7 +24,7 @@ import Select from "react-select";
 import { TEMPLATES } from "../../variables/template_file";
 import ColorPicker from "../../components/ColorPicker";
 import { connect } from "react-redux";
-import { updateSelectedTemplate } from "../../redux/actions/editProjectActions";
+import { updateSelectedTemplate } from "../../redux/actions/createProjectActions";
 const SIZEMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
 const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
 
@@ -83,7 +83,7 @@ const SBS = [
     },
   },
 ];
-class AppLayout extends React.PureComponent {
+class AppLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,6 +110,21 @@ class AppLayout extends React.PureComponent {
       );
     }
   }
+  handleNavlinkColorChange = (color, attr) => {
+    const temp = [...this.state.templateCopy];
+
+    let colorStr = color.hex;
+    if (color.rgb.a !== 1) {
+      colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+    }
+
+    temp.forEach((template) => {
+      template[`${attr}HighlightColor`] = colorStr;
+    });
+
+    this.setState({ templateCopy: temp });
+  };
+
   handleColorChange = (color, attr) => {
     const temp = [...this.state.templateCopy];
     let colorStr = color.hex;
@@ -146,7 +161,6 @@ class AppLayout extends React.PureComponent {
       }`;
     }
     temp[this.state.templateIndex][`${elem}linktemplate`] = selection;
-
     this.setState({ templateCopy: temp });
   };
   changeAttribute = (e, attr) => {
@@ -344,7 +358,7 @@ class AppLayout extends React.PureComponent {
                     />
                   </div>
                 </li>
-                <li>
+                {/* <li>
                   <p>Searchbar Style</p>
                   <Select
                     className="react-select info"
@@ -359,7 +373,7 @@ class AppLayout extends React.PureComponent {
                     }
                     options={SBS}
                   />
-                </li>
+                </li> */}
                 {templateCopy[templateIndex].padded != "FALSE" ||
                 templateCopy[templateIndex].templateName.indexOf("Floating") >
                   -1 ? (
@@ -394,13 +408,13 @@ class AppLayout extends React.PureComponent {
                         "Topnav"
                       ) == -1
                         ? "0"
-                        : "2"
+                        : "0"
                     }
                     max={
                       templateCopy[templateIndex].templateName.indexOf(
                         "Topnav"
                       ) == -1
-                        ? "2"
+                        ? "4"
                         : "4"
                     }
                     step="1"
@@ -448,6 +462,46 @@ class AppLayout extends React.PureComponent {
                     options={SHT}
                   />
                 </li>
+                {templateCopy[templateIndex].sidebarlinktemplate.indexOf(
+                  "SLT0"
+                ) === -1 ? (
+                  <li>
+                    <p>Sidebar Link Highlight Bg Color</p>
+                    <div className="d-flex position-relative">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleNavlinkColorChange(color, "sideBg")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"sideBg"}
+                        handleColorChange={this.handleNavlinkColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
+                {templateCopy[templateIndex].layout !== "TOP_NAVIGATION" ? (
+                  <li>
+                    <p>Sidebar Link Highlight Text Color</p>
+                    <div className="d-flex position-relative">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleNavlinkColorChange(color, "sideText")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"sideText"}
+                        handleColorChange={this.handleNavlinkColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
 
                 <li>
                   <p>Submenu Placement</p>
@@ -486,6 +540,47 @@ class AppLayout extends React.PureComponent {
                     options={THT}
                   />
                 </li>
+
+                {templateCopy[templateIndex].navbarlinktemplate.indexOf(
+                  "LT0"
+                ) === -1 ? (
+                  <li>
+                    <p>Navbar Link Highlight Bg Color</p>
+                    <div className="d-flex position-relative">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleNavlinkColorChange(color, "navBg")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"navBg"}
+                        handleNavlinkColorChange={this.handleNavlinkColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
+                {templateCopy[templateIndex].submenuConfig == "TNS" ? (
+                  <li>
+                    <p>Navbar Link Highlight Text Color</p>
+                    <div className="d-flex position-relative">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleNavlinkColorChange(color, "navText")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"navText"}
+                        handleNavlinkColorChange={this.handleNavlinkColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
 
                 <li>
                   <p>Topbar Icon Config</p>
@@ -547,7 +642,7 @@ class AppLayout extends React.PureComponent {
         <div className="workbench rounded p-3">
           <TemplateView
             MENUDATA={MENUDATA}
-            config={templateCopy[templateIndex]}
+            config={{ ...templateCopy[templateIndex] }}
           />
         </div>
       </div>

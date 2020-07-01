@@ -626,7 +626,7 @@ export const TEMPLATES = [
     templateName: "Topnav Standard",
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "TNS",
     searchbarConfig: {
       placement: "RIGHT",
       width: "15vw",
@@ -654,7 +654,7 @@ export const TEMPLATES = [
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "TNS",
     searchbarConfig: {
       placement: "RIGHT",
       width: "15vw",
@@ -682,7 +682,7 @@ export const TEMPLATES = [
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "TNS",
     searchbarConfig: {
       placement: "RIGHT",
       width: "15vw",

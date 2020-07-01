@@ -5,7 +5,7 @@ export const MENUDATA = [
     module: "Overview",
     path: "/overview",
     submenu: [],
-    active: false,
+    landingPage: true,
   },
 
   {
@@ -14,14 +14,14 @@ export const MENUDATA = [
     module: "tracking",
     path: "/tracking",
     submenu: [],
-    active: false,
+    landingPage: false,
   },
   {
     title: "Admin",
     icon: { family: "material-icon", name: "security" },
     module: "admin",
     path: "/admin",
-    active: false,
+    landingPage: false,
     submenu: [
       {
         title: "User Management",
@@ -44,7 +44,7 @@ export const MENUDATA = [
     icon: { family: "material-icon", name: "bar_chart" },
     module: "reports",
     path: "/reports",
-    active: false,
+    landingPage: false,
     submenu: [],
   },
 ];

@@ -20,65 +20,7 @@ import Select from "react-select";
 import { TEMPLATES } from "../../variables/template_file";
 import ColorPicker from "../../components/ColorPicker";
 import { connect } from "react-redux";
-import { updateSelectedTemplate } from "../../redux/actions/editProjectActions";
-const SIZEMAP = { "0": "XS", "1": "S", "2": "M" };
-const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2 };
-
-const SHT = [
-  { value: "SLT0", label: "Text Highlight" },
-  { value: "SLT1_ROUNDED", label: "Rounded Highlight" },
-  { value: "SLT1", label: "Flat Highlight" },
-
-  { value: "SLT2", label: "Fill Highlight" },
-];
-
-const SMP = [
-  { value: "SNS", label: "Sidebar Submenu" },
-  { value: "TNS", label: "Topbar Menu" },
-];
-const THT = [
-  { value: "LT0", label: "Text Highlight" },
-  { value: "LT1", label: "Flat Highlight" },
-  { value: "LT2", label: "Rounded Highlight" },
-  { value: "LT3", label: "Fill Highlight" },
-];
-const TIC = [
-  { value: "_ICONSTACK", label: "Stack Icon" },
-  { value: "_ICONONLYHIGHLIGHT", label: "Icon with Tooltip" },
-  { value: "_ICONONLY", label: "Icon Only" },
-
-  { value: "_NOICON", label: "Text Only" },
-  { value: "_ICOLAB", label: "Icon + Label" },
-];
-const SBS = [
-  {
-    label: "FLOATING RIGHT",
-    value: {
-      placement: "RIGHT",
-      width: "15vw",
-      floating: true,
-      hash: "FR",
-    },
-  },
-  {
-    label: "FIXED RIGHT",
-    value: {
-      placement: "RIGHT",
-      width: "15vw",
-      floating: false,
-      hash: "FIR",
-    },
-  },
-  {
-    label: "FIXED LEFT",
-    value: {
-      placement: "LEFT",
-      width: "15vw",
-      floating: false,
-      hash: "FL",
-    },
-  },
-];
+import { updateSelectedTemplate } from "../../redux/actions/createProjectActions";
 
 const mapState = (state) => ({
   selectedConfig: state.templateConfig.templateConfig,
@@ -87,79 +29,25 @@ class ColorPalette extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      templateIndex: 0,
-      templateCopy: TEMPLATES,
+      sideBgHighlightColor: "",
+      navBgHighlightColor: "",
+      navTextHighlightColor: "",
+      sideTextHighlightColor: "",
     };
   }
   getTemplateConfig() {
     return this.state.templateCopy[this.state.templateIndex];
   }
-  // componentDidUpdate(prevProps) {
-  //   if (
-  //     prevProps.wizardIndex != this.props.wizardIndex &&
-  //     this.props.wizardIndex == 2
-  //   ) {
-  //     this.props.dispatch(
-  //       updateSelectedTemplate(
-  //         this.state.templateCopy[this.state.templateIndex]
-  //       )
-  //     );
-  //   }
-  // }
+
   handleColorChange = (color, attr) => {
-    const temp = [...this.state.templateCopy];
     let colorStr = color.hex;
     if (color.rgb.a !== 1) {
       colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
     }
 
-    temp.forEach((template) => {
-      template[`${attr}BgColor`] = colorStr;
-      template[`${attr}Theme`] = tinycolor(colorStr).isDark()
-        ? "dark"
-        : "light";
-    });
-
-    this.setState({ templateCopy: temp });
+    this.setState({ [`${attr}HighlightColor`]: colorStr });
   };
-  selectSBStyle = (e) => {
-    const temp = [...this.state.templateCopy];
-    temp[this.state.templateIndex].searchbarConfig = e.value;
-    if (e.value.placement == "LEFT") {
-      temp[this.state.templateIndex].submenuConfig = "SNS";
-    }
-    this.setState({ templateCopy: temp });
-  };
-  selectHighlight = (type, elem) => {
-    const temp = [...this.state.templateCopy];
-    const configIndex = temp[this.state.templateIndex][
-      `${elem}linktemplate`
-    ].indexOf("_");
-    let selection = type.value;
-    if (configIndex > -1 && elem == "navbar") {
-      selection += `_${
-        temp[this.state.templateIndex][`${elem}linktemplate`].split("_")[1]
-      }`;
-    }
-    temp[this.state.templateIndex][`${elem}linktemplate`] = selection;
 
-    this.setState({ templateCopy: temp });
-  };
-  changeAttribute = (e, attr) => {
-    const temp = [...this.state.templateCopy];
-    temp[this.state.templateIndex][`${attr}`] = e.value;
-
-    this.setState({ templateCopy: temp });
-  };
-  selectIconConfig = (e) => {
-    const temp = [...this.state.templateCopy];
-
-    temp[this.state.templateIndex]["navbarlinktemplate"] =
-      temp[this.state.templateIndex]["navbarlinktemplate"].split("_")[0] +
-      e.value;
-
-    this.setState({ templateCopy: temp });
-  };
   initializeDropdownEventHandler() {
     let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
     dropdowns.forEach((elem, i) => {
@@ -189,41 +77,8 @@ class ColorPalette extends React.PureComponent {
 
     this.initializeDropdownEventHandler();
   }
-  setAppMode = () => {
-    const temp = [...this.state.templateCopy];
-
-    if (temp[this.state.templateIndex]["appMode"] != "dark") {
-      temp[this.state.templateIndex]["appMode"] = "dark";
-    } else {
-      temp[this.state.templateIndex]["appMode"] = "light";
-    }
-
-    this.setState({ templateCopy: temp });
-  };
-  roundedToggle = () => {
-    const temp = [...this.state.templateCopy];
-
-    if (temp[this.state.templateIndex]["rounded"] != "FALSE") {
-      temp[this.state.templateIndex]["rounded"] = "FALSE";
-    } else {
-      temp[this.state.templateIndex]["rounded"] =
-        temp[this.state.templateIndex]["boxed"];
-    }
-
-    this.setState({ templateCopy: temp });
-  };
-
-  applySize = (e, elem) => {
-    const temp = [...this.state.templateCopy];
-
-    temp[this.state.templateIndex][`${elem}size`] =
-      SIZEMAP[`${e.target.value}`];
-
-    this.setState({ templateCopy: temp });
-  };
 
   render() {
-    const { templateCopy, templateIndex } = this.state;
     return (
       <div
         className={`${
@@ -249,37 +104,75 @@ class ColorPalette extends React.PureComponent {
               >
                 {this.props.selectedConfig.submenuConfig == "TNS" ? (
                   <li>
-                    <p>Navbar Link Highlight Color</p>
+                    <p>Navbar Link Highlight Bg Color</p>
                     <div className="d-flex">
                       <CirclePicker
                         width="unset"
                         circleSize={15}
                         onChange={(color, event) =>
-                          this.handleColorChange(color, "navbarLink")
+                          this.handleColorChange(color, "navBg")
                         }
                         colors={["#1e1e2f", "#171725", "#ffffff"]}
                       />
                       <ColorPicker
-                        src={"navbar"}
+                        src={"navBg"}
                         handleColorChange={this.handleColorChange}
                       />
                     </div>
                   </li>
                 ) : null}
-                {this.props.selectedConfig.submenuConfig == "SNS" ? (
+                {this.props.selectedConfig.submenuConfig == "TNS" ? (
                   <li>
-                    <p>Sidebar Link Highlight Color</p>
+                    <p>Navbar Link Highlight Text Color</p>
                     <div className="d-flex">
                       <CirclePicker
                         width="unset"
                         circleSize={15}
                         onChange={(color, event) =>
-                          this.handleColorChange(color, "sidebarLink")
+                          this.handleColorChange(color, "navText")
                         }
                         colors={["#1e1e2f", "#171725", "#ffffff"]}
                       />
                       <ColorPicker
-                        src={"sidebar"}
+                        src={"navText"}
+                        handleColorChange={this.handleColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
+                {this.props.selectedConfig.layout !== "TOP_NAVIGATION" ? (
+                  <li>
+                    <p>Sidebar Link Highlight Bg Color</p>
+                    <div className="d-flex">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleColorChange(color, "sideBg")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"sideBg"}
+                        handleColorChange={this.handleColorChange}
+                      />
+                    </div>
+                  </li>
+                ) : null}
+                {this.props.selectedConfig.layout !== "TOP_NAVIGATION" ? (
+                  <li>
+                    <p>Sidebar Link Highlight Text Color</p>
+                    <div className="d-flex">
+                      <CirclePicker
+                        width="unset"
+                        circleSize={15}
+                        onChange={(color, event) =>
+                          this.handleColorChange(color, "sideText")
+                        }
+                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                      />
+                      <ColorPicker
+                        src={"sideText"}
                         handleColorChange={this.handleColorChange}
                       />
                     </div>
@@ -292,7 +185,7 @@ class ColorPalette extends React.PureComponent {
                       width="unset"
                       circleSize={15}
                       onChange={(color, event) =>
-                        this.handleColorChange(color, "navbar")
+                        this.bgColorHandler(color, "card")
                       }
                       colors={["#1e1e2f", "#171725", "#ffffff"]}
                     />
@@ -309,7 +202,7 @@ class ColorPalette extends React.PureComponent {
         <div className="workbench rounded p-3">
           <TemplateView
             MENUDATA={MENUDATA}
-            config={this.props.selectedConfig}
+            config={Object.assign({}, this.props.selectedConfig, this.state)}
           />
         </div>
       </div>

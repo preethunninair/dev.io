@@ -1,13 +1,13 @@
 import React from "react";
 import { ButtonGroup, Button } from "reactstrap";
 import Icon from "../components/uilibrary/Icon";
-import AppLayout from "./EditProject/AppLayout";
-import Routes from "./EditProject/Routes";
-import GenerateProject from "./EditProject/GenerateProject";
+import AppLayout from "./CreateProject/AppLayout";
+import Routes from "./CreateProject/Routes";
+import GenerateProject from "./CreateProject/GenerateProject";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../library/axiosInstance";
-import ColorPalette from "./EditProject/ColorPalette";
+import ColorPalette from "./CreateProject/ColorPalette";
 const mapState = (state) => ({
   config: state.templateConfig.templateConfig,
   route: state.templateConfig.route,
@@ -149,21 +149,11 @@ class EditProject extends React.PureComponent {
                       />
                     </a>
                   </li>
+
                   <li className="nav-item">
                     <a className="nav-link">
                       <Icon
                         className={wizardIndex == 1 ? "text-highlight" : ""}
-                        iconObj={{
-                          family: "material-icon",
-                          name: "palette",
-                        }}
-                      />
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link">
-                      <Icon
-                        className={wizardIndex == 2 ? "text-highlight" : ""}
                         iconObj={{
                           family: "material-icon",
                           name: "account_tree",
@@ -174,7 +164,7 @@ class EditProject extends React.PureComponent {
                   <li className="nav-item">
                     <a className="nav-link">
                       <Icon
-                        className={wizardIndex == 3 ? "text-highlight" : ""}
+                        className={wizardIndex == 2 ? "text-highlight" : ""}
                         iconObj={{
                           family: "material-icon",
                           name: "assignment_turned_in",
@@ -217,7 +207,6 @@ class EditProject extends React.PureComponent {
         </div>
         <div className="app-main">
           <AppLayout wizardIndex={wizardIndex} />
-          <ColorPalette wizardIndex={wizardIndex} />
 
           <Routes wizardIndex={wizardIndex} />
           <GenerateProject

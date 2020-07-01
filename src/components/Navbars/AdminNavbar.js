@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import Searchbar from "../uilibrary/Searchbar";
 import Icon from "../uilibrary/Icon";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import tinycolor from "tinycolor2";
 
 class AdminNavbar extends React.PureComponent {
@@ -18,22 +18,11 @@ class AdminNavbar extends React.PureComponent {
   }
   componentDidMount() {
     window.addEventListener("resize", this.updateColor);
-    this.setState({ selectedPage: this.props.location.pathname });
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColor);
   }
-  componentDidUpdate(prevProps) {
-    let newLoc = this.props.location.pathname;
-    let oldLoc = prevProps.location.pathname;
-    if (newLoc != oldLoc) {
-      if (newLoc.includes(oldLoc)) {
-        this.setState({ selectedPage: oldLoc });
-      } else {
-        this.setState({ selectedPage: newLoc });
-      }
-    }
-  }
+
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   updateColor = () => {
     if (window.innerWidth < 993 && this.state.collapseOpen) {
@@ -83,7 +72,7 @@ class AdminNavbar extends React.PureComponent {
             key={i}
           >
             <NavLink
-              to={`/editproject${menuItem.path}`}
+              to={`/createproject${menuItem.path}`}
               className="dropdown-toggle nav-link"
               data-toggle="dropdown"
               activeClassName="active"
@@ -105,22 +94,26 @@ class AdminNavbar extends React.PureComponent {
                   <div className="d-flex">
                     <ul>
                       {menuItem.submenu.map((subItem, i) => (
-                        <NavLink
-                          to={`/editproject${subItem.path}`}
-                          className="nav-item dropdown-item"
-                          activeClassName="active"
-                          onClick={() => {
-                            var current = document.querySelectorAll("li.show");
-                            if (current.length > 0) {
-                              current[0].className = current[0].className.replace(
-                                " show",
-                                ""
+                        <li className={`nav-item`} key={i}>
+                          <NavLink
+                            to={`/createproject${subItem.path}`}
+                            className="nav-link dropdown-item"
+                            activeClassName="active"
+                            onClick={() => {
+                              var current = document.querySelectorAll(
+                                "li.show"
                               );
-                            }
-                          }}
-                        >
-                          {subItem.title}
-                        </NavLink>
+                              if (current.length > 0) {
+                                current[0].className = current[0].className.replace(
+                                  " show",
+                                  ""
+                                );
+                              }
+                            }}
+                          >
+                            {subItem.title}
+                          </NavLink>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -132,26 +125,21 @@ class AdminNavbar extends React.PureComponent {
       });
     } else {
       if (this.props.submenuConfig !== "SNS") {
-        let pageOptn = this.props.routes.filter(
-          (item, i) => `/editproject${item.path}` == this.state.selectedPage
-        )[0];
-        menus =
-          pageOptn == undefined
-            ? []
-            : pageOptn.submenu.map((menuItem, i) => {
-                return (
-                  <NavLink
-                    to={`/editproject${menuItem.path}`}
-                    className="nav-link"
-                    activeClassName="active"
-                    key={i}
-                  >
-                    <Icon iconObj={menuItem.icon} />
+        menus = this.props.routes.map((menuItem, i) => {
+          return (
+            <li className="nav-item" key={i}>
+              <NavLink
+                to={`/createproject${menuItem.path}`}
+                className="nav-link"
+                activeClassName="active"
+              >
+                <Icon iconObj={menuItem.icon} />
 
-                    <span>{menuItem.title}</span>
-                  </NavLink>
-                );
-              });
+                <span>{menuItem.title}</span>
+              </NavLink>
+            </li>
+          );
+        });
       }
     }
     return menus;
@@ -268,5 +256,4 @@ class AdminNavbar extends React.PureComponent {
     );
   }
 }
-const AdminNavbarHist = withRouter(AdminNavbar);
-export default AdminNavbarHist;
+export default AdminNavbar;

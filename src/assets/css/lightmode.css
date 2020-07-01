@@ -57,7 +57,7 @@
     color: #222a42;
     border-color: rgba(29, 37, 59, 0.5); }
     .white-content .form-control:focus {
-      border-color: #e14eca; }
+      border-color:#4285F4; }
   .white-content .form-group.no-border .form-control,
   .white-content .form-group.no-border .form-control + .input-group-prepend .input-group-text,
   .white-content .form-group.no-border .form-control + .input-group-append .input-group-text,
@@ -112,7 +112,7 @@
   .white-content .input-group-focus .input-group-prepend .input-group-text,
   .white-content .input-group-focus .input-group-append .input-group-text,
   .white-content .input-group-focus .form-control {
-    border-color: #e14eca; }
+    border-color:#4285F4; }
   .white-content .input-group-focus.no-border .input-group-prepend .input-group-text,
   .white-content .input-group-focus.no-border .input-group-append .input-group-text {
     background-color: rgba(222, 222, 222, 0.5); }

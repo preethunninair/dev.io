@@ -62,6 +62,7 @@ class ColorPicker extends React.Component {
             <div style={styles.cover} onClick={this.handleClose} />
             <SketchPicker
               color={this.state.color}
+              width="150px"
               presetColors={[
                 "#1a1e3f",
                 "#161935",

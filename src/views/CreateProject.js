@@ -1,151 +1,250 @@
 import React from "react";
-import Input from "../components/uilibrary/formcomponent/Input";
-import { Redirect } from "react-router-dom";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  CardFooter,
-  Row,
-  Col,
-} from "reactstrap";
-import axios from "../library/axiosInstance";
+import { ButtonGroup, Button } from "reactstrap";
 import Icon from "../components/uilibrary/Icon";
-class CreateProject extends React.Component {
+import AppLayout from "./CreateProject/AppLayout";
+import Routes from "./CreateProject/Routes";
+import GenerateProject from "./CreateProject/GenerateProject";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "../library/axiosInstance";
+import ColorPalette from "./CreateProject/ColorPalette";
+const mapState = (state) => ({
+  config: state.templateConfig.templateConfig,
+  route: state.templateConfig.route,
+});
+class CreateProject extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.initializeProject = this.initializeProject.bind(this);
-    this.setFieldValue = this.setFieldValue.bind(this);
-    this.uploadedImage = React.createRef();
-    this.imageUploader = React.createRef();
+    this.toggleAppMode = this.toggleAppMode.bind(this);
+    this.statusCode = this.statusCode.bind(this);
+    this.generateProject = this.generateProject.bind(this);
     this.state = {
-      appName: "",
-      file: null,
+      appMode: "",
+      wizardIndex: 0,
+      generateStatus: [],
     };
   }
 
-  setFieldValue(e) {
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
-  }
-  initializeProject() {
-    axios
-      .post("/initProject", {
-        appName: this.state.appName,
-        logoFile: this.state.file,
-      })
-      .then(() => {})
-      .catch(() => {});
-  }
-  handleImageUpload(e) {
-    const [file] = e.target.files;
-    if (file) {
-      const data = new FormData();
-      data.append("file", e.target.files[0]);
+  statusCode(status) {
+    switch (status) {
+      case 0:
+        this.setState((prevState) => ({
+          generateStatus: [...prevState.generateStatus, "Generating Project"],
+        }));
+        break;
+      case 1:
+        this.setState((prevState) => ({
+          generateStatus: [
+            ...prevState.generateStatus,
+            "Project Created Successfully !",
+          ],
+        }));
 
-      const reader = new FileReader();
-      const { current } = this.uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      this.setState({ file: data });
-      reader.readAsDataURL(file);
+        break;
+      case 2:
+        this.setState((prevState) => ({
+          generateStatus: [
+            ...prevState.generateStatus,
+            "Applying configuration",
+          ],
+        }));
+
+        break;
+      case 3:
+        this.setState((prevState) => ({
+          generateStatus: [...prevState.generateStatus, "Creating Routes"],
+        }));
+
+        break;
+      case 4:
+        this.setState((prevState) => ({
+          generateStatus: [...prevState.generateStatus, "Done"],
+        }));
+
+        break;
     }
+  }
+  componentDidMount() {
+    const appMode = localStorage.getItem("appMode")
+      ? localStorage.getItem("appMode")
+      : "dark";
+    this.setAppMode(appMode);
+  }
+  generateProject() {
+    this.statusCode(0);
+    axios
+      .post("/generateProject", {
+        config: this.props.config,
+        route: this.props.route,
+      })
+      .then((res) => {
+        setTimeout(() => this.statusCode(1), 1000);
+        setTimeout(() => this.statusCode(2), 2000);
+        setTimeout(() => this.statusCode(3), 3000);
+        setTimeout(() => this.statusCode(4), 4000);
+      });
+  }
+  setAppMode(mode) {
+    document
+      .getElementsByClassName("wrapper")[0]
+      .setAttribute("data-appmode", mode);
+    this.setState({ appMode: mode });
+  }
+  toggleAppMode() {
+    if (this.state.appMode === "dark") {
+      this.setAppMode("light");
+      localStorage.setItem("appMode", "light");
+    } else {
+      this.setAppMode("dark");
+      localStorage.setItem("appMode", "dark");
+    }
+  }
+  wizardView(counter) {
+    this.setState((prevState) => ({
+      wizardIndex: prevState.wizardIndex + counter,
+    }));
   }
   render() {
-    if (this.state.status) {
-      return <Redirect to="/editproject/admin" />;
-    }
+    const { appMode, wizardIndex } = this.state;
     return (
-      <div className="d-flex h-100 align-items-center justify-content-center">
-        <Card className="card-contributions h-50 w-50">
-          <CardHeader>
-            <Row>
-              <Col className="text-left" sm="12">
-                <CardTitle tag="h4" style={{ fontWeight: "200" }}>
-                  dev.<span style={{ color: "red" }}>io</span>
-                </CardTitle>
-              </Col>
-            </Row>
-          </CardHeader>
-          <CardBody className="py-0">
-            <div class="d-flex px-5 center justify-content-between h-100 flex-column">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div
-                  style={{
-                    height: "100px",
-                    width: "100px",
-
-                    position: "relative",
-                  }}
-                  class="bg-transparent rounded border border-primary"
-                  onClick={() => this.imageUploader.current.click()}
-                >
-                  <input
-                    type="file"
-                    style={{
-                      display: "none",
-                    }}
-                    accept="image/*"
-                    onChange={(e) => this.handleImageUpload(e)}
-                    multiple="false"
-                    ref={this.imageUploader}
-                  />
-                  <img
-                    ref={this.uploadedImage}
-                    className="p-2"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      position: "absolute",
-                    }}
-                  />
+      <div className="wrapper overflow-hidden" data-appmode={"dark"}>
+        <div className="editor">
+          <div className="app-brand">
+            <div
+              className="brand-img pl-0 center text-center h-100"
+              data-theme={"dark"}
+              style={{ fontSize: "22px" }}
+            >
+              &#60;&#47;&#62; dev.<span style={{ color: "red" }}>io</span>
+            </div>
+          </div>
+          <div className="app-header">
+            <nav
+              data-theme="transparent"
+              className="navbar-absolute  navbar navbar-expand-lg px-0"
+            >
+              <div className="container-fluid px-0">
+                <div className="navbar-wrapper">
+                  <a
+                    className="navbar-brand"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <div className="brand-img d-flex align-items-center h-100">
+                      <img src={this.props.logo} alt="react-logo" />
+                      dev.io
+                    </div>
+                  </a>
                 </div>
 
-                <Icon
-                  className="position-absolute pointer"
-                  iconObj={{
-                    family: "linericons",
-                    name: "lnr lnr-plus-circle",
-                  }}
-                />
+                <div className="collapse navbar-collapse">
+                  <ul className="navbar-nav m-auto page-nav">
+                    <li className="nav-item">
+                      <a className="nav-link">
+                        <Icon
+                          className={wizardIndex == 0 ? "text-highlight" : ""}
+                          iconObj={{
+                            family: "material-icon",
+                            name: "view_compact",
+                          }}
+                        />
+                      </a>
+                    </li>
+
+                    <li className="nav-item">
+                      <a className="nav-link">
+                        <Icon
+                          className={wizardIndex == 1 ? "text-highlight" : ""}
+                          iconObj={{
+                            family: "material-icon",
+                            name: "account_tree",
+                          }}
+                        />
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link">
+                        <Icon
+                          className={wizardIndex == 2 ? "text-highlight" : ""}
+                          iconObj={{
+                            family: "material-icon",
+                            name: "assignment_turned_in",
+                          }}
+                        />
+                      </a>
+                    </li>
+                  </ul>
+                  <ul className="ml-auto form-inline navbar-nav">
+                    <li className="nav-item">
+                      <a
+                        className="nav-link pointer"
+                        onClick={this.toggleAppMode}
+                      >
+                        <Icon
+                          iconObj={{
+                            family: "material-icon",
+                            name:
+                              appMode === "light"
+                                ? "brightness_3"
+                                : "brightness_1",
+                          }}
+                        />
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/" className="nav-link pointer">
+                        <Icon
+                          iconObj={{
+                            family: "material-icon",
+                            name: "menu_open",
+                          }}
+                        />
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <Input
-                text="App Name"
-                ref="appName"
-                value={this.state.appName}
-                name="appName"
-                validator={true}
-                onChange={this.setFieldValue}
-                mandatory
-                emptyMessage="App name can't be empty"
-              />
+            </nav>
+          </div>
+          <div className="app-main">
+            <AppLayout wizardIndex={wizardIndex} />
+
+            <Routes wizardIndex={wizardIndex} />
+            <GenerateProject
+              msg={this.state.generateStatus}
+              wizardIndex={wizardIndex}
+            />
+            <div className="editor-footer center" style={{ height: "50px" }}>
+              <ButtonGroup className="ml-auto">
+                <Button
+                  color="primary"
+                  disabled={wizardIndex == 0}
+                  onClick={() => this.wizardView(-1)}
+                >
+                  Previous
+                </Button>
+                <Button
+                  color="primary"
+                  disabled={wizardIndex == 2}
+                  onClick={() => this.wizardView(1)}
+                >
+                  Next
+                </Button>
+              </ButtonGroup>
+              <Button
+                color="success"
+                disabled={wizardIndex != 2}
+                onClick={this.generateProject}
+                className="ml-auto mr-3"
+              >
+                Generate
+              </Button>
             </div>
-          </CardBody>
-          <hr class="m-0" />
-          <CardFooter className="center" style={{ height: "70px" }}>
-            <Button
-              color="primary"
-              size="lg"
-              block
-              onClick={this.initializeProject}
-            >
-              Initialize
-            </Button>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default CreateProject;
+export default connect(mapState)(CreateProject);

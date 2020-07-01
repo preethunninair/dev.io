@@ -12,7 +12,7 @@
   }
   .custom-control-input:checked ~ .custom-control-label::before {
     color: #ffffff;
-    background-color: #e14eca;
+    background-color:#4285F4;
     box-shadow: none;
   }
   .custom-control-input:focus ~ .custom-control-label::before {
@@ -20,7 +20,7 @@
   }
   .custom-control-input:active ~ .custom-control-label::before {
     color: #ffffff;
-    background-color: #e14eca;
+    background-color:#4285F4;
     box-shadow: none;
   }
   .custom-control-input:disabled ~ .custom-control-label {
@@ -65,7 +65,7 @@
   }
   
   .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #e14eca;
+    background-color:#4285F4;
   }
   
   .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
@@ -75,7 +75,7 @@
   .custom-checkbox
     .custom-control-input:indeterminate
     ~ .custom-control-label::before {
-    background-color: #e14eca;
+    background-color:#4285F4;
     box-shadow: none;
   }
   
@@ -102,7 +102,7 @@
   }
   
   .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #e14eca;
+    background-color:#4285F4;
   }
   
   .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
@@ -257,7 +257,7 @@
     width: 1rem;
     height: 1rem;
     margin-top: -0.25rem;
-    background-color: #e14eca;
+    background-color:#4285F4;
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.1rem 0.25rem rgba(34, 42, 66, 0.1);
@@ -286,7 +286,7 @@
   .custom-range::-moz-range-thumb {
     width: 1rem;
     height: 1rem;
-    background-color: #e14eca;
+    background-color:#4285F4;
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.1rem 0.25rem rgba(34, 42, 66, 0.1);
@@ -318,7 +318,7 @@
     margin-top: 0;
     margin-right: 0;
     margin-left: 0;
-    background-color: #e14eca;
+    background-color:#4285F4;
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.1rem 0.25rem rgba(34, 42, 66, 0.1);

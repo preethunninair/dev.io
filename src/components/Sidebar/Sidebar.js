@@ -44,7 +44,10 @@ class Sidebar extends React.Component {
             key={i}
           >
             <NavLink
-              to={`/editproject${menuItem.path}`}
+              to={{
+                pathname: `/createproject${menuItem.path}`,
+                state: { parentModule: menuItem.path },
+              }}
               className="dropdown-toggle nav-link"
               data-toggle="dropdown"
               activeClassName="active"
@@ -65,7 +68,7 @@ class Sidebar extends React.Component {
                   <ul className="p-0">
                     {menuItem.submenu.map((subItem, i) => (
                       <NavLink
-                        to={`/editproject${subItem.path}`}
+                        to={`/createproject${subItem.path}`}
                         className="nav-item dropdown-item"
                         activeClassName="active"
                         key={i}

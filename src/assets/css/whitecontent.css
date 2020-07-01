@@ -99,7 +99,7 @@
   border-color: rgba(29, 37, 59, 0.5);
 }
 [data-appmode="light"] .form-control:focus {
-  border-color: #e14eca;
+  border-color:#4285F4;
 }
 [data-appmode="light"] .form-group.no-border .form-control,
 [data-appmode="light"]
@@ -280,7 +280,7 @@
 [data-appmode="light"] .input-group-focus .input-group-prepend .input-group-text,
 [data-appmode="light"] .input-group-focus .input-group-append .input-group-text,
 [data-appmode="light"] .input-group-focus .form-control {
-  border-color: #e14eca;
+  border-color:#4285F4;
 }
 [data-appmode="light"]
   .input-group-focus.no-border

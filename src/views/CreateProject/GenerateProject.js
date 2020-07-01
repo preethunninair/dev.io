@@ -3,7 +3,7 @@ function GenerateProject(props) {
   return (
     <div
       className={`${
-        props.wizardIndex == 3 ? "" : "d-none "
+        props.wizardIndex == 2 ? "" : "d-none "
       }page-grid generate-layout`}
     >
       <div className="workbench p-2">
