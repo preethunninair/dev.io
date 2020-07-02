@@ -84,7 +84,7 @@ class TemplateView extends React.Component {
 
     if (sidebarlinktemplate.indexOf("LT0") > -1) {
       if (sideTextHighlightColor !== undefined) {
-        sidebarHighlightStyling += `.sidebar .nav li > a.active{
+        sidebarHighlightStyling += `.sidebar .nav li > a.active p, .sidebar .nav li > a.active i{
           color:${sideTextHighlightColor} !important;
         }`;
       }
@@ -158,7 +158,11 @@ class TemplateView extends React.Component {
           {layout == "SIDE_NAVIGATION" || layout == "SIDEONLYNAVIGATION" ? (
             <div className="app-menu">
               <Sidebar
-                routes={MENUDATA}
+                routes={
+                  layout == "SIDEONLYNAVIGATION" || layout == "SIDE_NAVIGATION"
+                    ? MENUDATA
+                    : this.props.subRoute
+                }
                 submenuConfig={submenuConfig}
                 sidebarBgColor={sidebarBgColor}
                 theme={sidebarTheme}
@@ -175,26 +179,24 @@ class TemplateView extends React.Component {
           ) : null}
 
           <div className="app-main" data-rounded={rounded}>
-            <div className="scroller">
-              <Switch>
-                {MENUDATA.map((route, i) => {
-                  return (
-                    <Route
-                      key={i}
-                      path={`/createproject${route.path}`}
-                      render={(props) => (
-                        <SubRouteDispatcher
-                          parentRoute={`/createproject${route.path}`}
-                          routes={route.submenu}
-                        >
-                          <Demo {...props} path={route.path} />
-                        </SubRouteDispatcher>
-                      )}
-                    />
-                  );
-                })}
-              </Switch>
-            </div>
+            <Switch>
+              {MENUDATA.map((route, i) => {
+                return (
+                  <Route
+                    key={i}
+                    path={`/createproject${route.path}`}
+                    render={(props) => (
+                      <SubRouteDispatcher
+                        parentRoute={`/createproject${route.path}`}
+                        routes={route.submenu}
+                      >
+                        <Demo {...props} path={route.path} />
+                      </SubRouteDispatcher>
+                    )}
+                  />
+                );
+              })}
+            </Switch>
           </div>
         </div>
         <style

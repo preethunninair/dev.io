@@ -105,7 +105,9 @@ class Sidebar extends React.Component {
       showToggler,
       theme,
     } = this.props;
-
+    if (layout == "TOP_NAVIGATION" && routes.length <= 0) {
+      return null;
+    }
     return (
       <div
         className="sidebar"

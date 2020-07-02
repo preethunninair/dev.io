@@ -650,6 +650,33 @@ export const TEMPLATES = [
   },
   {
     selectedPage: "/admin",
+    templateName: "Topnav Standard Padded",
+    logoTheme: "dark",
+    layout: "TOP_NAVIGATION",
+    submenuConfig: "TNS",
+    searchbarConfig: {
+      placement: "RIGHT",
+      width: "15vw",
+      floating: true,
+      hash: "FR",
+    },
+    gridConfig: "N0",
+    rounded: "S_LN",
+    boxed: "S_LN",
+    padded: "SLN",
+    template: "N0",
+
+    logoBgColor: "#1e1e2f",
+    navbarBgColor: "white",
+    sidebarBgColor: "#1e1e2f",
+    sidebarlinktemplate: "SLT0",
+    navbarlinktemplate: "LT0_NOICON",
+    navbarsize: "XS",
+    sidebarsize: "S",
+    appBgColor: "#f2f2f2",
+  },
+  {
+    selectedPage: "/admin",
     templateName: "Topnav Stacked",
 
     logoTheme: "dark",

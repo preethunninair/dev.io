@@ -36,47 +36,13 @@ class Admin extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.history.location.pathname != prevState.selectedPage) {
-      let loc = nextProps.history.location.pathname.split("/")[1];
-      if (loc == "" || loc == "/") {
-        localStorage.setItem("selectedPage", `/overview}`);
-        return {
-          selectedPage: `/overview`,
-        };
-      }
-      localStorage.setItem("selectedPage", `/${loc}`);
-      return {
-        selectedPage: `/${loc}`,
-      };
-    }
-    return null;
-  }
-
   componentDidMount(e) {
     if (navigator.platform.indexOf("Win") > -1) {
       document.documentElement.className += " perfect-scrollbar-on";
       document.documentElement.classList.remove("perfect-scrollbar-off");
       ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
-      }
     }
     this.initializeDropdownEventHandler();
-  }
-
-  queryPageURL(name) {
-    switch (name) {
-      case "":
-        break;
-      case "/":
-        return "/overview";
-        break;
-      default:
-        return name;
-        break;
-    }
   }
 
   initializeDropdownEventHandler = () => {
@@ -110,13 +76,6 @@ class Admin extends React.Component {
       document.documentElement.classList.remove("perfect-scrollbar-on");
     }
   }
-  // componentDidUpdate(prevProps) {
-  //  if(this.props.history.location.pathname!=prevProps.history.location.pathname){
-  //   localStorage.setItem("selectedPage",this.props.history.location.pathname);
-  //   this.setState({selectedPage:this.props.history.location.pathname});
-  //  }
-
-  // }
 
   // this function opens and closes the sidebar on small devices
   toggleSidebar = () => {

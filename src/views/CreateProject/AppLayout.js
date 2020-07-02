@@ -13,6 +13,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Collapse,
 } from "reactstrap";
 import { MENUDATA } from "../../variables/mockdata";
 
@@ -38,7 +39,7 @@ const SHT = [
 
 const SMP = [
   { value: "SNS", label: "Sidebar Submenu" },
-  { value: "TNS", label: "Topbar Menu" },
+  { value: "TNS", label: "Topnav Menu" },
 ];
 const THT = [
   { value: "LT0", label: "Text Highlight" },
@@ -90,6 +91,9 @@ class AppLayout extends React.Component {
       templateIndex: 0,
       templateCopy: TEMPLATES,
       dropdownOpen: false,
+      sidenavCtrl: false,
+      topnavCtrl: false,
+      colorCtrl: true,
     };
   }
   toggleTemplateDropDown = () => {
@@ -290,95 +294,97 @@ class AppLayout extends React.Component {
                   overflowY: "auto",
                 }}
               >
-                <li>
-                  <p>App Background</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "app")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
-                    />
-                    <ColorPicker
-                      src={"app"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
+                <li
+                  className="pointer"
+                  onClick={() =>
+                    this.setState((prevState) => ({
+                      colorCtrl: !prevState.colorCtrl,
+                    }))
+                  }
+                >
+                  <h4>Color Palette</h4>
                 </li>
-                <li>
-                  <p>Logo Background</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "logo")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
-                    />
-                    <ColorPicker
-                      src={"logo"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
-                </li>
-                <li>
-                  <p>Navbar Background</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "navbar")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
-                    />
-                    <ColorPicker
-                      src={"navbar"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
-                </li>
-                <li>
-                  <p>Sidebar Background</p>
-                  <div className="d-flex">
-                    <CirclePicker
-                      width="unset"
-                      circleSize={15}
-                      onChange={(color, event) =>
-                        this.handleColorChange(color, "sidebar")
-                      }
-                      colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
-                    />
-                    <ColorPicker
-                      src={"sidebar"}
-                      handleColorChange={this.handleColorChange}
-                    />
-                  </div>
-                </li>
-                {/* <li>
-                  <p>Searchbar Style</p>
-                  <Select
-                    className="react-select info"
-                    classNamePrefix="react-select"
-                    onChange={(e) => this.selectSBStyle(e)}
-                    value={
-                      SBS.filter(
-                        (item) =>
-                          item.value.hash ==
-                          templateCopy[templateIndex].searchbarConfig.hash
-                      )[0]
-                    }
-                    options={SBS}
-                  />
-                </li> */}
+                <Collapse
+                  style={{ background: "#1e1e2f" }}
+                  className="p-2"
+                  isOpen={this.state.colorCtrl}
+                >
+                  <ul className="list-unstyled">
+                    <li>
+                      <p>App Background</p>
+                      <div className="d-flex">
+                        <CirclePicker
+                          width="unset"
+                          circleSize={15}
+                          onChange={(color, event) =>
+                            this.handleColorChange(color, "app")
+                          }
+                          colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
+                        />
+                        <ColorPicker
+                          src={"app"}
+                          handleColorChange={this.handleColorChange}
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <p>Logo Background</p>
+                      <div className="d-flex">
+                        <CirclePicker
+                          width="unset"
+                          circleSize={15}
+                          onChange={(color, event) =>
+                            this.handleColorChange(color, "logo")
+                          }
+                          colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
+                        />
+                        <ColorPicker
+                          src={"logo"}
+                          handleColorChange={this.handleColorChange}
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <p>Topnav Background</p>
+                      <div className="d-flex">
+                        <CirclePicker
+                          width="unset"
+                          circleSize={15}
+                          onChange={(color, event) =>
+                            this.handleColorChange(color, "navbar")
+                          }
+                          colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
+                        />
+                        <ColorPicker
+                          src={"navbar"}
+                          handleColorChange={this.handleColorChange}
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <p>Sidenav Background</p>
+                      <div className="d-flex">
+                        <CirclePicker
+                          width="unset"
+                          circleSize={15}
+                          onChange={(color, event) =>
+                            this.handleColorChange(color, "sidebar")
+                          }
+                          colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
+                        />
+                        <ColorPicker
+                          src={"sidebar"}
+                          handleColorChange={this.handleColorChange}
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </Collapse>
                 {templateCopy[templateIndex].padded != "FALSE" ||
                 templateCopy[templateIndex].templateName.indexOf("Floating") >
                   -1 ? (
                   <li>
-                    <div className="custom-control d-flex align-items-center custom-checkbox">
+                    <div className="custom-control mt-1 d-flex align-items-center custom-checkbox">
                       <input
                         type="checkbox"
                         className="custom-control-input"
@@ -396,115 +402,9 @@ class AppLayout extends React.Component {
                     </div>
                   </li>
                 ) : null}
-                <li>
-                  <label className="text-white" htmlFor="navWidth">
-                    Navbar Height
-                  </label>
-                  <input
-                    type="range"
-                    className="custom-range"
-                    min={
-                      templateCopy[templateIndex].templateName.indexOf(
-                        "Topnav"
-                      ) == -1
-                        ? "0"
-                        : "0"
-                    }
-                    max={
-                      templateCopy[templateIndex].templateName.indexOf(
-                        "Topnav"
-                      ) == -1
-                        ? "4"
-                        : "4"
-                    }
-                    step="1"
-                    value={
-                      SIZEMAPINVERSE[templateCopy[templateIndex].navbarsize]
-                    }
-                    onChange={(e) => this.applySize(e, "navbar")}
-                    id="navWidth"
-                  />
-                </li>
-                {templateCopy[templateIndex].template.indexOf("S0") == -1 &&
-                templateCopy[templateIndex].templateName.indexOf("Sidenav") >
-                  -1 ? (
-                  <li>
-                    <label className="text-white" htmlFor="sidWidth">
-                      Sidebar Width
-                    </label>
-                    <input
-                      type="range"
-                      className="custom-range"
-                      min="0"
-                      max="2"
-                      step="1"
-                      value={
-                        SIZEMAPINVERSE[templateCopy[templateIndex].sidebarsize]
-                      }
-                      onChange={(e) => this.applySize(e, "sidebar")}
-                      id="sidWidth"
-                    />
-                  </li>
-                ) : null}
-                <li>
-                  <p>Side Menu Highlight Template</p>
-                  <Select
-                    className="react-select info"
-                    classNamePrefix="react-select"
-                    onChange={(e) => this.selectHighlight(e, "sidebar")}
-                    value={
-                      SHT.filter(
-                        (item) =>
-                          item.value ==
-                          templateCopy[templateIndex].sidebarlinktemplate
-                      )[0]
-                    }
-                    options={SHT}
-                  />
-                </li>
-                {templateCopy[templateIndex].sidebarlinktemplate.indexOf(
-                  "SLT0"
-                ) === -1 ? (
-                  <li>
-                    <p>Sidebar Link Highlight Bg Color</p>
-                    <div className="d-flex position-relative">
-                      <CirclePicker
-                        width="unset"
-                        circleSize={15}
-                        onChange={(color, event) =>
-                          this.handleNavlinkColorChange(color, "sideBg")
-                        }
-                        colors={["#1e1e2f", "#171725", "#ffffff"]}
-                      />
-                      <ColorPicker
-                        src={"sideBg"}
-                        handleColorChange={this.handleNavlinkColorChange}
-                      />
-                    </div>
-                  </li>
-                ) : null}
-                {templateCopy[templateIndex].layout !== "TOP_NAVIGATION" ? (
-                  <li>
-                    <p>Sidebar Link Highlight Text Color</p>
-                    <div className="d-flex position-relative">
-                      <CirclePicker
-                        width="unset"
-                        circleSize={15}
-                        onChange={(color, event) =>
-                          this.handleNavlinkColorChange(color, "sideText")
-                        }
-                        colors={["#1e1e2f", "#171725", "#ffffff"]}
-                      />
-                      <ColorPicker
-                        src={"sideText"}
-                        handleColorChange={this.handleNavlinkColorChange}
-                      />
-                    </div>
-                  </li>
-                ) : null}
 
                 <li>
-                  <p>Submenu Placement</p>
+                  <h4>Submenu Placement</h4>
                   <Select
                     className="react-select info"
                     classNamePrefix="react-select"
@@ -523,82 +423,254 @@ class AppLayout extends React.Component {
                     options={SMP}
                   />
                 </li>
-                <li>
-                  <p>Topbar Highlight Template</p>
+                {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
+                  <>
+                    <li
+                      onClick={() =>
+                        this.setState((prevState) => ({
+                          sidenavCtrl: !prevState.sidenavCtrl,
+                        }))
+                      }
+                    >
+                      <h4>Sidenav Settings</h4>
+                    </li>
+                    <Collapse
+                      style={{ background: "#1e1e2f" }}
+                      className="p-2"
+                      isOpen={this.state.sidenavCtrl}
+                    >
+                      <ul className="list-unstyled">
+                        {templateCopy[templateIndex].template.indexOf("S0") ==
+                        -1 ? (
+                          <li>
+                            <label className="text-white" htmlFor="sidWidth">
+                              Sidenav Width
+                            </label>
+                            <input
+                              type="range"
+                              className="custom-range"
+                              min="0"
+                              max="2"
+                              step="1"
+                              value={
+                                SIZEMAPINVERSE[
+                                  templateCopy[templateIndex].sidebarsize
+                                ]
+                              }
+                              onChange={(e) => this.applySize(e, "sidebar")}
+                              id="sidWidth"
+                            />
+                          </li>
+                        ) : null}
+                        <li>
+                          <p>Sidenav Highlight Template</p>
+                          <Select
+                            className="react-select info"
+                            classNamePrefix="react-select"
+                            onChange={(e) => this.selectHighlight(e, "sidebar")}
+                            value={
+                              SHT.filter(
+                                (item) =>
+                                  item.value ==
+                                  templateCopy[templateIndex]
+                                    .sidebarlinktemplate
+                              )[0]
+                            }
+                            options={SHT}
+                          />
+                        </li>
+                        {templateCopy[
+                          templateIndex
+                        ].sidebarlinktemplate.indexOf("SLT0") === -1 ? (
+                          <li>
+                            <p>Sidenav Link Highlight Bg Color</p>
+                            <div className="d-flex position-relative">
+                              <CirclePicker
+                                width="unset"
+                                circleSize={15}
+                                onChange={(color, event) =>
+                                  this.handleNavlinkColorChange(color, "sideBg")
+                                }
+                                colors={["#1e1e2f", "#171725", "#ffffff"]}
+                              />
+                              <ColorPicker
+                                src={"sideBg"}
+                                handleColorChange={
+                                  this.handleNavlinkColorChange
+                                }
+                              />
+                            </div>
+                          </li>
+                        ) : null}
+
+                        <li>
+                          <p>Sidenav Link Highlight Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(color, "sideText")
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"sideText"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                    </Collapse>
+                  </>
+                ) : null}
+                {/* <li>
+                  <p>Searchbar Style</p>
                   <Select
                     className="react-select info"
                     classNamePrefix="react-select"
-                    onChange={(e) => this.selectHighlight(e, "navbar")}
+                    onChange={(e) => this.selectSBStyle(e)}
                     value={
-                      THT.filter(
+                      SBS.filter(
                         (item) =>
-                          templateCopy[
-                            templateIndex
-                          ].navbarlinktemplate.indexOf(item.value) > -1
+                          item.value.hash ==
+                          templateCopy[templateIndex].searchbarConfig.hash
                       )[0]
                     }
-                    options={THT}
+                    options={SBS}
                   />
+                </li> */}
+                <li
+                  className="pointer"
+                  onClick={() =>
+                    this.setState((prevState) => ({
+                      topnavCtrl: !prevState.topnavCtrl,
+                    }))
+                  }
+                >
+                  <h4>Topnav Settings</h4>
                 </li>
-
-                {templateCopy[templateIndex].navbarlinktemplate.indexOf(
-                  "LT0"
-                ) === -1 ? (
-                  <li>
-                    <p>Navbar Link Highlight Bg Color</p>
-                    <div className="d-flex position-relative">
-                      <CirclePicker
-                        width="unset"
-                        circleSize={15}
-                        onChange={(color, event) =>
-                          this.handleNavlinkColorChange(color, "navBg")
+                <Collapse
+                  style={{ background: "#1e1e2f" }}
+                  className="p-2"
+                  isOpen={this.state.topnavCtrl}
+                >
+                  <ul className="list-unstyled">
+                    <li>
+                      <label className="text-white" htmlFor="navWidth">
+                        Topnav Height
+                      </label>
+                      <input
+                        type="range"
+                        className="custom-range"
+                        min={
+                          templateCopy[templateIndex].templateName.indexOf(
+                            "Topnav"
+                          ) == -1
+                            ? "0"
+                            : "0"
                         }
-                        colors={["#1e1e2f", "#171725", "#ffffff"]}
-                      />
-                      <ColorPicker
-                        src={"navBg"}
-                        handleNavlinkColorChange={this.handleNavlinkColorChange}
-                      />
-                    </div>
-                  </li>
-                ) : null}
-                {templateCopy[templateIndex].submenuConfig == "TNS" ? (
-                  <li>
-                    <p>Navbar Link Highlight Text Color</p>
-                    <div className="d-flex position-relative">
-                      <CirclePicker
-                        width="unset"
-                        circleSize={15}
-                        onChange={(color, event) =>
-                          this.handleNavlinkColorChange(color, "navText")
+                        max={
+                          templateCopy[templateIndex].templateName.indexOf(
+                            "Topnav"
+                          ) == -1
+                            ? "4"
+                            : "4"
                         }
-                        colors={["#1e1e2f", "#171725", "#ffffff"]}
+                        step="1"
+                        value={
+                          SIZEMAPINVERSE[templateCopy[templateIndex].navbarsize]
+                        }
+                        onChange={(e) => this.applySize(e, "navbar")}
+                        id="navWidth"
                       />
-                      <ColorPicker
-                        src={"navText"}
-                        handleNavlinkColorChange={this.handleNavlinkColorChange}
-                      />
-                    </div>
-                  </li>
-                ) : null}
+                    </li>
+                    {templateCopy[templateIndex].layout == "TOP_NAVIGATION" ||
+                    templateCopy[templateIndex].submenuConfig == "TNS" ? (
+                      <>
+                        <li>
+                          <p>Topnav Highlight Template</p>
+                          <Select
+                            className="react-select info"
+                            classNamePrefix="react-select"
+                            onChange={(e) => this.selectHighlight(e, "navbar")}
+                            value={
+                              THT.filter(
+                                (item) =>
+                                  templateCopy[
+                                    templateIndex
+                                  ].navbarlinktemplate.indexOf(item.value) > -1
+                              )[0]
+                            }
+                            options={THT}
+                          />
+                        </li>
 
-                <li>
-                  <p>Topbar Icon Config</p>
-                  <Select
-                    className="react-select info"
-                    classNamePrefix="react-select"
-                    onChange={(e) => this.selectIconConfig(e)}
-                    value={
-                      TIC.filter(
-                        (item) =>
-                          templateCopy[
-                            templateIndex
-                          ].navbarlinktemplate.indexOf(item.value) > -1
-                      )[0]
-                    }
-                    options={TIC}
-                  />
-                </li>
+                        {templateCopy[templateIndex].navbarlinktemplate.indexOf(
+                          "LT0"
+                        ) === -1 ? (
+                          <li>
+                            <p>Topnav Link Highlight Bg Color</p>
+                            <div className="d-flex position-relative">
+                              <CirclePicker
+                                width="unset"
+                                circleSize={15}
+                                onChange={(color, event) =>
+                                  this.handleNavlinkColorChange(color, "navBg")
+                                }
+                                colors={["#1e1e2f", "#171725", "#ffffff"]}
+                              />
+                              <ColorPicker
+                                src={"navBg"}
+                                handleNavlinkColorChange={
+                                  this.handleNavlinkColorChange
+                                }
+                              />
+                            </div>
+                          </li>
+                        ) : null}
+
+                        <li>
+                          <p>Topnav Link Highlight Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(color, "navText")
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"navText"}
+                              handleNavlinkColorChange={
+                                this.handleNavlinkColorChange
+                              }
+                            />
+                          </div>
+                        </li>
+
+                        <li>
+                          <p>Topnav Icon Config</p>
+                          <Select
+                            className="react-select info"
+                            classNamePrefix="react-select"
+                            onChange={(e) => this.selectIconConfig(e)}
+                            value={
+                              TIC.filter(
+                                (item) =>
+                                  templateCopy[
+                                    templateIndex
+                                  ].navbarlinktemplate.indexOf(item.value) > -1
+                              )[0]
+                            }
+                            options={TIC}
+                          />
+                        </li>
+                      </>
+                    ) : null}
+                  </ul>
+                </Collapse>
               </ul>
             </CardBody>
             <CardFooter className="flex-row justify-content-between d-flex">
