@@ -17,7 +17,7 @@ class SubRouteDispatcher extends React.PureComponent {
                 <Route
                   key={i}
                   path={`/createproject${route.path}`}
-                  render={(props) => <h1>{route.path}</h1>}
+                  render={(props) => <h1></h1>}
                 />
               );
             })}

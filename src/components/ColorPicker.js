@@ -53,7 +53,7 @@ class ColorPicker extends React.Component {
     };
 
     return (
-      <div>
+      <div class="position-relative">
         <div style={styles.swatch} onClick={this.handleClick}>
           <div style={styles.color} />
         </div>
@@ -62,8 +62,9 @@ class ColorPicker extends React.Component {
             <div style={styles.cover} onClick={this.handleClose} />
             <SketchPicker
               color={this.state.color}
-              width="150px"
+              width="125px"
               presetColors={[
+                "#002b49",
                 "#1a1e3f",
                 "#161935",
                 "#007bff",

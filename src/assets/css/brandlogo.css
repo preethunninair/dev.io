@@ -1,9 +1,12 @@
-.appcontainer:not([data-navbarsize$="S"]) .app-brand:not([data-grid="S2"]) .brand-img{
+.appcontainer:not([data-topnavsize$="S"]) .app-brand:not([data-grid="S2"]) .brand-img{
     padding:15px;
 }
 
-.brand-img{
+ .brand-img{
     padding:15px;
+}
+.app-brand[data-grid="S0"] .brand-img{
+    padding:22px;
 }
 .app-brand[data-grid="S0"] .brand-img img{
     width: unset;

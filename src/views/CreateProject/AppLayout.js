@@ -1,13 +1,10 @@
 import React from "react";
 import {
-  Container,
   Card,
   CardHeader,
   CardBody,
   CardTitle,
   CardFooter,
-  Row,
-  Col,
   CardSubtitle,
   Dropdown,
   DropdownToggle,
@@ -15,7 +12,6 @@ import {
   DropdownItem,
   Collapse,
 } from "reactstrap";
-import { MENUDATA } from "../../variables/mockdata";
 
 import { CirclePicker } from "react-color";
 import Icon from "../../components/uilibrary/Icon";
@@ -30,7 +26,8 @@ const SIZEMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
 const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
 
 const SHT = [
-  { value: "SLT0", label: "Text Highlight" },
+  { value: "SLT1_ROUND", label: "Round Highlight" },
+
   { value: "SLT1_ROUNDED", label: "Rounded Highlight" },
   { value: "SLT1", label: "Flat Highlight" },
 
@@ -38,11 +35,11 @@ const SHT = [
 ];
 
 const SMP = [
-  { value: "SNS", label: "Sidebar Submenu" },
+  { value: "SNS", label: "Sidebar Sidemenu" },
+  { value: "SNB", label: "Sidebar Submenu" },
   { value: "TNS", label: "Topnav Menu" },
 ];
 const THT = [
-  { value: "LT0", label: "Text Highlight" },
   { value: "LT1", label: "Flat Highlight" },
   { value: "LT2", label: "Rounded Highlight" },
   { value: "LT3", label: "Fill Highlight" },
@@ -55,35 +52,7 @@ const TIC = [
   { value: "_NOICON", label: "Text Only" },
   { value: "_ICOLAB", label: "Icon + Label" },
 ];
-const SBS = [
-  {
-    label: "FLOATING RIGHT",
-    value: {
-      placement: "RIGHT",
-      width: "15vw",
-      floating: true,
-      hash: "FR",
-    },
-  },
-  {
-    label: "FIXED RIGHT",
-    value: {
-      placement: "RIGHT",
-      width: "15vw",
-      floating: false,
-      hash: "FIR",
-    },
-  },
-  {
-    label: "FIXED LEFT",
-    value: {
-      placement: "LEFT",
-      width: "15vw",
-      floating: false,
-      hash: "FL",
-    },
-  },
-];
+
 class AppLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -104,8 +73,8 @@ class AppLayout extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (
-      prevProps.wizardIndex != this.props.wizardIndex &&
-      this.props.wizardIndex == 1
+      prevProps.wizardIndex !== this.props.wizardIndex &&
+      this.props.wizardIndex === 1
     ) {
       this.props.dispatch(
         updateSelectedTemplate(
@@ -123,12 +92,22 @@ class AppLayout extends React.Component {
     }
 
     temp.forEach((template) => {
-      template[`${attr}HighlightColor`] = colorStr;
+      template[`${attr}Color`] = colorStr;
     });
 
     this.setState({ templateCopy: temp });
   };
+  handlepageNavBGChange = (color) => {
+    const temp = [...this.state.templateCopy];
 
+    let colorStr = color.hex;
+    if (color.rgb.a !== 1) {
+      colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+    }
+    temp[this.state.templateIndex].topnavSecondaryBgColor = colorStr;
+
+    this.setState({ templateCopy: temp });
+  };
   handleColorChange = (color, attr) => {
     const temp = [...this.state.templateCopy];
     let colorStr = color.hex;
@@ -153,13 +132,13 @@ class AppLayout extends React.Component {
     }
     this.setState({ templateCopy: temp });
   };
-  selectHighlight = (type, elem) => {
+  selectActiveLinkTemplate = (type, elem) => {
     const temp = [...this.state.templateCopy];
     const configIndex = temp[this.state.templateIndex][
       `${elem}linktemplate`
     ].indexOf("_");
     let selection = type.value;
-    if (configIndex > -1 && elem == "navbar") {
+    if (configIndex > -1 && elem == "topnav") {
       selection += `_${
         temp[this.state.templateIndex][`${elem}linktemplate`].split("_")[1]
       }`;
@@ -167,34 +146,21 @@ class AppLayout extends React.Component {
     temp[this.state.templateIndex][`${elem}linktemplate`] = selection;
     this.setState({ templateCopy: temp });
   };
-  changeAttribute = (e, attr) => {
+  changeSubmenuConfig = (e) => {
     const temp = [...this.state.templateCopy];
-    temp[this.state.templateIndex][`${attr}`] = e.value;
+    temp[this.state.templateIndex].submenuConfig = e.value;
 
     this.setState({ templateCopy: temp });
   };
   selectIconConfig = (e) => {
     const temp = [...this.state.templateCopy];
 
-    temp[this.state.templateIndex]["navbarlinktemplate"] =
-      temp[this.state.templateIndex]["navbarlinktemplate"].split("_")[0] +
+    temp[this.state.templateIndex]["topnavlinktemplate"] =
+      temp[this.state.templateIndex]["topnavlinktemplate"].split("_")[0] +
       e.value;
 
     this.setState({ templateCopy: temp });
   };
-  initializeDropdownEventHandler() {
-    let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-    dropdowns.forEach((elem, i) => {
-      elem.addEventListener("click", function (e) {
-        var current = document.querySelectorAll("li.show");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" show", "");
-        }
-        e.target.setAttribute("listener", "true");
-        e.currentTarget.parentNode.className += " show";
-      });
-    });
-  }
 
   componentDidMount() {
     let appContent = document.getElementsByClassName("layout-editor");
@@ -202,14 +168,12 @@ class AppLayout extends React.Component {
       if (
         !(e.target.closest("li") != undefined && e.target.closest("li") != null)
       ) {
-        var current = document.querySelectorAll("li.show");
+        var current = document.querySelectorAll(".dropdown-menu.show");
         if (current.length > 0) {
           current[0].className = current[0].className.replace(" show", "");
         }
       }
     });
-
-    this.initializeDropdownEventHandler();
   }
   setAppMode = () => {
     const temp = [...this.state.templateCopy];
@@ -235,6 +199,20 @@ class AppLayout extends React.Component {
     this.setState({ templateCopy: temp });
   };
 
+  toggleCheck = (attr) => {
+    const temp = [...this.state.templateCopy];
+
+    if (temp[this.state.templateIndex][attr] === "FALSE") {
+      temp[this.state.templateIndex][attr] = "TRUE";
+    } else {
+      temp[this.state.templateIndex][attr] = "FALSE";
+    }
+    if (attr === "sidenavOnly") {
+      temp[this.state.templateIndex].submenuConfig = "SNS";
+    }
+
+    this.setState({ templateCopy: temp });
+  };
   applySize = (e, elem) => {
     const temp = [...this.state.templateCopy];
 
@@ -263,9 +241,16 @@ class AppLayout extends React.Component {
                   <CardSubtitle style={{ fontSize: "10px" }}>
                     Template Name
                   </CardSubtitle>
-                  <CardTitle tag="h3" className="text-highlight">
-                    {TEMPLATES[templateIndex].templateName}
+                  <CardTitle tag="h4" className="text-highlight">
+                    {TEMPLATES[templateIndex].templateName.split(":")[0]}
                   </CardTitle>
+                  <CardSubtitle tag="h5" className="text-highlight">
+                    Variant:
+                    {TEMPLATES[templateIndex].templateName.split(":")[1] !=
+                    undefined
+                      ? TEMPLATES[templateIndex].templateName.split(":")[1]
+                      : " Default"}
+                  </CardSubtitle>
                 </DropdownToggle>
                 <DropdownMenu
                   style={{
@@ -294,6 +279,51 @@ class AppLayout extends React.Component {
                   overflowY: "auto",
                 }}
               >
+                {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
+                  <li>
+                    <div className="custom-control mt-1 d-flex align-items-center custom-checkbox">
+                      <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id="sidenavOnly"
+                        name="sidenavOnly"
+                        checked={
+                          templateCopy[templateIndex].sidenavOnly === "TRUE"
+                        }
+                        onChange={() => this.toggleCheck("sidenavOnly")}
+                      />
+                      <label
+                        className="custom-control-label pt-1"
+                        htmlFor="sidenavOnly"
+                      >
+                        Sidenav Only
+                      </label>
+                    </div>
+                  </li>
+                ) : null}
+                {templateCopy[templateIndex].padded === "FALSE" ? (
+                  <li>
+                    <div className="custom-control mt-1 d-flex align-items-center custom-checkbox">
+                      <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id="containedTheme"
+                        name="example1"
+                        checked={
+                          templateCopy[templateIndex].contained === "TRUE"
+                        }
+                        onChange={() => this.toggleCheck("contained")}
+                      />
+                      <label
+                        className="custom-control-label pt-1"
+                        htmlFor="containedTheme"
+                      >
+                        Contained Theme
+                      </label>
+                    </div>
+                  </li>
+                ) : null}
+
                 <li
                   className="pointer"
                   onClick={() =>
@@ -305,7 +335,7 @@ class AppLayout extends React.Component {
                   <h4>Color Palette</h4>
                 </li>
                 <Collapse
-                  style={{ background: "#1e1e2f" }}
+                  style={{ background: "#0000002b" }}
                   className="p-2"
                   isOpen={this.state.colorCtrl}
                 >
@@ -327,6 +357,30 @@ class AppLayout extends React.Component {
                         />
                       </div>
                     </li>
+                    {templateCopy[templateIndex].contained == "TRUE" ? (
+                      <li>
+                        <p>Container Background</p>
+                        <div className="d-flex">
+                          <CirclePicker
+                            width="unset"
+                            circleSize={15}
+                            onChange={(color, event) =>
+                              this.handleColorChange(color, "container")
+                            }
+                            colors={[
+                              "#1e1e2f",
+                              "#171725",
+                              "#ffffff",
+                              "#f2f2f2",
+                            ]}
+                          />
+                          <ColorPicker
+                            src={"container"}
+                            handleColorChange={this.handleColorChange}
+                          />
+                        </div>
+                      </li>
+                    ) : null}
                     <li>
                       <p>Logo Background</p>
                       <div className="d-flex">
@@ -351,12 +405,12 @@ class AppLayout extends React.Component {
                           width="unset"
                           circleSize={15}
                           onChange={(color, event) =>
-                            this.handleColorChange(color, "navbar")
+                            this.handleColorChange(color, "topnav")
                           }
                           colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
                         />
                         <ColorPicker
-                          src={"navbar"}
+                          src={"topnav"}
                           handleColorChange={this.handleColorChange}
                         />
                       </div>
@@ -368,12 +422,12 @@ class AppLayout extends React.Component {
                           width="unset"
                           circleSize={15}
                           onChange={(color, event) =>
-                            this.handleColorChange(color, "sidebar")
+                            this.handleColorChange(color, "sidenav")
                           }
                           colors={["#1e1e2f", "#171725", "#ffffff", "#f2f2f2"]}
                         />
                         <ColorPicker
-                          src={"sidebar"}
+                          src={"sidenav"}
                           handleColorChange={this.handleColorChange}
                         />
                       </div>
@@ -408,11 +462,7 @@ class AppLayout extends React.Component {
                   <Select
                     className="react-select info"
                     classNamePrefix="react-select"
-                    isDisabled={
-                      templateCopy[templateIndex].searchbarConfig.placement ==
-                      "LEFT"
-                    }
-                    onChange={(e) => this.changeAttribute(e, "submenuConfig")}
+                    onChange={(e) => this.changeSubmenuConfig(e)}
                     value={
                       SMP.filter(
                         (item) =>
@@ -420,12 +470,17 @@ class AppLayout extends React.Component {
                           templateCopy[templateIndex].submenuConfig
                       )[0]
                     }
-                    options={SMP}
+                    options={
+                      templateCopy[templateIndex].sidenavOnly === "TRUE"
+                        ? SMP.filter((item) => item.value !== "TNS")
+                        : SMP
+                    }
                   />
                 </li>
                 {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
                   <>
                     <li
+                      className="pointer"
                       onClick={() =>
                         this.setState((prevState) => ({
                           sidenavCtrl: !prevState.sidenavCtrl,
@@ -435,7 +490,7 @@ class AppLayout extends React.Component {
                       <h4>Sidenav Settings</h4>
                     </li>
                     <Collapse
-                      style={{ background: "#1e1e2f" }}
+                      style={{ background: "#0000002b" }}
                       className="p-2"
                       isOpen={this.state.sidenavCtrl}
                     >
@@ -454,68 +509,145 @@ class AppLayout extends React.Component {
                               step="1"
                               value={
                                 SIZEMAPINVERSE[
-                                  templateCopy[templateIndex].sidebarsize
+                                  templateCopy[templateIndex].sidenavsize
                                 ]
                               }
-                              onChange={(e) => this.applySize(e, "sidebar")}
+                              onChange={(e) => this.applySize(e, "sidenav")}
                               id="sidWidth"
                             />
                           </li>
                         ) : null}
+                        {templateCopy[templateIndex].layout.indexOf("SIDE") >
+                          -1 &&
+                        templateCopy[templateIndex].gridConfig !== "S0" &&
+                        templateCopy[templateIndex].floatingMenu == "FALSE" ? (
+                          <li>
+                            <div className="custom-control mt-1 d-flex align-items-center custom-checkbox">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                id="alignSidenavCenter"
+                                name="alignSidenavCenter"
+                                checked={
+                                  templateCopy[templateIndex]
+                                    .sidenavMenuAlignCenter === "TRUE"
+                                }
+                                onChange={() =>
+                                  this.toggleCheck("sidenavMenuAlignCenter")
+                                }
+                              />
+                              <label
+                                className="custom-control-label pt-1"
+                                htmlFor="alignSidenavCenter"
+                              >
+                                Center Align Menu
+                              </label>
+                            </div>
+                          </li>
+                        ) : null}
                         <li>
-                          <p>Sidenav Highlight Template</p>
+                          <p>Sidenav Active Link Template</p>
                           <Select
                             className="react-select info"
                             classNamePrefix="react-select"
-                            onChange={(e) => this.selectHighlight(e, "sidebar")}
+                            onChange={(e) =>
+                              this.selectActiveLinkTemplate(e, "sidenav")
+                            }
                             value={
                               SHT.filter(
                                 (item) =>
                                   item.value ==
                                   templateCopy[templateIndex]
-                                    .sidebarlinktemplate
+                                    .sidenavlinktemplate
                               )[0]
                             }
-                            options={SHT}
+                            options={
+                              templateCopy[templateIndex].gridConfig == "S0"
+                                ? SHT.filter(
+                                    (optn) => optn.value != "SLT1_ROUND"
+                                  )
+                                : SHT
+                            }
                           />
                         </li>
-                        {templateCopy[
-                          templateIndex
-                        ].sidebarlinktemplate.indexOf("SLT0") === -1 ? (
-                          <li>
-                            <p>Sidenav Link Highlight Bg Color</p>
-                            <div className="d-flex position-relative">
-                              <CirclePicker
-                                width="unset"
-                                circleSize={15}
-                                onChange={(color, event) =>
-                                  this.handleNavlinkColorChange(color, "sideBg")
-                                }
-                                colors={["#1e1e2f", "#171725", "#ffffff"]}
-                              />
-                              <ColorPicker
-                                src={"sideBg"}
-                                handleColorChange={
-                                  this.handleNavlinkColorChange
-                                }
-                              />
-                            </div>
-                          </li>
-                        ) : null}
 
                         <li>
-                          <p>Sidenav Link Highlight Text Color</p>
+                          <p>Sidenav Active Link Bg Color</p>
                           <div className="d-flex position-relative">
                             <CirclePicker
                               width="unset"
                               circleSize={15}
                               onChange={(color, event) =>
-                                this.handleNavlinkColorChange(color, "sideText")
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "sidenavActiveLinkBg"
+                                )
                               }
                               colors={["#1e1e2f", "#171725", "#ffffff"]}
                             />
                             <ColorPicker
-                              src={"sideText"}
+                              src={"sidenavActiveLinkBg"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+
+                        <li>
+                          <p>Sidenav Active Link Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "sidenavActiveLinkText"
+                                )
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"sidenavActiveLinkText"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <p>Sidenav Active Link Icon Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "sidenavActiveLinkIcon"
+                                )
+                              }
+                              colors={["#06efc4", "#ef5c06", "#06a4ef"]}
+                            />
+                            <ColorPicker
+                              src={"sidenavActiveLinkIcon"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <p>Sidenav Link Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "sidenavLinkText"
+                                )
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"sidenavLinkText"}
                               handleColorChange={this.handleNavlinkColorChange}
                             />
                           </div>
@@ -524,22 +656,7 @@ class AppLayout extends React.Component {
                     </Collapse>
                   </>
                 ) : null}
-                {/* <li>
-                  <p>Searchbar Style</p>
-                  <Select
-                    className="react-select info"
-                    classNamePrefix="react-select"
-                    onChange={(e) => this.selectSBStyle(e)}
-                    value={
-                      SBS.filter(
-                        (item) =>
-                          item.value.hash ==
-                          templateCopy[templateIndex].searchbarConfig.hash
-                      )[0]
-                    }
-                    options={SBS}
-                  />
-                </li> */}
+
                 <li
                   className="pointer"
                   onClick={() =>
@@ -551,11 +668,33 @@ class AppLayout extends React.Component {
                   <h4>Topnav Settings</h4>
                 </li>
                 <Collapse
-                  style={{ background: "#1e1e2f" }}
+                  style={{ background: "#0000002b" }}
                   className="p-2"
                   isOpen={this.state.topnavCtrl}
                 >
                   <ul className="list-unstyled">
+                    {templateCopy[templateIndex].boxed != "SL_N" ? (
+                      <li>
+                        <div className="custom-control mt-1 d-flex align-items-center custom-checkbox">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input"
+                            id="tnshadow"
+                            name="example1"
+                            checked={
+                              templateCopy[templateIndex].tnshadow === "TRUE"
+                            }
+                            onChange={() => this.toggleCheck("tnshadow")}
+                          />
+                          <label
+                            className="custom-control-label pt-1"
+                            htmlFor="tnshadow"
+                          >
+                            Enable Topnav Shadow
+                          </label>
+                        </div>
+                      </li>
+                    ) : null}
                     <li>
                       <label className="text-white" htmlFor="navWidth">
                         Topnav Height
@@ -574,14 +713,14 @@ class AppLayout extends React.Component {
                           templateCopy[templateIndex].templateName.indexOf(
                             "Topnav"
                           ) == -1
-                            ? "4"
+                            ? "2"
                             : "4"
                         }
                         step="1"
                         value={
-                          SIZEMAPINVERSE[templateCopy[templateIndex].navbarsize]
+                          SIZEMAPINVERSE[templateCopy[templateIndex].topnavsize]
                         }
-                        onChange={(e) => this.applySize(e, "navbar")}
+                        onChange={(e) => this.applySize(e, "topnav")}
                         id="navWidth"
                       />
                     </li>
@@ -589,63 +728,122 @@ class AppLayout extends React.Component {
                     templateCopy[templateIndex].submenuConfig == "TNS" ? (
                       <>
                         <li>
-                          <p>Topnav Highlight Template</p>
+                          <p>Topnav Active Link Template</p>
                           <Select
                             className="react-select info"
                             classNamePrefix="react-select"
-                            onChange={(e) => this.selectHighlight(e, "navbar")}
+                            onChange={(e) =>
+                              this.selectActiveLinkTemplate(e, "topnav")
+                            }
                             value={
                               THT.filter(
                                 (item) =>
                                   templateCopy[
                                     templateIndex
-                                  ].navbarlinktemplate.indexOf(item.value) > -1
+                                  ].topnavlinktemplate.indexOf(item.value) > -1
                               )[0]
                             }
                             options={THT}
                           />
                         </li>
-
-                        {templateCopy[templateIndex].navbarlinktemplate.indexOf(
-                          "LT0"
-                        ) === -1 ? (
+                        {templateCopy[templateIndex].topnavSecondaryBgColor !==
+                        "NA" ? (
                           <li>
-                            <p>Topnav Link Highlight Bg Color</p>
+                            <p>Topnav Navigation Bg Color</p>
                             <div className="d-flex position-relative">
                               <CirclePicker
                                 width="unset"
                                 circleSize={15}
                                 onChange={(color, event) =>
-                                  this.handleNavlinkColorChange(color, "navBg")
+                                  this.handlepageNavBGChange(color)
                                 }
                                 colors={["#1e1e2f", "#171725", "#ffffff"]}
                               />
                               <ColorPicker
-                                src={"navBg"}
-                                handleNavlinkColorChange={
-                                  this.handleNavlinkColorChange
-                                }
+                                src={"topnavSecondaryBgColor"}
+                                handleColorChange={this.handlepageNavBGChange}
                               />
                             </div>
                           </li>
                         ) : null}
-
                         <li>
-                          <p>Topnav Link Highlight Text Color</p>
+                          <p>Topnav Active Link Bg Color</p>
                           <div className="d-flex position-relative">
                             <CirclePicker
                               width="unset"
                               circleSize={15}
                               onChange={(color, event) =>
-                                this.handleNavlinkColorChange(color, "navText")
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "topnavActiveLinkBg"
+                                )
                               }
                               colors={["#1e1e2f", "#171725", "#ffffff"]}
                             />
                             <ColorPicker
-                              src={"navText"}
-                              handleNavlinkColorChange={
-                                this.handleNavlinkColorChange
+                              src={"topnavActiveLinkBg"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+
+                        <li>
+                          <p>Topnav Active Link Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "topnavActiveLinkText"
+                                )
                               }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"topnavActiveLinkText"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <p>Topnav Active Link Icon Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "topnavActiveLinkIcon"
+                                )
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"topnavActiveLinkIcon"}
+                              handleColorChange={this.handleNavlinkColorChange}
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <p>Topnav Link Text Color</p>
+                          <div className="d-flex position-relative">
+                            <CirclePicker
+                              width="unset"
+                              circleSize={15}
+                              onChange={(color, event) =>
+                                this.handleNavlinkColorChange(
+                                  color,
+                                  "topnavLinkText"
+                                )
+                              }
+                              colors={["#1e1e2f", "#171725", "#ffffff"]}
+                            />
+                            <ColorPicker
+                              src={"topnavLinkText"}
+                              handleColorChange={this.handleNavlinkColorChange}
                             />
                           </div>
                         </li>
@@ -661,10 +859,17 @@ class AppLayout extends React.Component {
                                 (item) =>
                                   templateCopy[
                                     templateIndex
-                                  ].navbarlinktemplate.indexOf(item.value) > -1
+                                  ].topnavlinktemplate.indexOf(item.value) > -1
                               )[0]
                             }
-                            options={TIC}
+                            options={
+                              templateCopy[templateIndex].topnavsize == "S" ||
+                              templateCopy[templateIndex].topnavsize == "XS"
+                                ? TIC.filter(
+                                    (item) => item.value != "_ICONSTACK"
+                                  )
+                                : TIC
+                            }
                           />
                         </li>
                       </>
@@ -692,9 +897,9 @@ class AppLayout extends React.Component {
               </button>
               <button
                 className="circle border-primary bg-transparent text-primary"
+                disabled={templateIndex == templateCopy.length - 1}
                 onClick={() =>
                   this.setState((prevState) => {
-                    this.initializeDropdownEventHandler();
                     return {
                       templateIndex: prevState.templateIndex + 1,
                     };
@@ -711,11 +916,8 @@ class AppLayout extends React.Component {
             </CardFooter>
           </Card>
         </div>
-        <div className="workbench rounded p-3">
-          <TemplateView
-            MENUDATA={MENUDATA}
-            config={{ ...templateCopy[templateIndex] }}
-          />
+        <div className="workbench rounded p-1">
+          <TemplateView config={{ ...templateCopy[templateIndex] }} />
         </div>
       </div>
     );

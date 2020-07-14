@@ -25,14 +25,14 @@ export const MENUDATA = [
     submenu: [
       {
         title: "User Management",
-        icon: { family: "material-icon", name: "track_changes" },
+        icon: { family: "material-icon", name: "supervisor_account" },
         module: "admin",
         path: "/admin/usermanagement",
         submenu: [],
       },
       {
         title: "Fleet Managament",
-        icon: { family: "material-icon", name: "track_changes" },
+        icon: { family: "material-icon", name: "local_taxi" },
         module: "admin",
         path: "/admin/fleetmanagement",
         submenu: [],

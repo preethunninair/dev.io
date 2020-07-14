@@ -7,7 +7,6 @@ import GenerateProject from "./CreateProject/GenerateProject";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../library/axiosInstance";
-import ColorPalette from "./CreateProject/ColorPalette";
 const mapState = (state) => ({
   config: state.templateConfig.templateConfig,
   route: state.templateConfig.route,
@@ -112,10 +111,11 @@ class CreateProject extends React.PureComponent {
           <div className="app-brand">
             <div
               className="brand-img pl-0 center text-center h-100"
-              data-theme={"dark"}
+              data-theme={"transparent"}
               style={{ fontSize: "22px" }}
             >
-              &#60;&#47;&#62; dev.<span style={{ color: "red" }}>io</span>
+              [ _x
+              <span style={{ color: "red" }}>Lab ]</span>
             </div>
           </div>
           <div className="app-header">

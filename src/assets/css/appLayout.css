@@ -21,6 +21,7 @@ body,
   }
   .app-brand {
     grid-area: brand;
+    z-index: 1050;
   }
 
   .app-footer {
@@ -56,7 +57,6 @@ body,
   }
 
   /*..............Layout...........*/
-
   /*..............SIDE_NAVIGATION Layout...........*/
   .app-container[data-layout="SIDE_NAVIGATION"] {
     grid-template-areas:
@@ -74,6 +74,17 @@ body,
   .app-container[data-grid="S2"] {
     grid-template-columns: 90px auto;
   }
+
+/*..........................................*/
+  /*...............Sidenav Only..........*/
+.app-container[data-layout="SIDE_NAVIGATION"][data-sidenavonly="TRUE"]{
+  
+  grid-template-areas:
+    "brand main main main main main"
+    "menu main main main main main"
+    "menu main main main main main";
+}
+/*..........................................*/
 
   /*..............TOP_NAVIGATION Layout...........*/
   .app-container[data-layout="TOP_NAVIGATION"] {
@@ -151,67 +162,85 @@ body,
 
 /*........Nav Height..............*/
 
-.app-container[data-navbarsize="S"] {
+.app-container[data-topnavsize="S"] {
   grid-template-rows: 60px auto;
 }
-.app-container[data-navbarsize="XS"] {
+.app-container[data-topnavsize="XS"] {
   grid-template-rows: 50px auto;
 }
-.app-container[data-navbarsize="M"] {
+.app-container[data-topnavsize="M"] {
   grid-template-rows: 70px auto;
 }
-.app-container[data-grid="N1"][data-navbarsize="M"] {
+.app-container[data-grid="N1"][data-topnavsize="M"] {
   grid-template-rows: 90px auto;
 }
-.app-container[data-navbarsize="L"] {
+
+.app-container[data-topnavsize="L"] {
+  grid-template-rows: 90px auto;
+}
+.app-container[data-grid="N1"][data-topnavsize="L"] {
   grid-template-rows: 100px auto;
 }
-.app-container[data-navbarsize="XL"] {
+.app-container[data-topnavsize="XL"] {
   grid-template-rows: 120px auto;
 }
+.app-container[data-topnavsize="XL"] .navbar[data-template="N1"] .navbar-nav.page-nav
+{
+padding:10px 0px 10px 0px;
+height:50px;
+}
+.app-container[data-topnavsize="XL"][data-grid="N1"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link
+{
+height:50px;
+}
+.app-container[data-logoonnav="TRUE"][data-topnavsize="XL"] .app-brand{
+  height: calc(100% - 50px);
+}
+
 /*.................................*/
 
 /*........Sidebar width..............*/
 
-.app-container[data-sidebarsize="M"][data-grid="S2"] {
+.app-container[data-sidenavsize="M"][data-grid="S2"] {
   grid-template-columns: 100px auto;
 }
-.app-container[data-sidebarsize="S"][data-grid="S2"] {
+.app-container[data-sidenavsize="S"][data-grid="S2"] {
   grid-template-columns: 80px auto;
 }
-.app-container[data-sidebarsize="XS"][data-grid="S2"] {
+.app-container[data-sidenavsize="XS"][data-grid="S2"] {
   grid-template-columns: 60px auto;
 }
 
-.app-container[data-sidebarsize="M"][data-grid="S1"] {
+.app-container[data-sidenavsize="M"][data-grid="S1"] {
   grid-template-columns: 140px auto;
 }
-.app-container[data-sidebarsize="S"][data-grid="S1"] {
+.app-container[data-sidenavsize="S"][data-grid="S1"] {
   grid-template-columns: 120px auto;
 }
-.app-container[data-sidebarsize="XS"][data-grid="S1"] {
+.app-container[data-sidenavsize="XS"][data-grid="S1"] {
   grid-template-columns: 100px auto;
 }
 /*...................................................*/
 
-.app-container[data-navbarsize="S"] .brand-img {
+.app-container[data-topnavsize="S"] .brand-img {
  padding:10px;
 }
-.app-container[data-navbarsize="XS"] .brand-img,
-.app-container[data-navbarsize="XS"] .brand-img > img{
+.app-container[data-topnavsize="XS"] .brand-img,
+.app-container[data-topnavsize="XS"] .brand-img > img{
   padding:5px;
  }
 
-.app-container[data-navbarsize="S"][data-padded="FALSE"]
+.app-container[data-topnavsize="S"][data-padded="FALSE"]
   .app-menu
   .sidebar-wrapper {
   padding-top: 10px;
 }
-.app-container[data-navbarsize="XS"][data-padded="FALSE"]
+.app-container[data-topnavsize="XS"][data-padded="FALSE"]
   .app-menu
   .sidebar-wrapper {
   padding-top: 20px;
 }
+
 
 /*..........Floating Menu.........*/
 .app-container[data-floatingmenu="SIDENAV"] .sidebar .sidebar-wrapper{
@@ -237,4 +266,25 @@ body,
   border-top-right-radius:5px !important;
   border-bottom-right-radius:5px !important;
 
+}
+
+
+/*.............Contained Theme...........*/
+.wrapper[data-contained="TRUE"]{
+  padding:8px;
+}
+.wrapper[data-contained="TRUE"] .app-container{
+  border-radius:8px;
+  overflow: hidden;
+  box-shadow: 0 1rem 3rem rgba(34, 42, 66, 0.175);
+}
+
+
+
+.app-container[data-boxed="FALSE"][data-tnshadow="TRUE"]:not([data-logoonnav="TRUE"]) .app-brand,
+.app-container[data-boxed="S_LN"][data-tnshadow="TRUE"] .app-brand,
+.app-container[data-boxed="SLN"][data-tnshadow="TRUE"] .app-brand,
+.app-container[data-tnshadow="TRUE"]:not([data-boxed="SL_N"]) .app-header{
+  box-shadow:0 0 8px rgba(0,0,0,0.15)
+  
 }

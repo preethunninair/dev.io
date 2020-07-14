@@ -7,7 +7,6 @@ import GenerateProject from "./CreateProject/GenerateProject";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../library/axiosInstance";
-import ColorPalette from "./CreateProject/ColorPalette";
 const mapState = (state) => ({
   config: state.templateConfig.templateConfig,
   route: state.templateConfig.route,

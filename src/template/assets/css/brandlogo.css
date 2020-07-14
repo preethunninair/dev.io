@@ -1,0 +1,11 @@
+.appcontainer:not([data-navbarsize$="S"]) .app-brand:not([data-grid="S2"]) .brand-img{
+    padding:15px;
+}
+
+.brand-img{
+    padding:15px;
+}
+.app-brand[data-grid="S0"] .brand-img img{
+    width: unset;
+    padding: unset;
+}

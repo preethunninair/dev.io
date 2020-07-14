@@ -8,12 +8,11 @@ function Searchbar(props) {
     return (
       <>
         <div className="search-bar input-group">
-          <button
-            className="btn btn-link p-0 m-0"
+          <div
+            className="p-0 m-0"
             data-target="#searchModal"
             data-toggle="modal"
             id="search-button"
-            onClick={() => setModalSearch(true)}
           >
             <Icon
               className="mt-2"
@@ -23,7 +22,7 @@ function Searchbar(props) {
               }}
             />
             <span className="d-lg-none d-md-block">Search</span>
-          </button>
+          </div>
         </div>
         <div
           className={`modal modal-search fade ${modalSearch ? "show" : ""}`}
@@ -44,7 +43,6 @@ function Searchbar(props) {
                   className="close"
                   data-dismiss="modal"
                   type="button"
-                  onClick={() => setModalSearch(false)}
                 >
                   <i className="tim-icons icon-simple-remove" />
                 </button>

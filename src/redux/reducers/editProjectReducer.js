@@ -23,12 +23,12 @@ export default function templateConfig(
       template: "S1",
 
       logoBgColor: "#1e1e2f",
-      navbarBgColor: "white",
-      sidebarBgColor: "#1e1e2f",
-      sidebarlinktemplate: "SLT1",
-      navbarlinktemplate: "LT0_NOICON",
-      navbarsize: "M",
-      sidebarsize: "S",
+      topnavBgColor: "white",
+      sidenavBgColor: "#1e1e2f",
+      sidenavlinktemplate: "SLT1",
+      topnavlinktemplate: "LT1_NOICON",
+      topnavsize: "M",
+      sidenavsize: "S",
     },
   },
   action
