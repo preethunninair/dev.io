@@ -330,7 +330,7 @@
 
 @media screen and (min-width: 992px) {
   /*.............general Changes .................*/
-  .sidebar .nav li > a {
+  .sidebar .nav li a {
     border-radius: unset;
     width: 100%;
   }

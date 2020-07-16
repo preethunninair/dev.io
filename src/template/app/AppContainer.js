@@ -45,14 +45,17 @@ class AppContainer extends React.PureComponent {
       <Layout wrapperClass="h-100">
         <BrandLogo
           brandContent={
-            <img
-              src={
-                !tinycolor(this.props.templateConfig.logoBgColor).isDark()
-                  ? logo_black
-                  : logo_white
-              }
-              alt="react-logo"
-            />
+            <h4 class="m-0">
+              [_x<span class="text-danger">Lab]</span>
+            </h4>
+            /*<img
+            src={
+              !tinycolor(this.props.templateConfig.logoBgColor).isDark()
+                ? logo_black
+                : logo_white
+            }
+            alt="react-logo"
+          />*/
           }
         />
         <Topbar

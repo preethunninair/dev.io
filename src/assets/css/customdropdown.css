@@ -27,13 +27,22 @@ display: none !important;
   background: #f4f4ff !important;
   
 }
-.dropdown-item{
+.dropdown-menu .dropdown-item{
 font-size: 0.8rem;
 cursor: pointer;
 display: flex;
+margin:0 !important;
 padding: 8px 16px 8px 16px;
 align-items: center;
 justify-content: flex-start;
 flex-direction: row;
 color: rgba(0,0,0,0.8) !important;
 }
+
+.app-container[data-grid="S1"] .sidebar .dropdown-toggle::after{
+  display: none;
+}
+.app-container[data-grid="S2"] .sidebar .dropdown-toggle::after{
+  display: none;
+}
+

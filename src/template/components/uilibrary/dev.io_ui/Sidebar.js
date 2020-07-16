@@ -97,11 +97,11 @@ function Sidebar(props) {
             ) : null}
             {showSubMenu[i] && templateConfig.submenuConfig === "SNB" ? (
               <UncontrolledCollapse
-                className="collapse-menu-item w-100"
+                className="collapse-menu-item my-2 w-100"
                 toggler={`#${menuItem.module}`}
               >
                 <div className="d-flex">
-                  <ul className="p-0 w-100">
+                  <ul className="px-0 py-1 w-100">
                     {menuItem.submenu.map((subItem, i) => (
                       <li className={`nav-item`} key={i}>
                         <NavLink
@@ -110,7 +110,7 @@ function Sidebar(props) {
                           activeClassName="active"
                         >
                           <Icon iconObj={subItem.icon} />
-                          {subItem.title}
+                          <p> {subItem.title}</p>
                         </NavLink>
                       </li>
                     ))}
