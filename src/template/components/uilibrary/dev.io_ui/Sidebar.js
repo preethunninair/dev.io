@@ -1,9 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import tinycolor from "tinycolor2";
-import { NavLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import Icon from "../Icon";
 import { UncontrolledCollapse } from "reactstrap";
+
+import {
+  Button,
+  Collapse,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  Input,
+  InputGroup,
+  NavbarBrand,
+  Navbar,
+  NavLink,
+  NavItem,
+  Nav,
+  Container,
+  Modal,
+} from "reactstrap";
 
 function Sidebar(props) {
   const templateConfig = useSelector((state) => state.templateConfig.config);
@@ -19,110 +37,101 @@ function Sidebar(props) {
     let showSubMenu = [];
     if (templateConfig.layout === "SIDE_NAVIGATION") {
       menus = props.routes.map((menuItem, i) => {
-        showSubMenu[i] =
-          (templateConfig.submenuConfig === "SNS" ||
-            templateConfig.submenuConfig === "SNB") &&
-          menuItem.submenu.length > 0;
+        if (menuItem.submenu.length > 0) {
+          if (templateConfig.submenuConfig === "SNS") {
+            return (
+              <UncontrolledDropdown nav>
+                <DropdownToggle
+                  caret
+                  color="default"
+                  data-toggle="dropdown"
+                  nav
+                >
+                  <Icon iconObj={menuItem.icon} />
 
-        return (
-          <li
-            className={`nav-item${
-              showSubMenu[i] && templateConfig.submenuConfig === "SNS"
-                ? " dropdown dropright"
-                : ""
-            }`}
-            key={i}
-          >
-            <NavLink
-              to={{
-                pathname: `${props.baseURL}${menuItem.path}`,
-                state: { parentModule: menuItem.path },
-              }}
-              className={`nav-link ${
-                showSubMenu[i] && templateConfig.submenuConfig === "SNS"
-                  ? "dropdown-toggle"
-                  : ""
-              }`}
-              data-toggle="dropdown"
-              activeClassName="active"
-              id={menuItem.module}
-              onClick={(e) => {
-                if (showSubMenu[i]) {
-                  e.preventDefault();
-                } else {
-                  // if (templateConfig.submenuConfig === "SNB") {
-                  //   var current = document.querySelectorAll(
-                  //     ".collapse-menu-item.show"
-                  //   );
-                  //   if (current.length > 0) {
-                  //     current[0].className = current[0].className.replace(
-                  //       " show",
-                  //       ""
-                  //     );
-                  //   }
-                  // }
-                }
-              }}
-            >
-              <Icon iconObj={menuItem.icon} />
+                  <p>{menuItem.title}</p>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-navbar" right tag="ul">
+                  {menuItem.submenu.map((subItem, i) => (
+                    <DropdownItem
+                      tag={RouterLink}
+                      to={`${props.baseURL}${subItem.path}`}
+                    >
+                      <Icon iconObj={subItem.icon} />
 
-              <p>{menuItem.title}</p>
-            </NavLink>
+                      <p>{subItem.title}</p>
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            );
+          } else if (templateConfig.submenuConfig === "SNB") {
+            return (
+              <>
+                <NavItem>
+                  <NavLink id={menuItem.module}>
+                    <Icon iconObj={menuItem.icon} />
 
-            {showSubMenu[i] && templateConfig.submenuConfig === "SNS" ? (
-              <div className="dropdown-menu dropdown-navbar">
-                {menuItem.submenu.map((subItem, i) => (
-                  <NavLink
-                    to={`${props.baseURL}${subItem.path}`}
-                    key={i}
-                    className="dropdown-item"
-                    activeClassName="active"
-                    onClick={() => {
-                      var current = document.querySelectorAll(
-                        ".dropdown-menu.show"
-                      );
-                      if (current.length > 0) {
-                        current[0].className = current[0].className.replace(
-                          " show",
-                          ""
-                        );
-                      }
-                    }}
-                  >
-                    <Icon iconObj={subItem.icon} />
-                    {subItem.title}
+                    <p>{menuItem.title}</p>
                   </NavLink>
-                ))}
-              </div>
-            ) : null}
-            {showSubMenu[i] && templateConfig.submenuConfig === "SNB" ? (
-              <UncontrolledCollapse
-                className="collapse-menu-item my-2 w-100"
-                toggler={`#${menuItem.module}`}
+                </NavItem>
+                <UncontrolledCollapse
+                  className="collapse-menu-item my-2 w-100"
+                  toggler={`#${menuItem.module}`}
+                >
+                  <div className="d-flex">
+                    <ul className="px-0 py-1 w-100">
+                      {menuItem.submenu.map((subItem, i) => (
+                        <li className={`nav-item`} key={i}>
+                          <RouterLink
+                            to={`${props.baseURL}${subItem.path}`}
+                            className="nav-link"
+                            activeClassName="active"
+                          >
+                            <Icon iconObj={subItem.icon} />
+                            <p> {subItem.title}</p>
+                          </RouterLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </UncontrolledCollapse>
+              </>
+            );
+          } else {
+            return (
+              <NavItem>
+                <RouterLink
+                  to={`${props.baseURL}${menuItem.path}`}
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  <Icon iconObj={menuItem.icon} />
+
+                  <p>{menuItem.title}</p>
+                </RouterLink>
+              </NavItem>
+            );
+          }
+        } else {
+          return (
+            <NavItem>
+              <RouterLink
+                to={`${props.baseURL}${menuItem.path}`}
+                className="nav-link"
+                activeClassName="active"
               >
-                <div className="d-flex">
-                  <ul className="px-0 py-1 w-100">
-                    {menuItem.submenu.map((subItem, i) => (
-                      <li className={`nav-item`} key={i}>
-                        <NavLink
-                          to={`${props.baseURL}${subItem.path}`}
-                          className="nav-link"
-                          activeClassName="active"
-                        >
-                          <Icon iconObj={subItem.icon} />
-                          <p> {subItem.title}</p>
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </UncontrolledCollapse>
-            ) : null}
-          </li>
-        );
+                <Icon iconObj={menuItem.icon} />
+
+                <p>{menuItem.title}</p>
+              </RouterLink>
+            </NavItem>
+          );
+        }
       });
+
+      return menus;
     }
-    return menus;
   }
 
   if (templateConfig.layout === "SIDE_NAVIGATION") {

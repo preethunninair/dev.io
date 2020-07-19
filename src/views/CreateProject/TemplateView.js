@@ -11,31 +11,31 @@ class TemplateView extends React.Component {
         payload: this.props.config,
       });
     }
-    if (prevProps.config.templateName != this.props.config.templateName) {
-      this.initializeDropdownEventHandler();
-    } else if (
-      prevProps.config.submenuConfig != this.props.config.submenuConfig
-    ) {
-      this.initializeDropdownEventHandler();
-    } else if (prevProps.config.sidenavOnly != this.props.config.sidenavOnly) {
-      this.initializeDropdownEventHandler();
-    }
+    // if (prevProps.config.templateName != this.props.config.templateName) {
+    //   this.initializeDropdownEventHandler();
+    // } else if (
+    //   prevProps.config.submenuConfig != this.props.config.submenuConfig
+    // ) {
+    //   this.initializeDropdownEventHandler();
+    // } else if (prevProps.config.sidenavOnly != this.props.config.sidenavOnly) {
+    //   this.initializeDropdownEventHandler();
+    // }
   }
 
-  initializeDropdownEventHandler() {
-    let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-    dropdowns.forEach((elem, i) => {
-      elem.addEventListener("click", function (e) {
-        var current = document.querySelectorAll(".dropdown-menu.show");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" show", "");
-        }
-        if (e.currentTarget.nextSibling != null) {
-          e.currentTarget.nextSibling.className += " show";
-        }
-      });
-    });
-  }
+  // initializeDropdownEventHandler() {
+  //   let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
+  //   dropdowns.forEach((elem, i) => {
+  //     elem.addEventListener("click", function (e) {
+  //       var current = document.querySelectorAll(".dropdown-menu.show");
+  //       if (current.length > 0) {
+  //         current[0].className = current[0].className.replace(" show", "");
+  //       }
+  //       if (e.currentTarget.nextSibling != null) {
+  //         e.currentTarget.nextSibling.className += " show";
+  //       }
+  //     });
+  //   });
+  // }
 
   render() {
     if (this.props.config === undefined) {

@@ -21,24 +21,24 @@ const mapState = (store) => ({
   templateConfig: store.templateConfig.config,
 });
 class AppContainer extends React.PureComponent {
-  componentDidMount() {
-    this.initializeDropdownEventHandler();
-  }
+  // componentDidMount() {
+  //   this.initializeDropdownEventHandler();
+  // }
 
-  initializeDropdownEventHandler = () => {
-    let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-    dropdowns.forEach((elem, i) => {
-      elem.addEventListener("click", function (e) {
-        var current = document.querySelectorAll(".dropdown-menu.show");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" show", "");
-        }
-        if (e.currentTarget.nextSibling) {
-          e.currentTarget.nextSibling.className += " show";
-        }
-      });
-    });
-  };
+  // initializeDropdownEventHandler = () => {
+  //   let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
+  //   dropdowns.forEach((elem, i) => {
+  //     elem.addEventListener("click", function (e) {
+  //       var current = document.querySelectorAll(".dropdown-menu.show");
+  //       if (current.length > 0) {
+  //         current[0].className = current[0].className.replace(" show", "");
+  //       }
+  //       if (e.currentTarget.nextSibling) {
+  //         e.currentTarget.nextSibling.className += " show";
+  //       }
+  //     });
+  //   });
+  // };
 
   render() {
     return (
@@ -60,6 +60,11 @@ class AppContainer extends React.PureComponent {
         />
         <Topbar
           baseURL={this.props.baseURL}
+          brandContent={
+            <h4 class="m-0">
+              [_x<span class="text-danger">Lab]</span>
+            </h4>
+          }
           routes={
             this.props.templateConfig.layout === "TOP_NAVIGATION"
               ? this.props.routes

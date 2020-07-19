@@ -1,100 +1,79 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import tinycolor from "tinycolor2";
-import { NavLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import Icon from "../Icon";
+
+import {
+  Button,
+  Collapse,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  Input,
+  InputGroup,
+  NavbarBrand,
+  Navbar,
+  NavItem,
+  Nav,
+  Container,
+  Modal,
+} from "reactstrap";
 
 function Topbar(props) {
   const templateConfig = useSelector((state) => state.templateConfig.config);
   const [collapseOpen, setCollapseOpen] = useState(false);
 
   function generateMenuItems() {
-    if (props.routes == null || props.routes.length <= 0) {
+    if (
+      templateConfig.submenuConfig != "TNS" ||
+      props.routes == null ||
+      props.routes.length <= 0
+    ) {
       return null;
     }
     let menus = [];
     let showSubmenu = [];
-    if (templateConfig.layout === "TOP_NAVIGATION") {
-      menus = props.routes.map((menuItem, i) => {
-        showSubmenu[i] =
-          templateConfig.submenuConfig === "TNS" && menuItem.submenu.length > 0;
+    menus = props.routes.map((menuItem, i) => {
+      if (menuItem.submenu.length > 0) {
         return (
-          <li
-            className={`nav-item ${showSubmenu[i] ? "dropdown" : ""}`}
-            key={i}
-          >
-            <NavLink
+          <UncontrolledDropdown nav>
+            <DropdownToggle caret color="default" data-toggle="dropdown" nav>
+              <Icon iconObj={menuItem.icon} />
+
+              <p>{menuItem.title}</p>
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-navbar" right tag="ul">
+              {menuItem.submenu.map((subItem, i) => (
+                <DropdownItem
+                  tag={RouterLink}
+                  to={`${props.baseURL}${subItem.path}`}
+                >
+                  <Icon iconObj={subItem.icon} />
+
+                  <p>{subItem.title}</p>
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        );
+      } else {
+        return (
+          <NavItem>
+            <RouterLink
               to={`${props.baseURL}${menuItem.path}`}
-              className={`nav-link ${showSubmenu[i] ? "dropdown-toggle" : ""}`}
-              data-toggle="dropdown"
+              className="nav-link"
               activeClassName="active"
-              onClick={(e) => {
-                if (showSubmenu[i]) {
-                  e.preventDefault();
-                }
-              }}
             >
               <Icon iconObj={menuItem.icon} />
 
-              <span>{menuItem.title}</span>
-            </NavLink>
-
-            {showSubmenu[i] ? (
-              <div className="dropdown-menu dropdown-navbar">
-                <div className="d-flex">
-                  <ul className="list-unstyled w-100">
-                    {menuItem.submenu.map((subItem, i) => (
-                      <li className={`nav-item`} key={i}>
-                        <NavLink
-                          to={`${props.baseURL}${subItem.path}`}
-                          className="nav-link dropdown-item"
-                          activeClassName="active"
-                          onClick={() => {
-                            var current = document.querySelectorAll(
-                              ".dropdown-menu.show"
-                            );
-                            if (current.length > 0) {
-                              current[0].className = current[0].className.replace(
-                                " show",
-                                ""
-                              );
-                            }
-                          }}
-                        >
-                          <Icon iconObj={subItem.icon} />
-                          {subItem.title}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ) : null}
-          </li>
+              <p>{menuItem.title}</p>
+            </RouterLink>
+          </NavItem>
         );
-      });
-    } else {
-      if (
-        templateConfig.submenuConfig !== "SNS" &&
-        templateConfig.submenuConfig !== "SNB"
-      ) {
-        menus = props.routes.map((menuItem, i) => {
-          return (
-            <li className="nav-item" key={i}>
-              <NavLink
-                to={`${props.baseURL}${menuItem.path}`}
-                className="nav-link"
-                activeClassName="active"
-              >
-                <Icon iconObj={menuItem.icon} />
-
-                <span>{menuItem.title}</span>
-              </NavLink>
-            </li>
-          );
-        });
       }
-    }
+    });
     return menus;
   }
 
@@ -125,6 +104,9 @@ function Topbar(props) {
                   <span className="navbar-toggler-bar bar3" />
                 </button>
               </div>
+              {/* <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
+                {props.brandContent}
+              </NavbarBrand> */}
             </div>
             <button
               aria-expanded={false}
