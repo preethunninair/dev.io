@@ -108,7 +108,7 @@ class CreateProject extends React.PureComponent {
     return (
       <div className="wrapper overflow-hidden" data-appmode={"dark"}>
         <div className="editor">
-          <div className="app-brand">
+          <div className="editor-brand">
             <div
               className="brand-img pl-0 center text-center h-100"
               data-theme={"transparent"}
@@ -118,7 +118,7 @@ class CreateProject extends React.PureComponent {
               <span style={{ color: "red" }}>Lab ]</span>
             </div>
           </div>
-          <div className="app-header">
+          <div className="editor-header">
             <nav
               data-theme="transparent"
               className="navbar-absolute  navbar navbar-expand-lg px-0"
@@ -206,7 +206,7 @@ class CreateProject extends React.PureComponent {
               </div>
             </nav>
           </div>
-          <div className="app-main">
+          <div className="editor-main">
             <AppLayout wizardIndex={wizardIndex} />
 
             <Routes wizardIndex={wizardIndex} />

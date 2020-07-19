@@ -42,7 +42,7 @@ function Topbar(props) {
             <DropdownToggle caret color="default" data-toggle="dropdown" nav>
               <Icon iconObj={menuItem.icon} />
 
-              <p>{menuItem.title}</p>
+              <span>{menuItem.title}</span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-navbar" right tag="ul">
               {menuItem.submenu.map((subItem, i) => (
@@ -52,7 +52,7 @@ function Topbar(props) {
                 >
                   <Icon iconObj={subItem.icon} />
 
-                  <p>{subItem.title}</p>
+                  <span>{subItem.title}</span>
                 </DropdownItem>
               ))}
             </DropdownMenu>
@@ -68,7 +68,7 @@ function Topbar(props) {
             >
               <Icon iconObj={menuItem.icon} />
 
-              <p>{menuItem.title}</p>
+              <span>{menuItem.title}</span>
             </RouterLink>
           </NavItem>
         );
@@ -79,7 +79,7 @@ function Topbar(props) {
 
   if (templateConfig.sidenavOnly !== "TRUE") {
     return (
-      <div className="app-header">
+      <div className="app-topnav">
         <nav
           className="navbar navbar-expand-lg px-0 position-absolute"
           data-theme={

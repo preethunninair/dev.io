@@ -49,7 +49,7 @@ function Sidebar(props) {
                 >
                   <Icon iconObj={menuItem.icon} />
 
-                  <p>{menuItem.title}</p>
+                  <span>{menuItem.title}</span>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                   {menuItem.submenu.map((subItem, i) => (
@@ -59,7 +59,7 @@ function Sidebar(props) {
                     >
                       <Icon iconObj={subItem.icon} />
 
-                      <p>{subItem.title}</p>
+                      <span>{subItem.title}</span>
                     </DropdownItem>
                   ))}
                 </DropdownMenu>
@@ -72,7 +72,7 @@ function Sidebar(props) {
                   <NavLink id={menuItem.module}>
                     <Icon iconObj={menuItem.icon} />
 
-                    <p>{menuItem.title}</p>
+                    <span>{menuItem.title}</span>
                   </NavLink>
                 </NavItem>
                 <UncontrolledCollapse
@@ -89,7 +89,7 @@ function Sidebar(props) {
                             activeClassName="active"
                           >
                             <Icon iconObj={subItem.icon} />
-                            <p> {subItem.title}</p>
+                            <span> {subItem.title}</span>
                           </RouterLink>
                         </li>
                       ))}
@@ -108,7 +108,7 @@ function Sidebar(props) {
                 >
                   <Icon iconObj={menuItem.icon} />
 
-                  <p>{menuItem.title}</p>
+                  <span>{menuItem.title}</span>
                 </RouterLink>
               </NavItem>
             );
@@ -123,7 +123,7 @@ function Sidebar(props) {
               >
                 <Icon iconObj={menuItem.icon} />
 
-                <p>{menuItem.title}</p>
+                <span>{menuItem.title}</span>
               </RouterLink>
             </NavItem>
           );
@@ -136,7 +136,7 @@ function Sidebar(props) {
 
   if (templateConfig.layout === "SIDE_NAVIGATION") {
     return (
-      <div className="app-menu">
+      <div className="app-sidenav">
         <div
           className="sidebar"
           style={{ background: templateConfig.sidenavBgColor }}

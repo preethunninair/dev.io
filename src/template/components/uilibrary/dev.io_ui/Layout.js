@@ -37,6 +37,7 @@ function Layout(props) {
         data-topnavsize={templateConfig.topnavsize}
         data-floatingmenu={templateConfig.floatingMenu}
         data-sidenavsize={templateConfig.sidenavsize}
+        data-logowidthsize={templateConfig.logowidthsize}
         data-padded={templateConfig.padded}
         data-logoonnav={templateConfig.logoOnNav}
         data-boxed={templateConfig.boxed}

@@ -24,7 +24,32 @@ import { connect } from "react-redux";
 import { updateSelectedTemplate } from "../../redux/actions/createProjectActions";
 const SIZEMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
 const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
-
+const LOGOSIZEINVERSE = {
+  XXXS: 0,
+  XXS: 1,
+  XS: 2,
+  S: 3,
+  M: 4,
+  L: 5,
+  XL: 6,
+  XXL: 7,
+  XXXL: 8,
+  XXXXL: 9,
+  XXXXXL: 10,
+};
+const LOGOSIZEMAP = {
+  "0": "XXXS",
+  "1": "XXS",
+  "2": "XS",
+  "3": "S",
+  "4": "M",
+  "5": "L",
+  "6": "XL",
+  "7": "XXL",
+  "8": "XXXL",
+  "9": "XXXXL",
+  "10": "XXXXXL",
+};
 const SHT = [
   { value: "SLT1_ROUND", label: "Round Highlight" },
 
@@ -215,9 +240,13 @@ class AppLayout extends React.Component {
   };
   applySize = (e, elem) => {
     const temp = [...this.state.templateCopy];
-
-    temp[this.state.templateIndex][`${elem}size`] =
-      SIZEMAP[`${e.target.value}`];
+    if (elem === "logowidth") {
+      temp[this.state.templateIndex][`${elem}size`] =
+        LOGOSIZEMAP[`${e.target.value}`];
+    } else {
+      temp[this.state.templateIndex][`${elem}size`] =
+        SIZEMAP[`${e.target.value}`];
+    }
 
     this.setState({ templateCopy: temp });
   };
@@ -477,6 +506,27 @@ class AppLayout extends React.Component {
                     }
                   />
                 </li>
+                {templateCopy[templateIndex].template.indexOf("S0") == -1 ? (
+                  <li>
+                    <label className="text-white" htmlFor="logowidth">
+                      Logo Width
+                    </label>
+                    <input
+                      type="range"
+                      className="custom-range"
+                      min="0"
+                      max="10"
+                      step="1"
+                      value={
+                        LOGOSIZEINVERSE[
+                          templateCopy[templateIndex].logowidthsize
+                        ]
+                      }
+                      onChange={(e) => this.applySize(e, "logowidth")}
+                      id="logowidth"
+                    />
+                  </li>
+                ) : null}
                 {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
                   <>
                     <li

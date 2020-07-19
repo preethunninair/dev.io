@@ -28,6 +28,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXXL",
   },
   {
     templateName: "Sidenav Reduced",
@@ -59,6 +60,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "S",
   },
   {
     templateName: "Sidenav Compact",
@@ -90,6 +92,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav : (S-LN)",
@@ -121,6 +124,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXXL",
   },
 
   {
@@ -153,6 +157,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXXL",
   },
   {
     templateName: "Sidenav : (P)(S-L-N)",
@@ -184,6 +189,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXXL",
   },
   {
     templateName: "Sidenav : (P)(SL-N)",
@@ -215,6 +221,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXXL",
   },
 
   {
@@ -247,6 +254,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "S",
   },
   {
     templateName: "Sidenav Reduced : (P)(S-LN)",
@@ -278,6 +286,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "S",
   },
   {
     templateName: "Sidenav Reduced : (P)(S-L-N)",
@@ -309,6 +318,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "S",
   },
 
   {
@@ -341,6 +351,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "S",
   },
 
   {
@@ -373,6 +384,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact : (P)(S-LN)",
@@ -404,6 +416,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact : (P)(SLN)",
@@ -435,6 +448,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact : (P)(SL_N)",
@@ -466,6 +480,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact Floating",
@@ -496,6 +511,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact Floating : (P)(S-LN)",
@@ -526,6 +542,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Compact Floating : (P)(S-L-N)",
@@ -556,6 +573,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
 
   {
@@ -587,6 +605,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Reduced Floating : (P)(S-LN)",
@@ -617,6 +636,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
   {
     templateName: "Sidenav Reduced Floating : (P)(S-L-N)",
@@ -647,6 +667,7 @@ export const TEMPLATES = [
     snshadow: "FALSE",
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
+    logowidthsize: "XXS",
   },
 
   //topnavigation

@@ -9,14 +9,14 @@
     grid-template-columns:260px auto;
 }
 
-.app-header {
+.editor-header {
     grid-area: header;
   }
  
-  .app-main {
+  .editor-main {
     grid-area: main;
   }
-  .app-brand {
+  .editor-brand {
     grid-area: brand;
   }
 

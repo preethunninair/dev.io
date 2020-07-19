@@ -31,6 +31,7 @@ export default function templateConfigReducer(
       snshadow: "FALSE",
       logoOnNav: "FALSE",
       sidenavOnly: "FALSE",
+      logowidthsize: "XXXL",
     },
   },
   action

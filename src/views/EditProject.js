@@ -116,7 +116,7 @@ class EditProject extends React.PureComponent {
             &#60;&#47;&#62; dev.<span style={{ color: "red" }}>io</span>
           </div>
         </div>
-        <div className="app-header">
+        <div className="app-topnav">
           <nav
             data-theme="transparent"
             className="navbar-absolute  navbar navbar-expand-lg px-0"

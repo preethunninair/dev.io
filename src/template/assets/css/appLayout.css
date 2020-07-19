@@ -10,10 +10,10 @@ body,
     width: 100%;
 } */
 
-  .app-header {
+  .app-topnav {
     grid-area: header;
   }
-  .app-menu {
+  .app-sidenav {
     grid-area: menu;
   }
   .app-main {
@@ -148,7 +148,7 @@ body,
   .app-container[data-padded="SLN"] {
     padding: 8px;
   }
-  .app-container[data-padded="S_LN"] .app-menu {
+  .app-container[data-padded="S_LN"] .app-sidenav {
     padding: 0px 5px 5px 5px;
   }
 }
@@ -188,11 +188,11 @@ body,
   z-index: 2;
 }
 .app-container[data-navbarsize$="S"][data-boxed="SL_N"]
-  .app-menu
+  .app-sidenav
   .sidebar-wrapper {
   padding-top: 30px;
 }
-.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-menu {
+.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-sidenav {
   padding-top: 30px;
 } */
 .app-container[data-navbarsize="S"] .brand-img {
@@ -208,12 +208,12 @@ body,
   z-index: 2;
 }
 .app-container[data-navbarsize="S"][data-padded="FALSE"]
-  .app-menu
+  .app-sidenav
   .sidebar-wrapper {
   padding-top: 10px;
 }
 .app-container[data-navbarsize="XS"][data-padded="FALSE"]
-  .app-menu
+  .app-sidenav
   .sidebar-wrapper {
   padding-top: 20px;
 }
@@ -224,6 +224,6 @@ height: 60px !important;
 .app-container[data-navbarsize="XS"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link{
   height: 50px !important;
   }
-/* .app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-menu {
+/* .app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-sidenav {
   padding-top: 20px;
 } */
