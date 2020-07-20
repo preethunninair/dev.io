@@ -22,9 +22,23 @@ import { TEMPLATES } from "../../variables/template_file";
 import ColorPicker from "../../components/ColorPicker";
 import { connect } from "react-redux";
 import { updateSelectedTemplate } from "../../redux/actions/createProjectActions";
-const SIZEMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
-const SIZEMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
-const LOGOSIZEINVERSE = {
+const NAVMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
+const NAVMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
+const SIDENAVGRIDMAP = {
+  XXXS: "S2",
+  XXS: "S2",
+  XS: "S2",
+  XS_2: "S1",
+  S: "S1",
+  M: "S1",
+  L: "S1",
+  XL: "S1",
+  XXL: "S0",
+  XXXL: "S0",
+  XXXXL: "S0",
+  XXXXXL: "S0",
+};
+const LOGOMAPINVERSE = {
   XXXS: 0,
   XXS: 1,
   XS: 2,
@@ -50,6 +64,35 @@ const LOGOSIZEMAP = {
   "9": "XXXXL",
   "10": "XXXXXL",
 };
+const SIDENAVSIZEMAP = {
+  "0": "XXXS",
+  "1": "XXS",
+  "2": "XS",
+  "3": "XS_2",
+  "4": "S",
+  "5": "M",
+  "6": "L",
+  "7": "XL",
+  "8": "XXL",
+  "9": "XXXL",
+  "10": "XXXXL",
+  "11": "XXXXXL",
+};
+const SIDENAVINVERSE = {
+  XXXS: 0,
+  XXS: 1,
+  XS: 2,
+  XS_2: 3,
+  S: 4,
+  M: 5,
+  L: 6,
+  XL: 7,
+  XXL: 8,
+  XXXL: 9,
+  XXXXL: 10,
+  XXXXXL: 11,
+};
+
 const SHT = [
   { value: "SLT1_ROUND", label: "Round Highlight" },
 
@@ -240,12 +283,19 @@ class AppLayout extends React.Component {
   };
   applySize = (e, elem) => {
     const temp = [...this.state.templateCopy];
-    if (elem === "logowidth") {
+    if (elem === "topnav") {
+      temp[this.state.templateIndex][`${elem}size`] =
+        NAVMAP[`${e.target.value}`];
+    } else if (elem === "logowidth") {
       temp[this.state.templateIndex][`${elem}size`] =
         LOGOSIZEMAP[`${e.target.value}`];
     } else {
       temp[this.state.templateIndex][`${elem}size`] =
-        SIZEMAP[`${e.target.value}`];
+        SIDENAVSIZEMAP[`${e.target.value}`];
+      temp[this.state.templateIndex].gridConfig =
+        SIDENAVGRIDMAP[SIDENAVSIZEMAP[`${e.target.value}`]];
+      temp[this.state.templateIndex].template =
+        SIDENAVGRIDMAP[SIDENAVSIZEMAP[`${e.target.value}`]];
     }
 
     this.setState({ templateCopy: temp });
@@ -506,27 +556,25 @@ class AppLayout extends React.Component {
                     }
                   />
                 </li>
-                {templateCopy[templateIndex].template.indexOf("S0") == -1 ? (
-                  <li>
-                    <label className="text-white" htmlFor="logowidth">
-                      Logo Width
-                    </label>
-                    <input
-                      type="range"
-                      className="custom-range"
-                      min="0"
-                      max="10"
-                      step="1"
-                      value={
-                        LOGOSIZEINVERSE[
-                          templateCopy[templateIndex].logowidthsize
-                        ]
-                      }
-                      onChange={(e) => this.applySize(e, "logowidth")}
-                      id="logowidth"
-                    />
-                  </li>
-                ) : null}
+
+                <li>
+                  <label className="text-white" htmlFor="logowidth">
+                    Logo Width
+                  </label>
+                  <input
+                    type="range"
+                    className="custom-range"
+                    min="0"
+                    max="10"
+                    step="1"
+                    value={
+                      LOGOMAPINVERSE[templateCopy[templateIndex].logowidthsize]
+                    }
+                    onChange={(e) => this.applySize(e, "logowidth")}
+                    id="logowidth"
+                  />
+                </li>
+
                 {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
                   <>
                     <li
@@ -545,7 +593,7 @@ class AppLayout extends React.Component {
                       isOpen={this.state.sidenavCtrl}
                     >
                       <ul className="list-unstyled">
-                        {templateCopy[templateIndex].template.indexOf("S0") ==
+                        {templateCopy[templateIndex].layout.indexOf("SIDE") >
                         -1 ? (
                           <li>
                             <label className="text-white" htmlFor="sidWidth">
@@ -555,10 +603,10 @@ class AppLayout extends React.Component {
                               type="range"
                               className="custom-range"
                               min="0"
-                              max="2"
+                              max="11"
                               step="1"
                               value={
-                                SIZEMAPINVERSE[
+                                SIDENAVINVERSE[
                                   templateCopy[templateIndex].sidenavsize
                                 ]
                               }
@@ -768,7 +816,7 @@ class AppLayout extends React.Component {
                         }
                         step="1"
                         value={
-                          SIZEMAPINVERSE[templateCopy[templateIndex].topnavsize]
+                          NAVMAPINVERSE[templateCopy[templateIndex].topnavsize]
                         }
                         onChange={(e) => this.applySize(e, "topnav")}
                         id="navWidth"

@@ -70,15 +70,7 @@ body,
     grid-template-columns: [col-start] 60px [col-1] 20px [col-2] 20px [col-3] 20px [col-4] 20px [col-5] 30px [col-6] 30px [col-7] 30px [col-8] 30px [col-9] 30px [col-10] 30px [col-11] auto [col-end];
 
   }
-  /* .app-container[data-grid="S0"] {
-    grid-template-columns: 260px auto;
-  }
-  .app-container[data-grid="S1"] {
-    grid-template-columns: 140px auto;
-  }
-  .app-container[data-grid="S2"] {
-    grid-template-columns: 90px auto;
-  } */
+ 
 
 /*..........................................*/
   /*...............Sidenav Only..........*/
@@ -97,7 +89,7 @@ body,
       "brand header header header header header"
       "main main main main main main"
       "main main main main main main";
-    grid-template-columns: 140px auto;
+    grid-template-columns: [col-start] 60px [col-1] 20px [col-2] 20px [col-3] 20px [col-4] 20px [col-5] 30px [col-6] 30px [col-7] 30px [col-8] 30px [col-9] 30px [col-10] 30px [col-11] auto [col-end];
   }
 
   .app-container[data-logoonnav="TRUE"] .app-brand{
@@ -205,30 +197,76 @@ height:50px;
 /*.................................*/
 
 /*........Sidebar width..............*/
-.app-container[data-grid="S0"] .app-sidenav{
-  grid-column-end:col-9;
-}
-
-
-.app-container[data-sidenavsize="M"][data-grid="S2"] .app-sidenav{
-  grid-column-end:col-3;
-}
-.app-container[data-sidenavsize="S"][data-grid="S2"] .app-sidenav{
-  grid-column-end:col-2;
-}
-.app-container[data-sidenavsize="XS"][data-grid="S2"] .app-sidenav{
+.app-container[data-sidenavsize="XXXS"] .app-sidenav{
   grid-column-end:col-1;
 }
-
-.app-container[data-sidenavsize="M"][data-grid="S1"] .app-sidenav{
-  grid-column-end:col-5;
+.app-container[data-sidenavsize="XXS"] .app-sidenav{
+  grid-column-end:col-2;
 }
-.app-container[data-sidenavsize="S"][data-grid="S1"] .app-sidenav{
-  grid-column-end:col-4;
-}
-.app-container[data-sidenavsize="XS"][data-grid="S1"] .app-sidenav{
+.app-container[data-sidenavsize="XS"] .app-sidenav,
+.app-container[data-sidenavsize="XS_2"] .app-sidenav{
   grid-column-end:col-3;
 }
+.app-container[data-sidenavsize="S"] .app-sidenav{
+  grid-column-end:col-4;
+}
+.app-container[data-sidenavsize="M"] .app-sidenav{
+  grid-column-end:col-5;
+}
+.app-container[data-sidenavsize="L"] .app-sidenav{
+  grid-column-end:col-6;
+}
+.app-container[data-sidenavsize="XL"] .app-sidenav{
+  grid-column-end:col-7;
+}
+.app-container[data-sidenavsize="XXL"] .app-sidenav{
+  grid-column-end:col-8;
+}
+.app-container[data-sidenavsize="XXXL"] .app-sidenav{
+    grid-column-end:col-9;
+}
+.app-container[data-sidenavsize="XXXXL"] .app-sidenav{
+  grid-column-end:col-10;
+}
+.app-container[data-sidenavsize="XXXXXL"] .app-sidenav{
+  grid-column-end:col-11;
+}
+
+.app-container[data-sidenavsize="XXXS"] .app-main{
+  grid-column-start:col-1;
+}
+.app-container[data-sidenavsize="XXS"] .app-main{
+  grid-column-start:col-2;
+}
+.app-container[data-sidenavsize="XS"] .app-main,
+.app-container[data-sidenavsize="XS_2"] .app-main{
+  grid-column-start:col-3;
+}
+.app-container[data-sidenavsize="S"] .app-main{
+  grid-column-start:col-4;
+}
+.app-container[data-sidenavsize="M"] .app-main{
+  grid-column-start:col-5;
+}
+.app-container[data-sidenavsize="L"] .app-main{
+  grid-column-start:col-6;
+}
+.app-container[data-sidenavsize="XL"] .app-main{
+  grid-column-start:col-7;
+}
+.app-container[data-sidenavsize="XXL"] .app-main{
+  grid-column-start:col-8;
+}
+.app-container[data-sidenavsize="XXXL"] .app-main{
+    grid-column-start:col-9;
+}
+.app-container[data-sidenavsize="XXXXL"] .app-main{
+  grid-column-start:col-10;
+}
+.app-container[data-sidenavsize="XXXXXL"] .app-main{
+  grid-column-start:col-11;
+}
+
 /*...................................................*/
 
 /*...........Logo Width Style..............*/
@@ -274,37 +312,37 @@ height:50px;
 .app-container[data-grid="S0"] .app-topnav{
   grid-column-start:col-9;
 }
-.app-container[data-logowidthsize="XXXS"] .app-topnav{
+.app-container[data-logowidthsize="XXXS"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-1;
 }
-.app-container[data-logowidthsize="XXS"] .app-topnav{
+.app-container[data-logowidthsize="XXS"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-2;
 }
-.app-container[data-logowidthsize="XS"] .app-topnav{
+.app-container[data-logowidthsize="XS"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-3;
 }
-.app-container[data-logowidthsize="S"] .app-topnav{
+.app-container[data-logowidthsize="S"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-4;
 }
-.app-container[data-logowidthsize="M"] .app-topnav{
+.app-container[data-logowidthsize="M"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-5;
 }
-.app-container[data-logowidthsize="L"] .app-topnav{
+.app-container[data-logowidthsize="L"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-6;
 }
-.app-container[data-logowidthsize="XL"] .app-topnav{
+.app-container[data-logowidthsize="XL"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-7;
 }
-.app-container[data-logowidthsize="XXL"] .app-topnav{
+.app-container[data-logowidthsize="XXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-8;
 }
-.app-container[data-logowidthsize="XXXL"] .app-topnav{
+.app-container[data-logowidthsize="XXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-9;
 }
-.app-container[data-logowidthsize="XXXXL"] .app-topnav{
+.app-container[data-logowidthsize="XXXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-10;
 }
-.app-container[data-logowidthsize="XXXXXL"] .app-topnav{
+.app-container[data-logowidthsize="XXXXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
   grid-column-start:col-11;
 }
 /*.............................................*/

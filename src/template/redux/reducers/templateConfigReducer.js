@@ -3,7 +3,7 @@ const { default: reducers } = require(".");
 export default function templateConfigReducer(
   state = {
     config: {
-      templateName: "Sidenav Standard",
+      templateName: "Sidenav",
 
       logoTheme: "dark",
       layout: "SIDE_NAVIGATION",
@@ -21,7 +21,7 @@ export default function templateConfigReducer(
       sidenavlinktemplate: "SLT2",
       topnavlinktemplate: "LT1_NOICON",
       topnavsize: "M",
-      sidenavsize: "S",
+      sidenavsize: "XXXL",
       appBgColor: "#f2f2f2",
       topnavSecondaryBgColor: "NA",
       sidenavMenuAlignCenter: "FALSE",
