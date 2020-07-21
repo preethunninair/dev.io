@@ -41,6 +41,7 @@
   z-index: 4;
   position: relative;
   overflow: auto;
+  flex-direction: column;
 }
 .sidebar .nav,
 .off-canvas-sidebar .nav {
@@ -285,7 +286,7 @@
     background: white;
   }
   .sidebar {
-    padding-top: 10px;
+    padding-top: 5px;
   }
   .sidebar[data-submenuconfig="SNS"] .sidebar-wrapper {
     overflow: unset !important;
@@ -452,11 +453,6 @@ flex-grow: 1;  }
     opacity: 1;
   }
 
-  .sidebar[data-template="S2"] .nav > li > a {
-   
-    height:45px;
-    width: 45px;
-  }
  
   .sidebar[data-template="S2"] .sidebar-wrapper {
     overflow: unset !important;
@@ -489,10 +485,7 @@ flex-grow: 1;  }
 
   /*............. .................*/
 }
-.sidebar .nav.center{
-  position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
+.sidebar-wrapper.center{
+  padding-bottom: 25px;
+}

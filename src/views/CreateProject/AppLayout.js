@@ -131,6 +131,7 @@ class AppLayout extends React.Component {
       sidenavCtrl: false,
       topnavCtrl: false,
       colorCtrl: true,
+      layoutCtrl: true,
     };
   }
   toggleTemplateDropDown = () => {
@@ -285,8 +286,8 @@ class AppLayout extends React.Component {
     const temp = [...this.state.templateCopy];
     if (elem === "topnav") {
       temp[this.state.templateIndex][`${elem}size`] =
-        NAVMAP[`${e.target.value}`];
-    } else if (elem === "logowidth") {
+        LOGOSIZEMAP[`${e.target.value}`];
+    } else if (elem === "logowidth" || elem === "logoheight") {
       temp[this.state.templateIndex][`${elem}size`] =
         LOGOSIZEMAP[`${e.target.value}`];
     } else {
@@ -402,7 +403,100 @@ class AppLayout extends React.Component {
                     </div>
                   </li>
                 ) : null}
-
+                <li
+                  className="pointer"
+                  onClick={() =>
+                    this.setState((prevState) => ({
+                      layoutCtrl: !prevState.layoutCtrl,
+                    }))
+                  }
+                >
+                  <h4>Layout Control</h4>
+                </li>
+                <Collapse
+                  style={{ background: "#0000002b" }}
+                  className="p-2"
+                  isOpen={this.state.layoutCtrl}
+                >
+                  <ul className="list-unstyled">
+                    <li>
+                      <label className="text-white" htmlFor="logowidth">
+                        Logo Width
+                      </label>
+                      <input
+                        type="range"
+                        className="custom-range"
+                        min="0"
+                        max="10"
+                        step="1"
+                        value={
+                          LOGOMAPINVERSE[
+                            templateCopy[templateIndex].logowidthsize
+                          ]
+                        }
+                        onChange={(e) => this.applySize(e, "logowidth")}
+                        id="logowidth"
+                      />
+                    </li>
+                    <li>
+                      <label className="text-white" htmlFor="logoheight">
+                        Logo Height
+                      </label>
+                      <input
+                        type="range"
+                        className="custom-range"
+                        min="0"
+                        max="9"
+                        step="1"
+                        value={
+                          LOGOMAPINVERSE[
+                            templateCopy[templateIndex].logoheightsize
+                          ]
+                        }
+                        onChange={(e) => this.applySize(e, "logoheight")}
+                        id="logoheight"
+                      />
+                    </li>
+                    <li>
+                      <label className="text-white" htmlFor="navWidth">
+                        Topnav Height
+                      </label>
+                      <input
+                        type="range"
+                        className="custom-range"
+                        min="0"
+                        max="9"
+                        step="1"
+                        value={
+                          LOGOMAPINVERSE[templateCopy[templateIndex].topnavsize]
+                        }
+                        onChange={(e) => this.applySize(e, "topnav")}
+                        id="navWidth"
+                      />
+                    </li>
+                    {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
+                      <li>
+                        <label className="text-white" htmlFor="sidWidth">
+                          Sidenav Width
+                        </label>
+                        <input
+                          type="range"
+                          className="custom-range"
+                          min="0"
+                          max="11"
+                          step="1"
+                          value={
+                            SIDENAVINVERSE[
+                              templateCopy[templateIndex].sidenavsize
+                            ]
+                          }
+                          onChange={(e) => this.applySize(e, "sidenav")}
+                          id="sidWidth"
+                        />
+                      </li>
+                    ) : null}
+                  </ul>
+                </Collapse>
                 <li
                   className="pointer"
                   onClick={() =>
@@ -557,24 +651,6 @@ class AppLayout extends React.Component {
                   />
                 </li>
 
-                <li>
-                  <label className="text-white" htmlFor="logowidth">
-                    Logo Width
-                  </label>
-                  <input
-                    type="range"
-                    className="custom-range"
-                    min="0"
-                    max="10"
-                    step="1"
-                    value={
-                      LOGOMAPINVERSE[templateCopy[templateIndex].logowidthsize]
-                    }
-                    onChange={(e) => this.applySize(e, "logowidth")}
-                    id="logowidth"
-                  />
-                </li>
-
                 {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
                   <>
                     <li
@@ -593,28 +669,6 @@ class AppLayout extends React.Component {
                       isOpen={this.state.sidenavCtrl}
                     >
                       <ul className="list-unstyled">
-                        {templateCopy[templateIndex].layout.indexOf("SIDE") >
-                        -1 ? (
-                          <li>
-                            <label className="text-white" htmlFor="sidWidth">
-                              Sidenav Width
-                            </label>
-                            <input
-                              type="range"
-                              className="custom-range"
-                              min="0"
-                              max="11"
-                              step="1"
-                              value={
-                                SIDENAVINVERSE[
-                                  templateCopy[templateIndex].sidenavsize
-                                ]
-                              }
-                              onChange={(e) => this.applySize(e, "sidenav")}
-                              id="sidWidth"
-                            />
-                          </li>
-                        ) : null}
                         {templateCopy[templateIndex].layout.indexOf("SIDE") >
                           -1 &&
                         templateCopy[templateIndex].gridConfig !== "S0" &&
@@ -793,35 +847,7 @@ class AppLayout extends React.Component {
                         </div>
                       </li>
                     ) : null}
-                    <li>
-                      <label className="text-white" htmlFor="navWidth">
-                        Topnav Height
-                      </label>
-                      <input
-                        type="range"
-                        className="custom-range"
-                        min={
-                          templateCopy[templateIndex].templateName.indexOf(
-                            "Topnav"
-                          ) == -1
-                            ? "0"
-                            : "0"
-                        }
-                        max={
-                          templateCopy[templateIndex].templateName.indexOf(
-                            "Topnav"
-                          ) == -1
-                            ? "2"
-                            : "4"
-                        }
-                        step="1"
-                        value={
-                          NAVMAPINVERSE[templateCopy[templateIndex].topnavsize]
-                        }
-                        onChange={(e) => this.applySize(e, "topnav")}
-                        id="navWidth"
-                      />
-                    </li>
+
                     {templateCopy[templateIndex].layout == "TOP_NAVIGATION" ||
                     templateCopy[templateIndex].submenuConfig == "TNS" ? (
                       <>

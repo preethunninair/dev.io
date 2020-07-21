@@ -149,14 +149,12 @@ function Sidebar(props) {
           data-linktemplate={templateConfig.sidenavlinktemplate}
           data-template={templateConfig.template}
         >
-          <div className="sidebar-wrapper">
-            <ul
-              className={`nav page-nav ${
-                templateConfig.sidenavMenuAlignCenter !== "FALSE"
-                  ? "center"
-                  : ""
-              }`}
-            >
+          <div
+            className={`sidebar-wrapper ${
+              templateConfig.sidenavMenuAlignCenter !== "FALSE" ? "center" : ""
+            }`}
+          >
+            <ul className="nav page-nav w-100">
               {generateMenuItems()}
               {props.menuItems}
             </ul>

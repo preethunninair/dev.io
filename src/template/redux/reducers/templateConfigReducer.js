@@ -20,7 +20,7 @@ export default function templateConfigReducer(
       sidenavBgColor: "#1e1e2f",
       sidenavlinktemplate: "SLT2",
       topnavlinktemplate: "LT1_NOICON",
-      topnavsize: "M",
+      topnavsize: "XS",
       sidenavsize: "XXXL",
       appBgColor: "#f2f2f2",
       topnavSecondaryBgColor: "NA",
@@ -32,6 +32,7 @@ export default function templateConfigReducer(
       logoOnNav: "FALSE",
       sidenavOnly: "FALSE",
       logowidthsize: "XXXL",
+      logoheightsize: "XS",
     },
   },
   action

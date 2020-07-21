@@ -1,21 +1,10 @@
-.appcontainer:not([data-topnavsize$="S"]) .app-brand:not([data-grid="S2"]) .brand-img{
-    padding:15px;
-}
-
- .brand-img{
-    padding:15px;
+.brand-img{
+    padding:10px 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-.app-brand[data-grid="S0"] .brand-img{
-    padding:22px;
     justify-content: flex-start;
 }
-.app-brand[data-grid="S0"] .brand-img img{
-    width: unset;
-    padding: unset;
-}
+
 
 .brand-img[data-theme="dark"]{
     color:white;

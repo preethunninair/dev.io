@@ -522,17 +522,17 @@ padding-left: 5px;
     color: black;
   }
 
-  .navbar[data-theme="light"] .navbar-nav li a > span,
-  .navbar[data-theme="light"] .navbar-nav li a > i {
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item) > span,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item) > i {
     color: rgba(0, 0, 0, 0.8);
   }
 
-  .navbar[data-theme="light"] .navbar-nav li a.active > span,
-  .navbar[data-theme="light"] .navbar-nav li a.active > i,
-  .navbar[data-theme="light"] .navbar-nav li a:focus > span,
-  .navbar[data-theme="light"] .navbar-nav li a:focus > i,
-  .navbar[data-theme="light"] .navbar-nav li a:hover > span,
-  .navbar[data-theme="light"] .navbar-nav li a:hover > i {
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item).active > span,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item).active > i,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item):focus > span,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item):focus > i,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item):hover > span,
+  .navbar[data-theme="light"] .navbar-nav li a:not(.dropdown-item):hover > i {
     color: black;
   }
 
@@ -549,17 +549,17 @@ padding-left: 5px;
     color: white;
   }
 
-  .navbar[data-theme="dark"] .navbar-nav li a > span,
-  .navbar[data-theme="dark"] .navbar-nav li a > i {
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item) > span,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item) > i {
     color: rgba(255, 255, 255, 0.8);
   }
 
-  .navbar[data-theme="dark"] .navbar-nav li a.active > span,
-  .navbar[data-theme="dark"] .navbar-nav li a.active > i,
-  .navbar[data-theme="dark"] .navbar-nav li a:focus > span,
-  .navbar[data-theme="dark"] .navbar-nav li a:focus > i,
-  .navbar[data-theme="dark"] .navbar-nav li a:hover > span,
-  .navbar[data-theme="dark"] .navbar-nav li a:hover > i {
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item).active > span,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item).active > i,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item):focus > span,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item):focus > i,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item):hover > span,
+  .navbar[data-theme="dark"] .navbar-nav li a:not(.dropdown-item):hover > i {
     color: #ffffff;
   }
 
@@ -700,54 +700,122 @@ padding-left: 15px !important;
   }
 
   /*.............Link Template 2 .................*/
-
+  .app-container[data-topnavsize*="XS"] .navbar
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  .app-container .navbar
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+    padding: 0.7rem 1rem;
+}
+  .app-container[data-topnavsize$="L"] .navbar
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+  padding: 1rem
+}
   .navbar[data-linktemplate^="LT2"]
     .navbar-collapse 
     .navbar-nav.page-nav
     .nav-link {
     border-radius: 4px;
 
-    padding: 0.5rem 0.6rem;
+    /* padding: 0.5rem 0.6rem; */
   }
 
   
   /*............. .................*/
 
   /*.............Link Template 3 .................*/
+  .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    justify-content: space-evenly;
+  }
 
-   
-  
-  .app-container[data-topnavsize="XS"] .navbar[data-linktemplate^="LT3"]
+  .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav li{
+    padding:0px 0.5px;
+  }
+  .app-container[data-topnavsize="XXXS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 50px;
   }
 
-  .app-container[data-topnavsize="S"] .navbar[data-linktemplate^="LT3"]
+  .app-container[data-topnavsize="XXS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 60px;
   }
 
-  .app-container[data-topnavsize="M"] .navbar[data-linktemplate^="LT3"]
+  .app-container[data-topnavsize="XS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 70px;
   }
-
-
-  
-
-
-  .app-container:not([data-grid="N0"]) .navbar
+  .app-container[data-topnavsize="S"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
-    padding: 0.4rem 1rem;
+    height: 85px;
   }
+
+  .app-container[data-topnavsize="M"] .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 95px;
+  }
+
+  .app-container[data-topnavsize="L"] .navbar[data-linktemplate^="LT3"]
+    .navbar-collapse
+    .navbar-nav.page-nav
+    .nav-link {
+    height: 105px;
+  }
+  .app-container[data-topnavsize="XL"] .navbar[data-linktemplate^="LT3"]
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+  height: 115px;
+}
+
+.app-container[data-topnavsize="XXL"] .navbar[data-linktemplate^="LT3"]
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+  height: 125px;
+}
+
+.app-container[data-topnavsize="XXXL"] .navbar[data-linktemplate^="LT3"]
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+  height: 135px;
+}
+
+.app-container[data-topnavsize="XXXXL"] .navbar[data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+height: 145px;
+}
+.app-container[data-topnavsize$="L"] .navbar[data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+min-width: 100px;
+}
 
   .app-container[data-grid="N1"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
@@ -757,30 +825,6 @@ padding-left: 15px !important;
     }
     
 
-  .app-container[data-topnavsize="M"][data-grid="N0"]
-    .navbar[data-linktemplate^="LT3"]
-    .navbar-collapse
-    .navbar-nav.page-nav
-    .nav-link {
-    height: 70px;
-    min-width: 100px;
-  }
-  .app-container[data-topnavsize="L"][data-grid="N0"]
-    .navbar[data-linktemplate^="LT3"]
-    .navbar-collapse
-    .navbar-nav.page-nav
-    .nav-link {
-    height: 90px;
-    min-width: 100px;
-  }
-  .app-container[data-topnavsize="XL"][data-grid="N0"]
-    .navbar[data-linktemplate^="LT3"]
-    .navbar-collapse
-    .navbar-nav.page-nav
-    .nav-link {
-    height: 120px;
-    min-width: 110px;
-  }
 
   /*............. .................*/
 }
