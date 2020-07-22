@@ -89,6 +89,7 @@ function Topbar(props) {
           data-template={templateConfig.template}
           data-rounded={templateConfig.rounded}
           data-linktemplate={templateConfig.topnavlinktemplate}
+          data-secondarynavsize={templateConfig.secondarynavsize}
           style={{ background: templateConfig.topnavBgColor }}
         >
           <div className="container-fluid px-0">

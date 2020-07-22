@@ -622,7 +622,6 @@ padding-left: 5px;
     background: #02020229;
     width: 100%;
     z-index: 1;
-    height: 40px;
     align-items: center;
     padding: 5px 0px 5px 0px;
   }
@@ -632,9 +631,9 @@ padding-left: 15px !important;
   
   
   .navbar[data-template="N1"] .navbar-nav:not(.page-nav) {
-    height: 100%;
     align-items: center;
     padding-right: 10px;
+    flex: 1;
   }
 
   .navbar[data-template="N1"] .navbar-brand {
@@ -650,6 +649,19 @@ padding-left: 15px !important;
   }
   .navbar[data-template="N1"] .navbar-collapse .navbar-nav.page-nav .nav-item:nth-of-type(1){
     padding-left: 0px !important;
+  }
+
+  .navbar[data-template="N1"][data-secondarynavsize="S"] .navbar-nav.page-nav{
+    height: 40px;
+  }
+  .navbar[data-template="N1"][data-secondarynavsize="M"] .navbar-nav.page-nav{
+    height: 50px;
+  }
+  .navbar[data-template="N1"][data-secondarynavsize="L"] .navbar-nav.page-nav{
+    height: 60px;
+  }
+  .navbar[data-template="N1"][data-secondarynavsize="XL"] .navbar-nav.page-nav{
+    height: 70px;
   }
   /*..............................*/
   .navbar[data-linktemplate*="ICON"]
@@ -699,32 +711,59 @@ padding-left: 15px !important;
     display: none;
   }
 
-  /*.............Link Template 2 .................*/
-  .app-container[data-topnavsize*="XS"] .navbar
+  /*.............Link Template 1 .................*/
+  .app-container[data-grid="N1"] .navbar[data-secondarynavsize="S"]
+  .navbar-collapse
+  .navbar-nav.page-nav
+  .nav-link {
+    padding: 0.4rem 1rem;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="M"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+  padding: 0.55rem 1rem;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="L"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+  padding: 0.7rem 1rem;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="XL"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+  padding: 1rem;
+}
+
+  .app-container:not([data-grid="N1"])[data-topnavsize*="XS"] .navbar
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     padding: 0.5rem 1rem;
   }
-  .app-container .navbar
+  .app-container:not([data-grid="N1"]) .navbar
   .navbar-collapse
   .navbar-nav.page-nav
   .nav-link {
     padding: 0.7rem 1rem;
 }
-  .app-container[data-topnavsize$="L"] .navbar
+  .app-container:not([data-grid="N1"])[data-topnavsize$="L"] .navbar
   .navbar-collapse
   .navbar-nav.page-nav
   .nav-link {
   padding: 1rem
 }
+  /*............. .................*/
+
+    /*.............Link Template 2 .................*/
+
   .navbar[data-linktemplate^="LT2"]
     .navbar-collapse 
     .navbar-nav.page-nav
     .nav-link {
     border-radius: 4px;
-
-    /* padding: 0.5rem 0.6rem; */
   }
 
   
@@ -743,87 +782,105 @@ padding-left: 15px !important;
     .navbar-nav.page-nav li{
     padding:0px 0.5px;
   }
-  .app-container[data-topnavsize="XXXS"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="XXXS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 50px;
   }
 
-  .app-container[data-topnavsize="XXS"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="XXS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 60px;
   }
 
-  .app-container[data-topnavsize="XS"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="XS"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 70px;
   }
-  .app-container[data-topnavsize="S"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="S"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 85px;
   }
 
-  .app-container[data-topnavsize="M"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="M"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 95px;
   }
 
-  .app-container[data-topnavsize="L"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="L"] .navbar[data-linktemplate^="LT3"]
     .navbar-collapse
     .navbar-nav.page-nav
     .nav-link {
     height: 105px;
   }
-  .app-container[data-topnavsize="XL"] .navbar[data-linktemplate^="LT3"]
+  .app-container:not([data-grid="N1"])[data-topnavsize="XL"] .navbar[data-linktemplate^="LT3"]
   .navbar-collapse
   .navbar-nav.page-nav
   .nav-link {
   height: 115px;
 }
 
-.app-container[data-topnavsize="XXL"] .navbar[data-linktemplate^="LT3"]
+.app-container:not([data-grid="N1"])[data-topnavsize="XXL"] .navbar[data-linktemplate^="LT3"]
   .navbar-collapse
   .navbar-nav.page-nav
   .nav-link {
   height: 125px;
 }
 
-.app-container[data-topnavsize="XXXL"] .navbar[data-linktemplate^="LT3"]
+.app-container:not([data-grid="N1"])[data-topnavsize="XXXL"] .navbar[data-linktemplate^="LT3"]
   .navbar-collapse
   .navbar-nav.page-nav
   .nav-link {
   height: 135px;
 }
 
-.app-container[data-topnavsize="XXXXL"] .navbar[data-linktemplate^="LT3"]
+.app-container:not([data-grid="N1"])[data-topnavsize="XXXXL"] .navbar[data-linktemplate^="LT3"]
 .navbar-collapse
 .navbar-nav.page-nav
 .nav-link {
 height: 145px;
 }
-.app-container[data-topnavsize$="L"] .navbar[data-linktemplate^="LT3"]
+
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="S"][data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+height: 40px;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="M"][data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+height: 50px;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="L"][data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+height: 60px;
+}
+.app-container[data-grid="N1"] .navbar[data-secondarynavsize="XL"][data-linktemplate^="LT3"]
+.navbar-collapse
+.navbar-nav.page-nav
+.nav-link {
+height: 70px;
+}
+
+.app-container:not([data-grid="N1"])[data-topnavsize$="L"] .navbar[data-linktemplate^="LT3"]
 .navbar-collapse
 .navbar-nav.page-nav
 .nav-link {
 min-width: 100px;
 }
-
-  .app-container[data-grid="N1"] .navbar[data-linktemplate^="LT3"]
-    .navbar-collapse
-    .navbar-nav.page-nav
-    .nav-link {
-      height: 40px;
-    }
-    
 
 
   /*............. .................*/

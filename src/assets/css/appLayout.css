@@ -259,38 +259,14 @@ body,
   grid-row-start:row-11;
 }
 
-/* 
-.app-container[data-topnavsize="S"] {
-  grid-template-rows: 60px auto;
-}
-.app-container[data-topnavsize="XS"] {
-  grid-template-rows: 50px auto;
-}
-.app-container[data-topnavsize="M"] {
-  grid-template-rows: 70px auto;
-}
-.app-container[data-grid="N1"][data-topnavsize="M"] {
-  grid-template-rows: 90px auto;
-}
 
-.app-container[data-topnavsize="L"] {
-  grid-template-rows: 90px auto;
-}
-.app-container[data-grid="N1"][data-topnavsize="L"] {
-  grid-template-rows: 100px auto;
-}
-.app-container[data-topnavsize="XL"] {
-  grid-template-rows: 120px auto;
-} */
+
 .app-container[data-topnavsize="XL"] .navbar[data-template="N1"] .navbar-nav.page-nav
 {
 padding:10px 0px 10px 0px;
 height:50px;
 }
-.app-container[data-topnavsize="XL"][data-grid="N1"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link
-{
-height:50px;
-}
+
 .app-container[data-logoonnav="TRUE"][data-topnavsize="XL"] .app-brand{
   height: calc(100% - 50px);
 }

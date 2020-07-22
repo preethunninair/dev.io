@@ -30,6 +30,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "XXXL",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Sidenav : (S-LN)",
@@ -63,6 +64,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "S",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
 
   {
@@ -97,6 +99,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "L",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Sidenav : (P)(S-L-N)",
@@ -130,6 +133,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "XS",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Sidenav : (P)(SL-N)",
@@ -163,6 +167,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "XXXL",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
 
   {
@@ -196,6 +201,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "S",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Sidenav Compact Floating : (P)(S-LN)",
@@ -228,6 +234,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "M",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Sidenav Compact Floating : (P)(S-L-N)",
@@ -260,6 +267,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "L",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
 
   //topnavigation
@@ -294,6 +302,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "M",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Topnav Standard Padded",
@@ -326,6 +335,7 @@ export const TEMPLATES = [
     sidenavOnly: "FALSE",
     logowidthsize: "M",
     logoheightsize: "XS",
+    secondarynavsize: "NA",
   },
   {
     templateName: "Topnav Stacked",
@@ -346,7 +356,7 @@ export const TEMPLATES = [
     sidenavBgColor: "#1e1e2f",
     sidenavlinktemplate: "SLT1",
     topnavlinktemplate: "LT1_NOICON",
-    topnavsize: "XS",
+    topnavsize: "S",
     sidenavsize: "NA",
     appBgColor: "#f2f2f2",
     topnavSecondaryBgColor: "#02020229",
@@ -358,7 +368,8 @@ export const TEMPLATES = [
     logoOnNav: "FALSE",
     sidenavOnly: "FALSE",
     logowidthsize: "M",
-    logoheightsize: "XS",
+    logoheightsize: "S",
+    secondarynavsize: "S",
   },
   {
     templateName: "Topnav Stacked LN",
@@ -379,7 +390,7 @@ export const TEMPLATES = [
     sidenavBgColor: "#1e1e2f",
     sidenavlinktemplate: "SLT1",
     topnavlinktemplate: "LT1_NOICON",
-    topnavsize: "XS",
+    topnavsize: "L",
     sidenavsize: "NA",
     appBgColor: "#f2f2f2",
     topnavSecondaryBgColor: "#02020229",
@@ -391,6 +402,7 @@ export const TEMPLATES = [
     logoOnNav: "TRUE",
     sidenavOnly: "FALSE",
     logowidthsize: "M",
-    logoheightsize: "XS",
+    logoheightsize: "L",
+    secondarynavsize: "S",
   },
 ];

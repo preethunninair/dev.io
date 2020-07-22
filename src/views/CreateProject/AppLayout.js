@@ -22,8 +22,8 @@ import { TEMPLATES } from "../../variables/template_file";
 import ColorPicker from "../../components/ColorPicker";
 import { connect } from "react-redux";
 import { updateSelectedTemplate } from "../../redux/actions/createProjectActions";
-const NAVMAP = { "0": "XS", "1": "S", "2": "M", "3": "L", "4": "XL" };
-const NAVMAPINVERSE = { XS: 0, S: 1, M: 2, L: 3, XL: 4 };
+const SECONDARYSIZE = { "0": "S", "1": "M", "2": "L", "3": "XL" };
+const SECONDARYSIZEINVERSE = { S: 0, M: 1, L: 2, XL: 3 };
 const SIDENAVGRIDMAP = {
   XXXS: "S2",
   XXS: "S2",
@@ -284,12 +284,12 @@ class AppLayout extends React.Component {
   };
   applySize = (e, elem) => {
     const temp = [...this.state.templateCopy];
-    if (elem === "topnav") {
+    if (elem === "topnav" || elem === "logowidth" || elem === "logoheight") {
       temp[this.state.templateIndex][`${elem}size`] =
         LOGOSIZEMAP[`${e.target.value}`];
-    } else if (elem === "logowidth" || elem === "logoheight") {
-      temp[this.state.templateIndex][`${elem}size`] =
-        LOGOSIZEMAP[`${e.target.value}`];
+    } else if (elem == "secondarynav") {
+      temp[this.state.templateIndex].secondarynavsize =
+        SECONDARYSIZE[`${e.target.value}`];
     } else {
       temp[this.state.templateIndex][`${elem}size`] =
         SIDENAVSIZEMAP[`${e.target.value}`];
@@ -445,7 +445,11 @@ class AppLayout extends React.Component {
                       <input
                         type="range"
                         className="custom-range"
-                        min="0"
+                        min={
+                          templateCopy[templateIndex].gridConfig != "N1"
+                            ? "0"
+                            : "3"
+                        }
                         max="9"
                         step="1"
                         value={
@@ -464,7 +468,11 @@ class AppLayout extends React.Component {
                       <input
                         type="range"
                         className="custom-range"
-                        min="0"
+                        min={
+                          templateCopy[templateIndex].gridConfig != "N1"
+                            ? "0"
+                            : "3"
+                        }
                         max="9"
                         step="1"
                         value={
@@ -474,6 +482,30 @@ class AppLayout extends React.Component {
                         id="navWidth"
                       />
                     </li>
+                    {templateCopy[templateIndex].gridConfig == "N1" ? (
+                      <li>
+                        <label
+                          className="text-white"
+                          htmlFor="secondarynavsize"
+                        >
+                          Topnav Sub Height
+                        </label>
+                        <input
+                          type="range"
+                          className="custom-range"
+                          min="0"
+                          max="3"
+                          step="1"
+                          value={
+                            SECONDARYSIZEINVERSE[
+                              templateCopy[templateIndex].secondarynavsize
+                            ]
+                          }
+                          onChange={(e) => this.applySize(e, "secondarynav")}
+                          id="secondarynavsize"
+                        />
+                      </li>
+                    ) : null}
                     {templateCopy[templateIndex].layout.indexOf("SIDE") > -1 ? (
                       <li>
                         <label className="text-white" htmlFor="sidWidth">
