@@ -48,14 +48,13 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   };
 
-  doLogin = (e) => {
+  doLogin = () => {
     this.props.dispatch(
       loginUser({
         login: this.state.login,
         password: this.state.password,
       })
     );
-    e.preventDefault();
   };
 
   render() {
@@ -98,6 +97,7 @@ class Login extends React.Component {
                       onChange={this.changeLogin}
                       type="text"
                       required
+                      text="Username"
                       name="username"
                       label="Username"
                       placeholder="Username"
@@ -105,6 +105,7 @@ class Login extends React.Component {
 
                     <Input
                       className="no-border mt-2"
+                      text="Password"
                       value={this.state.password}
                       onChange={this.changePassword}
                       type="password"
@@ -115,7 +116,13 @@ class Login extends React.Component {
                     />
                   </FormGroup>
 
-                  <Button color="success" size="sm" type="submit">
+                  <Button
+                    className="w-100 mt-5"
+                    color="success"
+                    size="sm"
+                    type="submit"
+                    onClick={() => this.doLogin()}
+                  >
                     {this.props.isFetching ? "Loading..." : "Login"}
                   </Button>
                 </Form>

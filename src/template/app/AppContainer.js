@@ -29,14 +29,6 @@ class AppContainer extends React.PureComponent {
             <h4 class="m-0">
               [_x<span class="text-danger">Lab]</span>
             </h4>
-            /*<img
-            src={
-              !tinycolor(this.props.templateConfig.logoBgColor).isDark()
-                ? logo_black
-                : logo_white
-            }
-            alt="react-logo"
-          />*/
           }
         />
         <Topbar

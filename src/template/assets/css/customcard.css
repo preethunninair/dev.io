@@ -57,9 +57,10 @@
 }
 .card.card-white {
   background: #ffffff;
+  color: black;
 }
 .card.card-white .card-title {
-  color: #222a42;
+  color: black;
 }
 .card.card-white .card-category,
 .card.card-white .stats {

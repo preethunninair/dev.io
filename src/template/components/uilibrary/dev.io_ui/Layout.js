@@ -13,6 +13,7 @@ function Layout(props) {
       }`}
       style={{ background: templateConfig.appBgColor }}
       data-contained={templateConfig.contained}
+      data-codespace="TRUE"
       data-appmode={
         tinycolor(
           templateConfig.contained === "TRUE"

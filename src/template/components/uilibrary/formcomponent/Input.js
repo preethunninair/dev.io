@@ -450,7 +450,7 @@ export default class Input extends React.Component {
     }
     const inpID = this.props.id
       ? this.props.id
-      : `${this.props.name.replace(/\s/g, "").toLowerCase()}${Math.random()}`;
+      : `${this.props.name.replace(/\s/g, "").toLowerCase()}`;
     return (
       <div className={inputGroupClasses + " " + this.state.theme}>
         <label className="input_label" htmlFor={inpID}>

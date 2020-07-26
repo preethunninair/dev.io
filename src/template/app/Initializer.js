@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { MENUDATA } from "../../variables/mockdata";
+import MENUDATA from "../dev.io_config/route.json";
 class Initializer extends React.PureComponent {
   constructor(props) {
     super(props);

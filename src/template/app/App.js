@@ -1,5 +1,10 @@
 import React from "react";
-import { Route, Switch, Redirect, Router } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  HashRouter as Router,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { createHashHistory } from "history";
 import AppContainer from "./AppContainer";
@@ -21,7 +26,9 @@ const PrivateRoute = ({ dispatch, bypass, component, ...rest }) => {
       // eslint-disable-line
       <Route
         {...rest}
-        render={(props) => React.createElement(component, props)}
+        render={(props) =>
+          React.createElement(component, { ...props, baseURL: "/app" })
+        }
       />
     );
   }
@@ -40,7 +47,6 @@ class App extends React.Component {
             dispatch={this.props.dispatch}
             path="/app"
             bypass={true}
-            exact
             component={AppContainer}
           />
         </Switch>
