@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonGroup, Button } from "reactstrap";
+import { ButtonGroup, Button, Row } from "reactstrap";
 import Icon from "../components/uilibrary/Icon";
 import AppLayout from "./CreateProject/AppLayout";
 import Routes from "./CreateProject/Routes";
@@ -7,9 +7,11 @@ import GenerateProject from "./CreateProject/GenerateProject";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../library/axiosInstance";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import xlabcreate from "../assets/img/xlabcreate.gif";
 const mapState = (state) => ({
-  config: state.templateConfig.templateConfig,
-  route: state.templateConfig.route,
+  config: state.templateConfig.config,
+  route: state.routerReducer.routes,
 });
 class CreateProject extends React.PureComponent {
   constructor(props) {
@@ -20,45 +22,39 @@ class CreateProject extends React.PureComponent {
     this.state = {
       appMode: "",
       wizardIndex: 0,
-      generateStatus: [],
+      generateStatus: "",
+      showGenerateModel: false,
     };
   }
 
   statusCode(status) {
     switch (status) {
       case 0:
-        this.setState((prevState) => ({
-          generateStatus: [...prevState.generateStatus, "Generating Project"],
-        }));
+        this.setState({
+          generateStatus: "Generating Project",
+        });
+        break;
+      case 3:
+        this.setState({
+          generateStatus: "Project Created Successfully !",
+        });
         break;
       case 1:
-        this.setState((prevState) => ({
-          generateStatus: [
-            ...prevState.generateStatus,
-            "Project Created Successfully !",
-          ],
-        }));
+        this.setState({
+          generateStatus: "Applying configuration",
+        });
 
         break;
       case 2:
-        this.setState((prevState) => ({
-          generateStatus: [
-            ...prevState.generateStatus,
-            "Applying configuration",
-          ],
-        }));
-
-        break;
-      case 3:
-        this.setState((prevState) => ({
-          generateStatus: [...prevState.generateStatus, "Creating Routes"],
-        }));
+        this.setState({
+          generateStatus: "Creating Routes",
+        });
 
         break;
       case 4:
-        this.setState((prevState) => ({
-          generateStatus: [...prevState.generateStatus, "Done"],
-        }));
+        this.setState({
+          generateStatus: "Done",
+        });
 
         break;
     }
@@ -69,6 +65,11 @@ class CreateProject extends React.PureComponent {
       : "dark";
     this.setAppMode(appMode);
   }
+  toggleGenerateProject = () => {
+    this.setState((prevState) => ({
+      showGenerateModel: !prevState.showGenerateModel,
+    }));
+  };
   generateProject() {
     this.statusCode(0);
     axios
@@ -210,12 +211,9 @@ class CreateProject extends React.PureComponent {
             <AppLayout wizardIndex={wizardIndex} />
 
             <Routes wizardIndex={wizardIndex} />
-            <GenerateProject
-              msg={this.state.generateStatus}
-              wizardIndex={wizardIndex}
-            />
+
             <div className="editor-footer center" style={{ height: "50px" }}>
-              <ButtonGroup className="ml-auto">
+              <ButtonGroup>
                 <Button
                   color="primary"
                   disabled={wizardIndex == 0}
@@ -225,22 +223,60 @@ class CreateProject extends React.PureComponent {
                 </Button>
                 <Button
                   color="primary"
-                  disabled={wizardIndex == 2}
-                  onClick={() => this.wizardView(1)}
+                  onClick={() => {
+                    if (wizardIndex == 1) {
+                      this.generateProject();
+                      this.toggleGenerateProject();
+                    } else {
+                      this.wizardView(1);
+                    }
+                  }}
                 >
-                  Next
+                  {wizardIndex == 1 ? "Generate" : "Next"}
                 </Button>
               </ButtonGroup>
-              <Button
-                color="success"
-                disabled={wizardIndex != 2}
-                onClick={this.generateProject}
-                className="ml-auto mr-3"
-              >
-                Generate
-              </Button>
             </div>
           </div>
+          <Modal
+            isOpen={this.state.showGenerateModel}
+            toggle={this.toggleGenerateProject}
+          >
+            <ModalHeader>
+              <div
+                className="brand-img pl-0 center text-center h-100"
+                data-theme={"transparent"}
+                style={{ fontSize: "22px" }}
+              >
+                [ _x
+                <span style={{ color: "red" }}>Lab ]</span>
+              </div>
+            </ModalHeader>
+            <ModalBody>
+              <Row className="center">
+                <img src={xlabcreate} height="150" />
+              </Row>
+              <Row className="center" style={{ marginTop: "50px" }}>
+                <h3 className="text-dark">
+                  {this.state.generateStatus == "Done"
+                    ? "Project Created Successfully !"
+                    : this.state.generateStatus}
+                </h3>
+              </Row>
+            </ModalBody>
+            <ModalFooter>
+              {this.state.generateStatus == "Done" ? (
+                <Button
+                  color="success"
+                  className="w-100"
+                  onClick={this.toggleGenerateProject}
+                  size="lg"
+                  block
+                >
+                  Done
+                </Button>
+              ) : null}
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     );

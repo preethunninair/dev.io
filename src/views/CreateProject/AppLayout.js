@@ -103,8 +103,8 @@ const SHT = [
 ];
 
 const SMP = [
-  { value: "SNS", label: "Sidebar Sidemenu" },
-  { value: "SNB", label: "Sidebar Submenu" },
+  { value: "DSM", label: "Drop Menu" },
+  { value: "SSM", label: "Sidebar Submenu" },
   { value: "TNS", label: "Topnav Menu" },
 ];
 const THT = [
@@ -197,7 +197,7 @@ class AppLayout extends React.Component {
     const temp = [...this.state.templateCopy];
     temp[this.state.templateIndex].searchbarConfig = e.value;
     if (e.value.placement == "LEFT") {
-      temp[this.state.templateIndex].submenuConfig = "SNS";
+      temp[this.state.templateIndex].submenuConfig = "DSM";
     }
     this.setState({ templateCopy: temp });
   };
@@ -277,7 +277,7 @@ class AppLayout extends React.Component {
       temp[this.state.templateIndex][attr] = "FALSE";
     }
     if (attr === "sidenavOnly") {
-      temp[this.state.templateIndex].submenuConfig = "SNS";
+      temp[this.state.templateIndex].submenuConfig = "DSM";
     }
 
     this.setState({ templateCopy: temp });
@@ -678,6 +678,10 @@ class AppLayout extends React.Component {
                     options={
                       templateCopy[templateIndex].sidenavOnly === "TRUE"
                         ? SMP.filter((item) => item.value !== "TNS")
+                        : templateCopy[templateIndex].layout == "TOP_NAVIGATION"
+                        ? SMP.filter(
+                            (item) => item.value !== "SSM" && item !== "TNS"
+                          )
                         : SMP
                     }
                   />

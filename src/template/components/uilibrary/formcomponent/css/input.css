@@ -10,7 +10,7 @@
 .wrapper[data-appmode="light"] .custom-inp-container .bar{
   background:rgba(0, 0, 0, 0.54);
 }
-.card.card-white .input_group.input_unfocused.input_hasValue.input_valid label.input_label{
+.wrapper[data-appmode="light"] .input_group.input_unfocused.input_hasValue.input_valid label.input_label{
   color: rgba(0,0,0,0.55);
 }
 

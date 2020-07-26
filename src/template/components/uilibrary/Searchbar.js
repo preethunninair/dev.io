@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Icon from "./Icon";
 
 function Searchbar(props) {
   const [modalSearch, setModalSearch] = useState(false);
@@ -7,37 +8,41 @@ function Searchbar(props) {
     return (
       <>
         <div className="search-bar input-group">
-          <button
-            class="btn btn-link"
+          <div
+            className="p-0 m-0"
             data-target="#searchModal"
             data-toggle="modal"
             id="search-button"
-            onClick={() => setModalSearch(true)}
           >
-            <i className="tim-icons icon-zoom-split" />
+            <Icon
+              className="mt-2"
+              iconObj={{
+                family: "material-icon",
+                name: "search",
+              }}
+            />
             <span className="d-lg-none d-md-block">Search</span>
-          </button>
+          </div>
         </div>
         <div
-          class={`modal modal-search fade ${modalSearch ? "show" : ""}`}
+          className={`modal modal-search fade ${modalSearch ? "show" : ""}`}
           role="dialog"
           style={modalSearch ? { display: "block" } : { display: "none" }}
         >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
               <div className="modal-header">
                 <input
                   id="inlineFormInputGroup"
                   placeholder="SEARCH"
                   type="text"
-                  class="form-control"
+                  className="form-control"
                 />
                 <button
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
                   type="button"
-                  onClick={() => setModalSearch(false)}
                 >
                   <i className="tim-icons icon-simple-remove" />
                 </button>
@@ -49,15 +54,15 @@ function Searchbar(props) {
     );
   }
   return (
-    <div class="input-group" style={{ width: props.config.width }}>
+    <div className="input-group" style={{ width: props.config.width }}>
       <input
         type="text"
-        class="form-control"
+        className="form-control"
         placeholder="Username"
         aria-label="Username"
       />
-      <div class="input-group-append">
-        <span class="input-group-text">
+      <div className="input-group-append">
+        <span className="input-group-text">
           <i className="tim-icons icon-zoom-split" />
         </span>
       </div>

@@ -37,7 +37,7 @@ export const TEMPLATES = [
 
     logoTheme: "dark",
     layout: "SIDE_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S1",
     rounded: "FALSE",
@@ -72,7 +72,7 @@ export const TEMPLATES = [
 
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S1",
     rounded: "S_LN",
@@ -106,7 +106,7 @@ export const TEMPLATES = [
 
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S2",
     rounded: "SLN",
@@ -140,7 +140,7 @@ export const TEMPLATES = [
 
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S0",
     rounded: "SL_N",
@@ -176,7 +176,7 @@ export const TEMPLATES = [
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
     floatingMenu: "SIDENAV",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S2",
     rounded: "FALSE",
@@ -209,7 +209,7 @@ export const TEMPLATES = [
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
     floatingMenu: "SIDENAV",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S2",
     rounded: "S_LN",
@@ -242,7 +242,7 @@ export const TEMPLATES = [
     logoTheme: "light",
     layout: "SIDE_NAVIGATION",
     floatingMenu: "SIDENAV",
-    submenuConfig: "SNS",
+    submenuConfig: "DSM",
 
     gridConfig: "S2",
     rounded: "FALSE",
@@ -275,7 +275,7 @@ export const TEMPLATES = [
     templateName: "Topnav Standard",
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "TNS",
+    submenuConfig: "DSM",
 
     gridConfig: "N0",
     rounded: "FALSE",
@@ -308,7 +308,7 @@ export const TEMPLATES = [
     templateName: "Topnav Standard Padded",
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "TNS",
+    submenuConfig: "DSM",
 
     gridConfig: "N0",
     rounded: "S_LN",
@@ -342,7 +342,7 @@ export const TEMPLATES = [
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "TNS",
+    submenuConfig: "DSM",
 
     gridConfig: "N1",
     rounded: "FALSE",
@@ -376,7 +376,7 @@ export const TEMPLATES = [
 
     logoTheme: "dark",
     layout: "TOP_NAVIGATION",
-    submenuConfig: "TNS",
+    submenuConfig: "DSM",
 
     gridConfig: "N1",
     rounded: "FALSE",

@@ -11,31 +11,7 @@ class TemplateView extends React.Component {
         payload: this.props.config,
       });
     }
-    // if (prevProps.config.templateName != this.props.config.templateName) {
-    //   this.initializeDropdownEventHandler();
-    // } else if (
-    //   prevProps.config.submenuConfig != this.props.config.submenuConfig
-    // ) {
-    //   this.initializeDropdownEventHandler();
-    // } else if (prevProps.config.sidenavOnly != this.props.config.sidenavOnly) {
-    //   this.initializeDropdownEventHandler();
-    // }
   }
-
-  // initializeDropdownEventHandler() {
-  //   let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-  //   dropdowns.forEach((elem, i) => {
-  //     elem.addEventListener("click", function (e) {
-  //       var current = document.querySelectorAll(".dropdown-menu.show");
-  //       if (current.length > 0) {
-  //         current[0].className = current[0].className.replace(" show", "");
-  //       }
-  //       if (e.currentTarget.nextSibling != null) {
-  //         e.currentTarget.nextSibling.className += " show";
-  //       }
-  //     });
-  //   });
-  // }
 
   render() {
     if (this.props.config === undefined) {
@@ -59,8 +35,8 @@ class TemplateView extends React.Component {
     let topnavLinkColorStyling = "";
     let sidenavLinkTextColorStyling = "";
     if (topnavLinkTextColor !== undefined) {
-      topnavLinkColorStyling += `.layout-editor .navbar .navbar-nav.page-nav li a > span,
-   .layout-editor .navbar .navbar-nav.page-nav li a > i {
+      topnavLinkColorStyling += `.layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item) > span,
+   .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item) > i {
      color: ${topnavLinkTextColor};
    }`;
     }
@@ -73,22 +49,26 @@ class TemplateView extends React.Component {
         }`;
     }
     if (topnavActiveLinkTextColor !== undefined) {
-      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a.active > span, .layout-editor .navbar .navbar-nav.page-nav li a.active > i,
-      .layout-editor .navbar .navbar-nav.page-nav li a:hover > span, .layout-editor .navbar .navbar-nav.page-nav li a:hover > i{
+      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item).active > span,
+       .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item).active > i,
+       .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):focus > span,
+       .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):focus > i
+      .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):hover > span,
+       .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):hover > i{
           color:${topnavActiveLinkTextColor};
         }
         `;
     }
 
     if (topnavActiveLinkIconColor !== undefined) {
-      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a.active > i,
-      .layout-editor .navbar .navbar-nav.page-nav li a:hover > i{
+      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item).active > i,
+      .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):hover > i{
           color:${topnavActiveLinkIconColor};
         }
         `;
     } else if (topnavActiveLinkTextColor !== undefined) {
-      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a.active > i,
-      .layout-editor .navbar .navbar-nav.page-nav li a:hover > i{
+      topnavActiveLinkStyling += `.layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item).active > i,
+      .layout-editor .navbar .navbar-nav.page-nav li a:not(.dropdown-item):hover > i{
           color:${topnavActiveLinkTextColor};
         }
         `;

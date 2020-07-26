@@ -17,60 +17,22 @@ app.use(function (req, res, next) {
 });
 
 app.post("/generateProject", (req, res) => {
-  mochitoBuild.emptyDir(process.cwd() + "/publics/").then(function (response) {
-    mochitoBuild
-      .copyFolder(
-        `${process.cwd()}/dev.io_engine/src`,
-        process.cwd() + "/publics/"
-      )
-      .then(function (response) {
-        mochitoBuild
-          .applyProjectConfig(
-            `${process.cwd()}/publics/dev.io/config.json`,
-            req.body.config
-          )
-          .then(function (response) {
-            mochitoBuild
-              .applyProjectConfig(
-                `${process.cwd()}/publics/dev.io/route.json`,
-                req.body.route
-              )
-              .then(function (response) {
-                res.send("200");
-              });
-          });
-      });
-  });
+  mochitoBuild
+    .applyProjectConfig(
+      `${process.cwd()}/src_model/dev.io_config/config.json`,
+      req.body.config
+    )
+    .then(function (response) {
+      mochitoBuild
+        .applyProjectConfig(
+          `${process.cwd()}/src_model/dev.io_config/route.json`,
+          req.body.route
+        )
+        .then(function (response) {
+          res.send("200");
+        });
+    });
 });
-
-app.post("/build", (req, res) => {
-  mochitoBuild.buildPagesDirectory().then(function (response) {
-    console.log("folder created.");
-    let pages = req.body.page;
-    mochitoBuild.buildProject(pages);
-  });
-
-  res.send("Hello World!");
-});
-
-// app.post("/create", (req, res) => {
-//   let appName = req.body.appName;
-//   let appDir = req.body.appDir;
-//   mochitoBuild
-//     .createProjectDirectory(appName, appDir)
-//     .then(function (response) {
-//       mochitoBuild
-//         .createProject(appName, appDir)
-//         .then(function (response) {
-//           templateEngine.generateIndexHTML(appDir, appName);
-//         })
-//         .catch((err) => {
-//           console.log(err);
-//         });
-//     });
-
-//   res.send("Hello World!");
-// });
 
 app.listen(port, () =>
   console.log("Example app listening on port" + port + "!")

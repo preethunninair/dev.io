@@ -28,7 +28,8 @@ import Input from "../../components/uilibrary/formcomponent/Input";
 import { createRoute } from "../../redux/actions/createProjectActions";
 
 const mapState = (state) => ({
-  selectedConfig: state.templateConfig.templateConfig,
+  selectedConfig: state.templateConfig.config,
+  route: state.routerReducer.routes,
 });
 class Routes extends React.PureComponent {
   constructor(props) {
@@ -37,6 +38,8 @@ class Routes extends React.PureComponent {
       iconName: "",
       routeName: "",
       addSubRouteIndex: -1,
+      editRouteIndex: -1,
+      editSubRouteIndex: -1,
       modalAddRoute: false,
       toggleSubroute: -1,
       routeData: [],
@@ -46,28 +49,20 @@ class Routes extends React.PureComponent {
     this.setFieldValue = this.setFieldValue.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.wizardIndex != this.props.wizardIndex &&
       this.props.wizardIndex == 2
     ) {
-      this.props.dispatch(createRoute(this.state.routeData));
+      // this.setState({})
+      // this.props.dispatch(createRoute(this.state.routeData));
     }
+    if (prevProps.route.length == 0 && this.props.route.length > 0) {
+      this.setState({ routeData: this.props.route });
+    }
+    this.props.dispatch({ type: "SET_ROUTE", payload: this.state.routeData });
   }
 
-  initializeDropdownEventHandler() {
-    let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-    dropdowns.forEach((elem, i) => {
-      elem.addEventListener("click", function (e) {
-        var current = document.querySelectorAll("li.show");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" show", "");
-        }
-        e.target.setAttribute("listener", "true");
-        e.currentTarget.parentNode.className += " show";
-      });
-    });
-  }
   toggleAddRoute() {
     this.setState({
       modalAddRoute: !this.state.modalAddRoute,
@@ -92,15 +87,55 @@ class Routes extends React.PureComponent {
         submenu: [],
         active: false,
       };
-      this.setState(
-        (prevState) => ({
-          routeData: [...prevState.routeData, newRoute],
-        }),
-        () => {
-          this.setState({ iconName: "", routeName: "", addSubRouteIndex: -1 });
-          this.toggleAddRoute();
+      if (this.state.editRouteIndex > -1) {
+        if (this.state.editSubRouteIndex == -1) {
+          let tempRouteData = [...this.state.routeData];
+          newRoute.submenu = tempRouteData[this.state.editRouteIndex].submenu;
+          tempRouteData[this.state.editRouteIndex] = newRoute;
+          this.setState(
+            {
+              routeData: tempRouteData,
+              iconName: "",
+              routeName: "",
+              addSubRouteIndex: -1,
+              editRouteIndex: -1,
+            },
+            () => {
+              this.toggleAddRoute();
+            }
+          );
+        } else {
+          let tempSubRouteData = [...this.state.routeData];
+          tempSubRouteData[this.state.editRouteIndex].submenu[
+            this.state.editSubRouteIndex
+          ] = newRoute;
+          this.setState(
+            {
+              routeData: tempSubRouteData,
+              iconName: "",
+              routeName: "",
+              addSubRouteIndex: -1,
+              editRouteIndex: -1,
+              editSubRouteIndex: -1,
+            },
+            () => {
+              this.toggleAddRoute();
+            }
+          );
         }
-      );
+      } else {
+        this.setState(
+          (prevState) => ({
+            routeData: [...prevState.routeData, newRoute],
+            iconName: "",
+            routeName: "",
+            addSubRouteIndex: -1,
+          }),
+          () => {
+            this.toggleAddRoute();
+          }
+        );
+      }
     } else {
       let submenuData = [...this.state.routeData][this.state.addSubRouteIndex]
         .submenu;
@@ -110,6 +145,7 @@ class Routes extends React.PureComponent {
           title: this.state.routeName,
           icon: { family: "material-icon", name: this.state.iconName },
           module: this.state.routeName,
+          submenu: [],
           path: `${
             this.state.routeData[this.state.addSubRouteIndex].path
           }/${this.state.routeName.replace(/\s/gi, "").toLowerCase()}`,
@@ -125,7 +161,6 @@ class Routes extends React.PureComponent {
         () => {
           this.setState({ iconName: "", routeName: "", addSubRouteIndex: -1 });
           this.toggleAddRoute();
-          this.initializeDropdownEventHandler();
         }
       );
     }
@@ -134,6 +169,33 @@ class Routes extends React.PureComponent {
     this.setState({ addSubRouteIndex: index }, () => {
       this.toggleAddRoute();
     });
+  }
+  editRoute(index) {
+    const editRoute = [...this.state.routeData][index];
+    this.setState(
+      {
+        iconName: editRoute.icon.name,
+        routeName: editRoute.title,
+        editRouteIndex: index,
+      },
+      () => {
+        this.toggleAddRoute();
+      }
+    );
+  }
+  editSubRoute(parentIndex, childIndex) {
+    const editSubRoute = this.state.routeData[parentIndex].submenu[childIndex];
+    this.setState(
+      {
+        iconName: editSubRoute.icon.name,
+        routeName: editSubRoute.title,
+        editRouteIndex: parentIndex,
+        editSubRouteIndex: childIndex,
+      },
+      () => {
+        this.toggleAddRoute();
+      }
+    );
   }
   removeRoute(index) {
     this.setState((prevState) => ({
@@ -153,21 +215,19 @@ class Routes extends React.PureComponent {
   setFieldValue(e) {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   }
-  componentDidMount() {
-    let appContent = document.getElementsByClassName("route-editor");
-    appContent[0].addEventListener("click", function (e) {
-      if (
-        !(e.target.closest("li") != undefined && e.target.closest("li") != null)
-      ) {
-        var current = document.querySelectorAll("li.show");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" show", "");
-        }
-      }
-    });
-
-    this.initializeDropdownEventHandler();
-  }
+  // componentDidMount() {
+  //   let appContent = document.getElementsByClassName("route-editor");
+  //   appContent[0].addEventListener("click", function (e) {
+  //     if (
+  //       !(e.target.closest("li") != undefined && e.target.closest("li") != null)
+  //     ) {
+  //       var current = document.querySelectorAll("li.show");
+  //       if (current.length > 0) {
+  //         current[0].className = current[0].className.replace(" show", "");
+  //       }
+  //     }
+  //   });
+  // }
 
   render() {
     const { selectedConfig } = this.props;
@@ -212,6 +272,14 @@ class Routes extends React.PureComponent {
                             <span className="ml-2">{menuItm.title}</span>
                           </div>
                           <div className="d-flex align-items-center">
+                            <Icon
+                              className="text-info pointer"
+                              onClick={this.editRoute.bind(this, parentIndex)}
+                              iconObj={{
+                                family: "material-icon",
+                                name: "edit",
+                              }}
+                            />
                             <Icon
                               className="text-danger pointer"
                               onClick={this.removeRoute.bind(this, parentIndex)}
@@ -260,6 +328,18 @@ class Routes extends React.PureComponent {
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Icon
+                                    className="text-info pointer"
+                                    onClick={this.editSubRoute.bind(
+                                      this,
+                                      parentIndex,
+                                      childIndex
+                                    )}
+                                    iconObj={{
+                                      family: "material-icon",
+                                      name: "edit",
+                                    }}
+                                  />
+                                  <Icon
                                     className="text-danger pointer"
                                     onClick={this.removeSubRoute.bind(
                                       this,
@@ -286,10 +366,7 @@ class Routes extends React.PureComponent {
           </Card>
         </div>
         <div className="workbench rounded p-3">
-          <TemplateView
-            MENUDATA={this.state.routeData}
-            config={selectedConfig}
-          />
+          <TemplateView config={selectedConfig} />
         </div>
         <Modal isOpen={this.state.modalAddRoute} toggle={this.toggleAddRoute}>
           <ModalHeader toggle={this.toggleAddRoute}>Create Route</ModalHeader>

@@ -4,8 +4,8 @@ import PasswordValidator from "./helpers/PasswordValidator";
 import { isEmpty, isUndefined } from "./helpers/Utility";
 import classNames from "classnames";
 import "./css/input.css";
+import { FORM_CONFIG } from "../../../variables/CONSTANTS";
 
-const FORM_CONFIG = { theme: "boxed fixedLabel", validTick: "d-none" };
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
@@ -422,7 +422,7 @@ export default class Input extends React.Component {
         <PasswordValidator
           ref="passwordValidator"
           visible={this.state.validatorVisible}
-          name={this.props.label}
+          name={this.props.text}
           value={this.state.value}
           validData={this.state.isValidatorValid}
           valid={this.state.allValidatorValid}
@@ -454,7 +454,7 @@ export default class Input extends React.Component {
     return (
       <div className={inputGroupClasses + " " + this.state.theme}>
         <label className="input_label" htmlFor={inpID}>
-          <span className="label_text">{this.props.label}</span>
+          <span className="label_text">{this.props.text}</span>
         </label>
 
         <input

@@ -12,15 +12,23 @@ body,
 
   .app-topnav {
     grid-area: header;
+    grid-column-end: col-end;
+    grid-row-start: row-start;
   }
   .app-sidenav {
     grid-area: menu;
+    grid-row-end: row-end;
   }
   .app-main {
     grid-area: main;
+    grid-column-end: col-end;
+    grid-row-end: row-end;
+
   }
   .app-brand {
     grid-area: brand;
+    grid-row-start: row-start;
+    z-index: 1050;
   }
 
   .app-footer {
@@ -56,44 +64,46 @@ body,
   }
 
   /*..............Layout...........*/
-
   /*..............SIDE_NAVIGATION Layout...........*/
   .app-container[data-layout="SIDE_NAVIGATION"] {
     grid-template-areas:
       "brand header header header header header"
       "menu main main main main main"
       "menu main main main main main";
-    grid-template-rows: 70px auto;
+    grid-template-rows: [row-start] 50px [row-1] 10px [row-2] 10px [row-3] 15px [row-4] 10px [row-5] 10px [row-6] 10px [row-7] 10px [row-8] 10px [row-9] 10px [row-10] auto [row-end];
+    grid-template-columns: [col-start] 60px [col-1] 20px [col-2] 20px [col-3] 20px [col-4] 20px [col-5] 30px [col-6] 30px [col-7] 30px [col-8] 30px [col-9] 30px [col-10] 30px [col-11] auto [col-end];
+
   }
-  .app-container[data-grid="S0"] {
-    grid-template-columns: 260px auto;
-  }
-  .app-container[data-grid="S1"] {
-    grid-template-columns: 140px auto;
-  }
-  .app-container[data-grid="S2"] {
-    grid-template-columns: 90px auto;
-  }
+ 
+
+/*..........................................*/
+  /*...............Sidenav Only..........*/
+.app-container[data-layout="SIDE_NAVIGATION"][data-sidenavonly="TRUE"]{
+  
+  grid-template-areas:
+    "brand main main main main main"
+    "menu main main main main main"
+    "menu main main main main main";
+}
+/*..........................................*/
 
   /*..............TOP_NAVIGATION Layout...........*/
   .app-container[data-layout="TOP_NAVIGATION"] {
     grid-template-areas:
-      "header header header header header header"
+      "brand header header header header header"
       "main main main main main main"
       "main main main main main main";
-    grid-template-columns: 140px auto;
+      grid-template-rows: [row-start] 50px [row-1] 10px [row-2] 10px [row-3] 15px [row-4] 10px [row-5] 10px [row-6] 10px [row-7] 10px [row-8] 10px [row-9] 10px [row-10] auto [row-end];
+
+    grid-template-columns: [col-start] 60px [col-1] 20px [col-2] 20px [col-3] 20px [col-4] 20px [col-5] 30px [col-6] 30px [col-7] 30px [col-8] 30px [col-9] 30px [col-10] 30px [col-11] auto [col-end];
   }
 
-  .app-container[data-grid="N0"] {
-    grid-template-rows: 70px auto;
+  .app-container[data-logoonnav="TRUE"] .app-brand{
+    z-index: 1092;
+    height:calc(100% - 40px);
   }
-  .app-container[data-grid="N1"] {
-    grid-template-rows: 100px auto;
-  }
-
-  .app-container[data-grid="N2"],
-  .app-container[data-grid="N3"] {
-    grid-template-rows: 130px auto;
+  .app-container[data-logoonnav="TRUE"] .app-topnav{
+    grid-column-start: 1;
   }
 
   /*..............Rounded...........*/
@@ -134,14 +144,17 @@ body,
   }
 
   /*..............Boxed...........*/
-  .app-container[data-boxed="SLN"] {
-    grid-gap: 5px 5px;
+  .app-container[data-boxed="SLN"] .app-sidenav{
+    padding-top: 5px !important;
   }
-  .app-container[data-boxed="S_LN"] {
-    grid-gap: 5px 0px;
+  .app-container[data-boxed="SLN"] .app-topnav{
+    padding-left: 5px !important;
   }
-  .app-container[data-boxed="SL_N"] {
-    grid-gap: 0px 5px;
+  .app-container[data-boxed="S_LN"] .app-sidenav{
+    padding-top: 5px !important;
+  }
+  .app-container[data-boxed="SL_N"] .app-topnav{
+    padding-left: 5px !important
   }
 
   /*..............Padded...........*/
@@ -153,77 +166,303 @@ body,
   }
 }
 
-/*........Slim Mode..............*/
+/*........Nav and logo Height..............*/
+.app-container[data-topnavsize="XXXS"] .app-topnav,
+.app-container[data-logoheightsize="XXXS"] .app-brand
+{
+  grid-row-end:row-1;
+}
+.app-container[data-topnavsize="XXS"] .app-topnav,
+.app-container[data-logoheightsize="XXS"] .app-brand{
+  grid-row-end:row-2;
+}
+.app-container[data-topnavsize="XS"] .app-topnav,
+.app-container[data-logoheightsize="XS"] .app-brand{
+  grid-row-end:row-3;
+}
+.app-container[data-topnavsize="S"] .app-topnav,
+.app-container[data-logoheightsize="S"] .app-brand{
+  grid-row-end:row-4;
+}
+.app-container[data-topnavsize="M"] .app-topnav,
+.app-container[data-logoheightsize="M"] .app-brand{
+  grid-row-end:row-5;
+}
+.app-container[data-topnavsize="L"] .app-topnav,
+.app-container[data-logoheightsize="L"] .app-brand{
+  grid-row-end:row-6;
+}
+.app-container[data-topnavsize="XL"] .app-topnav,
+.app-container[data-logoheightsize="XL"] .app-brand{
+  grid-row-end:row-7;
+}
+.app-container[data-topnavsize="XXL"] .app-topnav,
+.app-container[data-logoheightsize="XXL"] .app-brand{
+  grid-row-end:row-8;
+}
+.app-container[data-topnavsize="XXXL"] .app-topnav,
+.app-container[data-logoheightsize="XXXL"] .app-brand{
+    grid-row-end:row-9;
+}
+.app-container[data-topnavsize="XXXXL"] .app-topnav,
+.app-container[data-logoheightsize="XXXXL"] .app-brand{
+  grid-row-end:row-10;
+}
+.app-container[data-topnavsize="XXXXXL"] .app-topnav,
+.app-container[data-logoheightsize="XXXXXL"] .app-brand{
+  grid-row-end:row-11;
+}
 
-.app-container[data-navbarsize="S"] {
-  grid-template-rows: 60px auto;
+.app-container[data-topnavsize="XXXS"] .app-main,
+.app-container[data-logoheightsize="XXXS"] .app-sidenav
+{
+  grid-row-start:row-1;
 }
-.app-container[data-navbarsize="XS"] {
-  grid-template-rows: 50px auto;
+.app-container[data-topnavsize="XXS"] .app-main,
+.app-container[data-logoheightsize="XXS"] .app-sidenav{
+  grid-row-start:row-2;
+}
+.app-container[data-topnavsize="XS"] .app-main,
+.app-container[data-logoheightsize="XS"] .app-sidenav{
+  grid-row-start:row-3;
+}
+.app-container[data-topnavsize="S"] .app-main,
+.app-container[data-logoheightsize="S"] .app-sidenav{
+  grid-row-start:row-4;
+}
+.app-container[data-topnavsize="M"] .app-main,
+.app-container[data-logoheightsize="M"] .app-sidenav{
+  grid-row-start:row-5;
+}
+.app-container[data-topnavsize="L"] .app-main,
+.app-container[data-logoheightsize="L"] .app-sidenav{
+  grid-row-start:row-6;
+}
+.app-container[data-topnavsize="XL"] .app-main,
+.app-container[data-logoheightsize="XL"] .app-sidenav{
+  grid-row-start:row-7;
+}
+.app-container[data-topnavsize="XXL"] .app-main,
+.app-container[data-logoheightsize="XXL"] .app-sidenav{
+  grid-row-start:row-8;
+}
+.app-container[data-topnavsize="XXXL"] .app-main,
+.app-container[data-logoheightsize="XXXL"] .app-sidenav{
+    grid-row-start:row-9;
+}
+.app-container[data-topnavsize="XXXXL"] .app-main,
+.app-container[data-logoheightsize="XXXXL"] .app-sidenav{
+  grid-row-start:row-10;
+}
+.app-container[data-topnavsize="XXXXXL"] .app-main,
+.app-container[data-logoheightsize="XXXXXL"] .app-sidenav{
+  grid-row-start:row-11;
 }
 
-.app-container[data-sidebarsize="M"][data-grid="S2"] {
-  grid-template-columns: 100px auto;
-}
-.app-container[data-sidebarsize="S"][data-grid="S2"] {
-  grid-template-columns: 80px auto;
-}
-.app-container[data-sidebarsize="XS"][data-grid="S2"] {
-  grid-template-columns: 60px auto;
+
+
+.app-container[data-topnavsize="XL"] .navbar[data-template="N1"] .navbar-nav.page-nav
+{
+padding:10px 0px 10px 0px;
+height:50px;
 }
 
-.app-container[data-sidebarsize="M"][data-grid="S1"] {
-  grid-template-columns: 140px auto;
-}
-.app-container[data-sidebarsize="S"][data-grid="S1"] {
-  grid-template-columns: 120px auto;
-}
-.app-container[data-sidebarsize="XS"][data-grid="S1"] {
-  grid-template-columns: 100px auto;
+.app-container[data-logoonnav="TRUE"][data-topnavsize="XL"] .app-brand{
+  height: calc(100% - 50px);
 }
 
-/* .app-container[data-navbarsize$="S"][data-boxed="SL_N"] .app-brand,
-.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-brand {
-  height: 80px;
-  z-index: 2;
+/*.................................*/
+
+/*........Sidebar width..............*/
+.app-container[data-sidenavsize="XXXS"] .app-sidenav{
+  grid-column-end:col-1;
 }
-.app-container[data-navbarsize$="S"][data-boxed="SL_N"]
-  .app-sidenav
-  .sidebar-wrapper {
-  padding-top: 30px;
+.app-container[data-sidenavsize="XXS"] .app-sidenav{
+  grid-column-end:col-2;
 }
-.app-container[data-navbarsize$="S"][data-boxed="SLN"] .app-sidenav {
-  padding-top: 30px;
-} */
-.app-container[data-navbarsize="S"] .brand-img {
- padding:10px;
+.app-container[data-sidenavsize="XS"] .app-sidenav,
+.app-container[data-sidenavsize="XS_2"] .app-sidenav{
+  grid-column-end:col-3;
 }
-.app-container[data-navbarsize="XS"] .brand-img,
-.app-container[data-navbarsize="XS"] .brand-img > img{
-  padding:5px;
- }
-.app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-brand,
-.app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-brand {
-  height: 70px;
-  z-index: 2;
+.app-container[data-sidenavsize="S"] .app-sidenav{
+  grid-column-end:col-4;
 }
-.app-container[data-navbarsize="S"][data-padded="FALSE"]
-  .app-sidenav
-  .sidebar-wrapper {
+.app-container[data-sidenavsize="M"] .app-sidenav{
+  grid-column-end:col-5;
+}
+.app-container[data-sidenavsize="L"] .app-sidenav{
+  grid-column-end:col-6;
+}
+.app-container[data-sidenavsize="XL"] .app-sidenav{
+  grid-column-end:col-7;
+}
+.app-container[data-sidenavsize="XXL"] .app-sidenav{
+  grid-column-end:col-8;
+}
+.app-container[data-sidenavsize="XXXL"] .app-sidenav{
+    grid-column-end:col-9;
+}
+.app-container[data-sidenavsize="XXXXL"] .app-sidenav{
+  grid-column-end:col-10;
+}
+.app-container[data-sidenavsize="XXXXXL"] .app-sidenav{
+  grid-column-end:col-11;
+}
+
+.app-container[data-sidenavsize="XXXS"] .app-main{
+  grid-column-start:col-1;
+}
+.app-container[data-sidenavsize="XXS"] .app-main{
+  grid-column-start:col-2;
+}
+.app-container[data-sidenavsize="XS"] .app-main,
+.app-container[data-sidenavsize="XS_2"] .app-main{
+  grid-column-start:col-3;
+}
+.app-container[data-sidenavsize="S"] .app-main{
+  grid-column-start:col-4;
+}
+.app-container[data-sidenavsize="M"] .app-main{
+  grid-column-start:col-5;
+}
+.app-container[data-sidenavsize="L"] .app-main{
+  grid-column-start:col-6;
+}
+.app-container[data-sidenavsize="XL"] .app-main{
+  grid-column-start:col-7;
+}
+.app-container[data-sidenavsize="XXL"] .app-main{
+  grid-column-start:col-8;
+}
+.app-container[data-sidenavsize="XXXL"] .app-main{
+    grid-column-start:col-9;
+}
+.app-container[data-sidenavsize="XXXXL"] .app-main{
+  grid-column-start:col-10;
+}
+.app-container[data-sidenavsize="XXXXXL"] .app-main{
+  grid-column-start:col-11;
+}
+
+/*...................................................*/
+
+/*...........Logo Width Style..............*/
+
+.app-container[data-logowidthsize="XXXS"] .app-brand{
+  grid-column-end:col-1;
+}
+.app-container[data-logowidthsize="XXS"] .app-brand{
+  grid-column-end:col-2;
+}
+.app-container[data-logowidthsize="XS"] .app-brand{
+  grid-column-end:col-3;
+}
+.app-container[data-logowidthsize="S"] .app-brand{
+  grid-column-end:col-4;
+}
+.app-container[data-logowidthsize="M"] .app-brand{
+  grid-column-end:col-5;
+}
+.app-container[data-logowidthsize="L"] .app-brand{
+  grid-column-end:col-6;
+}
+.app-container[data-logowidthsize="XL"] .app-brand{
+  grid-column-end:col-7;
+}
+.app-container[data-logowidthsize="XXL"] .app-brand{
+  grid-column-end:col-8;
+}
+.app-container[data-logowidthsize="XXXL"] .app-brand{
+    grid-column-end:col-9;
+}
+.app-container[data-logowidthsize="XXXXL"] .app-brand{
+  grid-column-end:col-10;
+}
+.app-container[data-logowidthsize="XXXXXL"] .app-brand{
+  grid-column-end:col-11;
+}
+
+.app-container[data-grid="S0"] .app-topnav{
+  grid-column-start:col-9;
+}
+.app-container[data-logowidthsize="XXXS"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-1;
+}
+.app-container[data-logowidthsize="XXS"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-2;
+}
+.app-container[data-logowidthsize="XS"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-3;
+}
+.app-container[data-logowidthsize="S"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-4;
+}
+.app-container[data-logowidthsize="M"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-5;
+}
+.app-container[data-logowidthsize="L"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-6;
+}
+.app-container[data-logowidthsize="XL"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-7;
+}
+.app-container[data-logowidthsize="XXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-8;
+}
+.app-container[data-logowidthsize="XXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-9;
+}
+.app-container[data-logowidthsize="XXXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-10;
+}
+.app-container[data-logowidthsize="XXXXXL"]:not([data-logoonnav="TRUE"]) .app-topnav{
+  grid-column-start:col-11;
+}
+/*.............................................*/
+
+/*..........Floating Menu.........*/
+.app-container[data-floatingmenu="SIDENAV"] .sidebar .sidebar-wrapper{
+  min-height: unset;
+  max-height: unset;
+}
+.app-container[data-floatingmenu="SIDENAV"] .sidebar{
+  height:auto;
   padding-top: 10px;
+  padding-bottom: 10px;
+
+  margin-bottom: 55px;
 }
-.app-container[data-navbarsize="XS"][data-padded="FALSE"]
-  .app-sidenav
-  .sidebar-wrapper {
-  padding-top: 20px;
+.app-container[data-floatingmenu="SIDENAV"] .app-sidenav{
+  align-items:center;
+  display: flex;
 }
 
-.app-container[data-navbarsize="S"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link{
-height: 60px !important;
+.app-container:not([data-rounded="FALSE"]):not([data-padded="FALSE"])[data-floatingmenu="SIDENAV"] .sidebar{
+  border-radius:5px !important;
 }
-.app-container[data-navbarsize="XS"] .navbar[data-linktemplate^="LT3"] .navbar-collapse .navbar-nav.page-nav .nav-link{
-  height: 50px !important;
-  }
-/* .app-container[data-navbarsize$="S"][data-padded="FALSE"] .app-sidenav {
-  padding-top: 20px;
-} */
+.app-container:not([data-rounded="FALSE"])[data-padded="FALSE"][data-floatingmenu="SIDENAV"] .sidebar{
+  border-top-right-radius:5px !important;
+  border-bottom-right-radius:5px !important;
+
+}
+
+
+/*.............Contained Theme...........*/
+.wrapper[data-contained="TRUE"]{
+  padding:8px;
+}
+.wrapper[data-contained="TRUE"] .app-container{
+  border-radius:8px;
+  overflow: hidden;
+  box-shadow: 0 1rem 3rem rgba(34, 42, 66, 0.175);
+}
+
+
+
+.app-container[data-boxed="FALSE"][data-tnshadow="TRUE"]:not([data-logoonnav="TRUE"]) .app-brand,
+.app-container[data-boxed="S_LN"][data-tnshadow="TRUE"] .app-brand,
+.app-container[data-boxed="SLN"][data-tnshadow="TRUE"] .app-brand,
+.app-container[data-tnshadow="TRUE"]:not([data-boxed="SL_N"]) .app-topnav{
+  box-shadow:0 0 8px rgba(0,0,0,0.15)
+  
+}

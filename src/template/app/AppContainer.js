@@ -21,25 +21,6 @@ const mapState = (store) => ({
   templateConfig: store.templateConfig.config,
 });
 class AppContainer extends React.PureComponent {
-  // componentDidMount() {
-  //   this.initializeDropdownEventHandler();
-  // }
-
-  // initializeDropdownEventHandler = () => {
-  //   let dropdowns = document.querySelectorAll('a[data-toggle="dropdown"]');
-  //   dropdowns.forEach((elem, i) => {
-  //     elem.addEventListener("click", function (e) {
-  //       var current = document.querySelectorAll(".dropdown-menu.show");
-  //       if (current.length > 0) {
-  //         current[0].className = current[0].className.replace(" show", "");
-  //       }
-  //       if (e.currentTarget.nextSibling) {
-  //         e.currentTarget.nextSibling.className += " show";
-  //       }
-  //     });
-  //   });
-  // };
-
   render() {
     return (
       <Layout wrapperClass="h-100">

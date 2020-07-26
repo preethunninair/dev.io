@@ -1,11 +1,9 @@
 @import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "utilities.css";
 
 @import "customslider.css";
-@import "customdropdown.css";
 @import "custommodal.css";
 @import "customcard.css";
-@import "whitecontent.css";
+/* @import "whitecontent.css"; */
 @import "appLayout.css";
 
 
@@ -14,3 +12,4 @@
 @import "brandlogo.css";
 @import "customstyle.css";
 @import "customform.css";
+@import "customdropdown.css";

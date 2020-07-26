@@ -2,7 +2,7 @@ export const MENUDATA = [
   {
     title: "Overview",
     icon: { family: "material-icon", name: "dashboard" },
-    module: "Overview",
+    module: "overview",
     path: "/overview",
     submenu: [],
     landingPage: true,

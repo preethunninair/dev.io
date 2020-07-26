@@ -14,7 +14,7 @@ display: none !important;
   transform: rotate(90deg);
   display: inline-flex;
 }
-.sidebar:not([data-submenuconfig="SNB"]) .dropdown-toggle::after{
+.sidebar:not([data-submenuconfig="SSM"]) .dropdown-toggle::after{
   display: inline-flex;
 }
 

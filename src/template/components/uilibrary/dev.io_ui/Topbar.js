@@ -27,16 +27,19 @@ function Topbar(props) {
 
   function generateMenuItems() {
     if (
-      templateConfig.submenuConfig != "TNS" ||
+      (templateConfig.layout.indexOf("SIDE") > -1 &&
+        templateConfig.submenuConfig != "TNS") ||
       props.routes == null ||
       props.routes.length <= 0
     ) {
       return null;
     }
     let menus = [];
-    let showSubmenu = [];
     menus = props.routes.map((menuItem, i) => {
-      if (menuItem.submenu.length > 0) {
+      if (
+        menuItem.submenu.length > 0 &&
+        templateConfig.submenuConfig == "DSM"
+      ) {
         return (
           <UncontrolledDropdown nav>
             <DropdownToggle caret color="default" data-toggle="dropdown" nav>

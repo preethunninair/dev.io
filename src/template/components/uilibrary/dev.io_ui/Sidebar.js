@@ -38,9 +38,9 @@ function Sidebar(props) {
     if (templateConfig.layout === "SIDE_NAVIGATION") {
       menus = props.routes.map((menuItem, i) => {
         if (menuItem.submenu.length > 0) {
-          if (templateConfig.submenuConfig === "SNS") {
+          if (templateConfig.submenuConfig === "DSM") {
             return (
-              <UncontrolledDropdown nav>
+              <UncontrolledDropdown nav direction="right">
                 <DropdownToggle
                   caret
                   color="default"
@@ -65,7 +65,7 @@ function Sidebar(props) {
                 </DropdownMenu>
               </UncontrolledDropdown>
             );
-          } else if (templateConfig.submenuConfig === "SNB") {
+          } else if (templateConfig.submenuConfig === "SSM") {
             return (
               <>
                 <NavItem>
