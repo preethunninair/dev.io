@@ -1,4 +1,4 @@
-import template from "../../dev.io_config/config.json";
+import template from "../../codespace_config/config.json";
 const { default: reducers } = require(".");
 
 export default function templateConfigReducer(

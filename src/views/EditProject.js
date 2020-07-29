@@ -130,7 +130,7 @@ class EditProject extends React.PureComponent {
                 >
                   <div className="brand-img d-flex align-items-center h-100">
                     <img src={this.props.logo} alt="react-logo" />
-                    dev.io
+                    codespace
                   </div>
                 </a>
               </div>

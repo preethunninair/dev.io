@@ -7,13 +7,13 @@ import logo_white from "../assets/img/logo_white.png";
 import logo_black from "../assets/img/logo_black.png";
 
 // core components
-import Topbar from "../components/uilibrary/dev.io_ui/Topbar";
-import Sidebar from "../components/uilibrary/dev.io_ui/Sidebar";
-import Content from "../components/uilibrary/dev.io_ui/Content";
-import BrandLogo from "../components/uilibrary/dev.io_ui/BrandLogo";
-import Layout from "../components/uilibrary/dev.io_ui/Layout";
+import Topbar from "../components/uilibrary/codespace_ui/Topbar";
+import Sidebar from "../components/uilibrary/codespace_ui/Sidebar";
+import Content from "../components/uilibrary/codespace_ui/Content";
+import BrandLogo from "../components/uilibrary/codespace_ui/BrandLogo";
+import Layout from "../components/uilibrary/codespace_ui/Layout";
 import { connect } from "react-redux";
-import SubRouteDispatcher from "../components/uilibrary/dev.io_ui/SubRouteDispatcher";
+import SubRouteDispatcher from "../components/uilibrary/codespace_ui/SubRouteDispatcher";
 
 const mapState = (store) => ({
   subRoute: store.routerReducer.subRoute,

@@ -1,5 +1,5 @@
 {
-  "name": "devio",
+  "name": "codespace",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,8 +30,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "devio": "nodemon ./dev.io_engine/devio.js",
-    "dev": "concurrently \"npm run start\" \"npm run devio\"",
+    "codespace": "nodemon ./codespace_engine/codespace.js",
+    "dev": "concurrently \"npm run start\" \"npm run codespace\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
